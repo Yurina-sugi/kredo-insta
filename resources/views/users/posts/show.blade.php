@@ -112,7 +112,8 @@
                         <div class="liked-users" style="display: inline-block;">
                             <span>Liked:</span>
                             @foreach ($post->likedUsers as $user)
-                                <span>{{ $user->name }}</span>
+                                <a class="text-decoration-none"
+                                    href="{{ route('profile.show', $user->id) }}"<span>{{ $user->name }}</span></a>
                             @endforeach
                         </div>
                     </div>
