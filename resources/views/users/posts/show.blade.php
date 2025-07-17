@@ -59,15 +59,18 @@
                                 {{-- If you are not the owner, show follow/unfollow button --}}
                                 {{-- show follow button for now --}}
                                 @if ($post->user->isFollowed())
-                                    <form action="{{ route('follow.destroy', $post->user->id) }}" method="post" class="d-inline">
+                                    <form action="{{ route('follow.destroy', $post->user->id) }}" method="post"
+                                        class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="border-0 bg-transparent p-0 text-secondary">Following</button>
+                                        <button type="submit"
+                                            class="border-0 bg-transparent p-0 text-secondary">Following</button>
                                     </form>
                                 @else
                                     <form action="{{ route('follow.store', $post->user->id) }}" method="post">
                                         @csrf
-                                        <button type="submit" class="border-0 bg-transparent p-0 text-primary">Follow</button>
+                                        <button type="submit"
+                                            class="border-0 bg-transparent p-0 text-primary">Follow</button>
                                     </form>
                                 @endif
                             @endif
@@ -95,6 +98,7 @@
                                 </form>
                             @endif
                         </div>
+                        <!-- Liked User List -->
                         <div class="col-auto px-0">
                             <span>{{ $post->likes->count() }}</span>
                         </div>
@@ -103,6 +107,12 @@
                                 <div class="badge bg-secondary bg-opacity-50">
                                     {{ $category_post->category->name }}
                                 </div>
+                            @endforeach
+                        </div>
+                        <div class="liked-users" style="display: inline-block;">
+                            <span>Liked:</span>
+                            @foreach ($post->likedUsers as $user)
+                                <span>{{ $user->name }}</span>
                             @endforeach
                         </div>
                     </div>
