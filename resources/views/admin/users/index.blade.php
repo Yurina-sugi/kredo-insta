@@ -21,9 +21,6 @@
         </div>
     </div>
 
-
-
-
     <table class="table table-hover align-middle bg-white border text-secondary">
         <thead class="small table-success text-secondary">
             <tr>
