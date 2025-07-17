@@ -37,6 +37,12 @@
                 <div class="badge bg-dark text-wrap">Uncategorized</div>
             @endforelse
         </div>
+        <div class="liked-users" style="display: inline-block;">
+            <span>Liked:</span>
+            @foreach ($post->likedUsers as $user)
+                <span>{{ $user->name }}</span>
+            @endforeach
+        </div>
     </div>
 
     {{-- owner + description --}}
