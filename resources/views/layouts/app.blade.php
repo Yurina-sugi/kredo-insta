@@ -20,76 +20,162 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        /* ネイビーバージョン用のスタイル */
+        .navbar-navy {
+            background-color: #0A1E54 !important;
+            /* navy */
+            border-bottom: none;
+            box-shadow: none;
+        }
+
+        .navbar-navy .navbar-brand,
+        .navbar-navy .nav-link,
+        .navbar-navy .navbar-toggler-icon {
+            color: #F9F5EE !important;
+            /* white */
+            font-family: sans-serif;
+        }
+
+        .navbar-navy .navbar-brand h1 {
+            color: #F9F5EE !important;
+            /* white */
+        }
+
+        .navbar-navy .navbar-toggler {
+            border-color: #F9F5EE;
+            /* white */
+        }
+
+        .navbar-navy .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28249, 245, 238, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        .navbar-navy .form-control {
+            border-color: #F9F5EE;
+            /* white */
+            background-color: rgba(249, 245, 238, 0.2);
+            /* 半透明の白 */
+            color: #F9F5EE;
+            /* white */
+            border-radius: 5px;
+        }
+
+        .navbar-navy .form-control::placeholder {
+            color: rgba(249, 245, 238, 0.7);
+            /* 半透明の白 */
+        }
+
+        .navbar-navy .form-control:focus {
+            background-color: rgba(249, 245, 238, 0.3);
+            border-color: #F9F5EE;
+            box-shadow: none;
+            color: #F9F5EE;
+        }
+
+        .navbar-navy .icon-sm {
+            color: #F9F5EE !important;
+            /* white */
+        }
+
+        .navbar-navy .dropdown-menu {
+            background-color: #F9F5EE;
+            /* white */
+            border: 1px solid #CFC7C8;
+            /* gray */
+            border-radius: 5px;
+        }
+
+        .navbar-navy .dropdown-item {
+            color: #0A1E54;
+            /* navy */
+            font-family: sans-serif;
+        }
+
+        .navbar-navy .dropdown-item:hover {
+            background-color: #CFC7C8;
+            /* gray */
+            color: #0A1E54;
+            /* navy */
+        }
+
+        .navbar-navy .avatar-sm {
+            border: 1px solid #F9F5EE;
+            /* white */
+        }
+    </style>
 </head>
 
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <h1 class="h5 mb-0">{{ config('app.name') }}</h1>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    {{-- [SOON] Search bar here. Show it when a user logs in --}}
-                    @auth
-                        @if (!request()->is('admin/*'))
-                            <ul class="navbar-nav ms-auto">
-                                <form action="{{ route('search') }}" style="width: 300px">
-                                    <input type="search" name="search" class="form-control form-control-sm" placeholder="Search...">
-                                </form>
-                            </ul>
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm navbar-navy">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <h1 class="h5 mb-0">{{ config('app.name') }}</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                {{-- [SOON] Search bar here. Show it when a user logs in --}}
+                @auth
+                    @if (!request()->is('admin/*'))
+                        <ul class="navbar-nav ms-auto">
+                            <form action="{{ route('search') }}" style="width: 300px">
+                                <input type="search" name="search" class="form-control form-control-sm"
+                                    placeholder="Search...">
+                            </form>
+                        </ul>
+                    @endif
+                @endauth
+
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ms-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
                         @endif
-                    @endauth
-                    
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            {{-- Home --}}
-                            <li class="nav-item" title="Home">
-                                <a href="{{ route('index') }}" class="nav-link"><i
-                                        class="fa-solid fa-house text-dark icon-sm"></i></a>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
+                        @endif
+                    @else
+                        {{-- Home --}}
+                        <li class="nav-item" title="Home">
+                            <a href="{{ route('index') }}" class="nav-link"><i
+                                    class="fa-solid fa-house text-light icon-sm"></i></a>
+                        </li>
 
-                            {{-- Create Post --}}
-                            <li class="nav-item" title="Create Post">
-                                <a href="{{ route('post.create') }}" class="nav-link"><i
-                                        class="fa-solid fa-circle-plus text-dark icon-sm"></i></a>
-                            </li>
+                        {{-- Create Post --}}
+                        <li class="nav-item" title="Create Post">
+                            <a href="{{ route('post.create') }}" class="nav-link"><i
+                                    class="fa-solid fa-circle-plus text-light icon-sm"></i></a>
+                        </li>
 
-                            {{-- Account --}}
-                            <li class="nav-item dropdown">
-                                <button id="account-dropdown" class="btn shadow-none nav-link" data-bs-toggle="dropdown">
-                                    @if (Auth::user()->avatar)
-                                        <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}"
-                                            class="rounded-circle avatar-sm">
-                                    @else
-                                        <i class="fa-solid fa-circle-user text-dark icon-sm"></i>
-                                    @endif
-                                </button>
+                        {{-- Account --}}
+                        <li class="nav-item dropdown">
+                            <button id="account-dropdown" class="btn shadow-none nav-link" data-bs-toggle="dropdown">
+                                @if (Auth::user()->avatar)
+                                    <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}"
+                                        class="rounded-circle avatar-sm">
+                                @else
+                                    <i class="fa-solid fa-circle-user text-light icon-sm"></i>
+                                @endif
+                            </button>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="account-dropdown">
-                                    {{-- [SOON] Admin Controls --}}
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="account-dropdown">
+                                {{-- [SOON] Admin Controls --}}
                                 @can('admin')
                                     <a href="{{ route('admin.users') }}" class="dropdown-item">
                                         <i class="fa-solid fa-user-gear"></i> Admin
@@ -105,7 +191,7 @@
                                 {{-- Logout --}}
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                             document.getElementById('logout-form').submit();">
                                     <i class="fa-solid fa-right-from-bracket"></i> {{ __('Logout') }}
                                 </a>
 
@@ -149,7 +235,7 @@
             </div>
         </div>
     </main>
-</div>
+    </div>
 </body>
 
 </html>
