@@ -22,94 +22,161 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <style>
-        /* ネイビーバージョン用のスタイル */
-        .navbar-navy {
-            background-color: #0A1E54 !important;
-            /* navy */
+        /* ナビゲーションバーの共通スタイル */
+        .navbar-custom {
+            border-bottom: none;
+        }
+
+        /* ライトテーマ（ログイン状態に関わらず統一） */
+        .navbar-light-theme {
+            background-color: #F9F5EE !important;
+            /* 白 */
             border-bottom: none;
             box-shadow: none;
+            border-radius: 0;
         }
 
-        .navbar-navy .navbar-brand,
-        .navbar-navy .nav-link,
-        .navbar-navy .navbar-toggler-icon {
-            color: #F9F5EE !important;
-            /* white */
+        .navbar-light-theme .navbar-brand,
+        .navbar-light-theme .nav-link,
+        .navbar-light-theme .navbar-toggler-icon {
+            color: #B39A84 !important;
+            /* ベージュ */
             font-family: sans-serif;
         }
 
-        .navbar-navy .navbar-brand h1 {
-            color: #F9F5EE !important;
-            /* white */
+        .navbar-light-theme .navbar-brand h1 {
+            color: #B39A84 !important;
+            /* ベージュ */
         }
 
-        .navbar-navy .navbar-toggler {
-            border-color: #F9F5EE;
-            /* white */
+        .navbar-light-theme .navbar-toggler {
+            border-color: #B39A84;
+            /* ベージュ */
         }
 
-        .navbar-navy .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28249, 245, 238, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        .navbar-light-theme .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28179, 154, 132, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
         }
 
-        .navbar-navy .form-control {
-            border-color: #F9F5EE;
-            /* white */
-            background-color: rgba(249, 245, 238, 0.2);
-            /* 半透明の白 */
-            color: #F9F5EE;
-            /* white */
-            border-radius: 5px;
+        /* 検索バーのスタイル */
+        .navbar-light-theme .search-bar-container {
+            position: relative;
+            display: flex;
+            /* アイコンと入力フィールドを整列 */
+            align-items: center;
+            width: 300px;
+            /* フォームの幅を維持 */
         }
 
-        .navbar-navy .form-control::placeholder {
-            color: rgba(249, 245, 238, 0.7);
-            /* 半透明の白 */
+        .navbar-light-theme .search-icon {
+            position: absolute;
+            /* コンテナ内で絶対位置指定 */
+            left: 5px;
+            /* アイコンの左からの位置 */
+            color: #B39A84;
+            /* ベージュ色 (虫眼鏡アイコンの色) */
+            font-size: 1rem;
+            z-index: 1;
+            /* アイコンが入力フィールドの上に表示されるように */
         }
 
-        .navbar-navy .form-control:focus {
-            background-color: rgba(249, 245, 238, 0.3);
-            border-color: #F9F5EE;
+        .navbar-light-theme .search-input {
+            border: none;
+            /* デフォルトのボーダーを削除 */
+            border-bottom: 1px solid #B39A84;
+            /* ベージュ色のアンダーライン */
+            background-color: transparent;
+            /* 背景を透明に */
+            padding-left: 30px;
+            /* アイコンのためのスペース */
+            padding-right: 5px;
+            /* 右側の小さなパディング */
+            color: #0A1E54;
+            /* ネイビーの文字色 */
+            border-radius: 0;
+            /* 角丸を削除 */
             box-shadow: none;
-            color: #F9F5EE;
+            /* 影を削除 */
+            width: 100%;
+            /* コンテナの全幅を使用 */
         }
 
-        .navbar-navy .icon-sm {
-            color: #F9F5EE !important;
-            /* white */
+        .navbar-light-theme .search-input::placeholder {
+            color: rgba(10, 30, 84, 0.7);
+            /* 半透明のネイビーのプレースホルダー */
         }
 
-        .navbar-navy .dropdown-menu {
+        .navbar-light-theme .search-input:focus {
+            background-color: transparent;
+            /* フォーカス時も透明を維持 */
+            border-color: #0A1E54;
+            /* フォーカス時はネイビーのアンダーライン */
+            box-shadow: none;
+            color: #0A1E54;
+        }
+
+        /* 既存のフォームコントロールスタイルは、より具体的な.search-inputで上書きされる */
+        .navbar-light-theme .form-control {
+            /* このスタイルは、.search-inputによって上書きされるため、
+       他のフォームコントロールに影響を与える場合にのみ調整が必要 */
+            border-color: #B39A84;
+            /* ベージュ */
+            background-color: transparent;
+            /* 半透明のベージュ */
+            color: #0A1E54;
+
+        }
+
+        .navbar-light-theme .form-control::placeholder {
+            color: rgba(10, 30, 84, 0.7);
+            /* 半透明のネイビー */
+        }
+
+        .navbar-light-theme .form-control:focus {
+            background-color: transparent;
+            border-color: #B39A84;
+            box-shadow: none;
+            color: #0A1E54;
+        }
+
+
+        .navbar-light-theme .icon-sm {
+            color: #B39A84 !important;
+            /* ベージュ */
+        }
+
+        .navbar-light-theme .avatar-sm {
+            border: 1px solid #B39A84;
+            /* ベージュ */
+        }
+
+        /* ドロップダウンメニュー（統一テーマで共通） */
+        .dropdown-menu {
             background-color: #F9F5EE;
-            /* white */
+            /* 白 */
             border: 1px solid #CFC7C8;
-            /* gray */
+            /* グレー */
             border-radius: 5px;
         }
 
-        .navbar-navy .dropdown-item {
+        .dropdown-item {
             color: #0A1E54;
-            /* navy */
+            /* ネイビー */
             font-family: sans-serif;
         }
 
-        .navbar-navy .dropdown-item:hover {
+        .dropdown-item:hover {
             background-color: #CFC7C8;
-            /* gray */
+            /* グレー */
             color: #0A1E54;
-            /* navy */
-        }
-
-        .navbar-navy .avatar-sm {
-            border: 1px solid #F9F5EE;
-            /* white */
+            /* ネイビー */
         }
     </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light shadow-sm navbar-navy">
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm navbar-custom navbar-light-theme"> {{-- クラスを統一しました --}}
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <h1 class="h5 mb-0">{{ config('app.name') }}</h1>
@@ -127,8 +194,11 @@
                     @if (!request()->is('admin/*'))
                         <ul class="navbar-nav ms-auto">
                             <form action="{{ route('search') }}" style="width: 300px">
-                                <input type="search" name="search" class="form-control form-control-sm"
-                                    placeholder="Search...">
+                                <div class="search-bar-container">
+                                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                                    <input type="search" name="search" class="form-control form-control-sm search-input"
+                                        placeholder="Search...">
+                                </div>
                             </form>
                         </ul>
                     @endif
@@ -139,28 +209,17 @@
                 <ul class="navbar-nav ms-auto">
                     <!-- Authentication Links -->
                     @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
-
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
+                        {{-- ログイン/登録ボタンは削除済みのため、ここには何も表示されません --}}
                     @else
                         {{-- Home --}}
                         <li class="nav-item" title="Home">
-                            <a href="{{ route('index') }}" class="nav-link"><i
-                                    class="fa-solid fa-house text-light icon-sm"></i></a>
+                            <a href="{{ route('index') }}" class="nav-link"><i class="fa-solid fa-house icon-sm"></i></a>
                         </li>
 
                         {{-- Create Post --}}
                         <li class="nav-item" title="Create Post">
                             <a href="{{ route('post.create') }}" class="nav-link"><i
-                                    class="fa-solid fa-circle-plus text-light icon-sm"></i></a>
+                                    class="fa-solid fa-circle-plus icon-sm"></i></a>
                         </li>
 
                         {{-- Account --}}
@@ -170,7 +229,7 @@
                                     <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}"
                                         class="rounded-circle avatar-sm">
                                 @else
-                                    <i class="fa-solid fa-circle-user text-light icon-sm"></i>
+                                    <i class="fa-solid fa-circle-user icon-sm"></i>
                                 @endif
                             </button>
 
@@ -205,6 +264,7 @@
             </div>
         </div>
     </nav>
+
 
     <main class="py-5">
         <div class="container">
