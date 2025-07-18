@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Register')
+@section('title', 'Login')
 
 @section('content')
     <style>
@@ -104,38 +104,25 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs-custom" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="login-tab" href="{{ route('login') }}" role="tab"
-                                    aria-controls="login" aria-selected="false">Login</a>
-
+                                <a class="nav-link active" id="login-tab" role="tab"
+                                    aria-controls="login" aria-selected="true">Login</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="regi-tab" role="tab" aria-controls="register"
-                                    aria-selected="true">Register</a>
+                                <a class="nav-link" id="regi-tab" href="{{ route('register') }}" role="tab"
+                                    aria-controls="register" aria-selected="false">Register</a>
                             </li>
                         </ul>
                     </div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('login') }}">
                             @csrf
 
                             <div class="mb-3">
-                                <label for="name" class="form-label">{{ __('Name') }}</label>
-                                <input id="name" type="text"
-                                    class="form-control @error('name') is-invalid @enderror" name="name"
-                                    value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="email" class="form-label">{{ __('Email Address') }}</label>
+                                <label for="email" class="form-label">{{ __('Email') }}</label>
                                 <input id="email" type="email"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email') }}" required autocomplete="email">
+                                    value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -155,15 +142,17 @@
                                 @enderror
                             </div>
 
-                            <div class="mb-3">
-                                <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
-                                <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" required autocomplete="new-password">
+                            <div class="d-flex justify-content-end mb-3">
+                                @if (Route::has('password.request'))
+                                    <a class="forgot-password-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Password !?') }}
+                                    </a>
+                                @endif
                             </div>
 
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Login') }}
                                 </button>
                             </div>
                         </form>
