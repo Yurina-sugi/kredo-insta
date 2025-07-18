@@ -1,3 +1,18 @@
+<style>
+.multi-photo-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px; /* 基本は右上 */
+    transform: translateX(-6px); /* 左にずらす */
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+
+</style>
 @extends('layouts.app')
 
 @section('title', 'Admin: Posts')
@@ -10,7 +25,7 @@
 
                 <select name="owner" class="form-select" style="width: 200px;">
                     <option value="">All Owners</option>
-                    @foreach($owners as $owner)
+                    @foreach ($owners as $owner)
                         <option value="{{ $owner->id }}" {{ request('owner') == $owner->id ? 'selected' : '' }}>
                             {{ $owner->name }}
                         </option>
@@ -19,7 +34,7 @@
 
                 <select name="category" class="form-select" style="width: 200px;">
                     <option value="">All Categories</option>
-                    @foreach($categories as $category)
+                    @foreach ($categories as $category)
                         <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
                             {{ $category->name }}
                         </option>
@@ -54,8 +69,25 @@
                 <tr>
                     <td class="text-end">{{ $post->id }}</td>
                     <td>
-                        <a href="{{ route('post.show', $post->id) }}">
-                            <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="d-block mx-auto image-lg">
+                        {{-- <a href="{{ route('post.show', $post->id) }}">
+                            <img src="{{ $post->image }}" alt="post id {{ $post->id }}"
+                                class="d-block mx-auto image-lg">
+                        </a> --}}
+                        <a href="{{ route('post.show', $post->id) }}" class="d-block position-relative">
+                            @php
+                                $images = json_decode($post->image, true);
+                            @endphp
+
+                            @if (is_array($images))
+                                <img src="{{ $images[0] }}" alt="post image" class="image-lg">
+
+                                {{-- 複数画像アイコン --}}
+                                <div class="multi-photo-icon">
+                                    <i class="fa-solid fa-clone"></i>
+                                </div>
+                            @else
+                                <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="image-lg">
+                            @endif
                         </a>
                     </td>
                     <td>

@@ -1,9 +1,89 @@
 {{-- Clickable image --}}
+<style>
+    .img-fixed {
+        width: 100%;
+        height: 450px;
+        object-fit: contain;
+        /* 画像比率を維持 */
+    }
+
+    .swiper {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .swiper-wrapper {
+        height: 450px;
+        /* スライドの高さ固定 */
+    }
+
+    .swiper-pagination-fraction {
+        color: #000;
+        /* 黒文字 */
+        font-weight: bold;
+        font-size: 13px;
+        position: static;
+        /* 画像の下に自然に配置 */
+        text-align: center;
+    }
+
+    /* ナビゲーション矢印 */
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: #000;
+    }
+</style>
+
 <div class="container p-0">
-    <a href="{{ route('post.show', $post->id) }}">
-        <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="w-100">
-    </a>
+    @php
+        $images = json_decode($post->image, true);
+    @endphp
+
+    @if (is_array($images))
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                @foreach ($images as $img)
+                    <div class="swiper-slide d-flex justify-content-center align-items-center">
+                        <a href="{{ route('post.show', $post->id) }}">
+                            <img src="{{ $img }}" alt="post image" class="img-fixed">
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- ページ数（画像の下に表示） -->
+            <div class="swiper-pagination swiper-pagination-fraction"></div>
+
+            <!-- 矢印（必要なら） -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    @else
+        <a href="{{ route('post.show', $post->id) }}">
+            <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="w-100 img-fixed">
+        </a>
+    @endif
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new Swiper('.mySwiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'fraction',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    });
+</script>
+
+
+
 <div class="card-body">
     {{-- heart button + no. of likes + categories --}}
     <div class="row align-items-center">
@@ -12,18 +92,21 @@
                 <form action="{{ route('like.destroy', $post->id) }}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-sm p-0">
-                        <i class="fa-solid fa-heart text-danger"></i>
+                    <button type="submit" class="like-btn btn btn-sm p-0" onclick="showFloatingHearts(this)">
+                        <i class="fa-heart fa-2x fa-solid heart-icon liked"></i>
                     </button>
+                    <div class="floating-hearts-container" style="position: relative;"></div>
                 </form>
             @else
                 <form action="{{ route('like.store', $post->id) }}" method="post">
                     @csrf
-                    <button type="submit" class="btn btn-sm shadow-none p-0">
-                        <i class="fa-regular fa-heart"></i>
+                    <button type="submit" class="like-btn btn btn-sm p-0" onclick="showFloatingHearts(this)">
+                        <i class="fa-heart fa-2x fa-regular heart-icon"></i>
                     </button>
+                    <div class="floating-hearts-container" style="position: relative;"></div>
                 </form>
             @endif
+            
         </div>
         <div class="col-auto px-0">
             <span>{{ $post->likes->count() }}</span>
