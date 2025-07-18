@@ -24,6 +24,9 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+<<<<<<< HEAD
+
+=======
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -220,6 +223,7 @@
         }
     </style>
 
+>>>>>>> c47b4c06b22b061ac7aaa3a55b73573ccfe18dae
 </head>
 
 <body>
@@ -312,6 +316,8 @@
                     @endguest
                 </ul>
             </div>
+<<<<<<< HEAD
+=======
         </div>
         <div class="me-2">
             <form action="{{ route('lang.switch', app()->getLocale()) }}" method="get" id="lang-form">
@@ -326,6 +332,7 @@
                 </select>
             </form>
         </div>
+>>>>>>> c47b4c06b22b061ac7aaa3a55b73573ccfe18dae
     </nav>
 
 
