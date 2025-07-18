@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::get('/people', [HomeController::class, 'search'])->name('search');
 
-    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
         #USER
         Route::get('/users', [UsersController::class, 'index'])->name('users');
         Route::delete('/users/{id}/deactivate', [UsersController::class, 'deactivate'])->name('users.deactivate');
@@ -66,3 +66,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/follow/{user_id}/store', [FollowController::class, 'store'])->name('follow.store');
     Route::delete('/follow/{user_id}/destroy', [FollowController::class, 'destroy'])->name('follow.destroy');
 });
+
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ja', 'fil'])) {
+        session(['locale' => $locale]);
+        session()->save();
+    }
+    return redirect()->back();
+})->name('lang.switch');

@@ -42,10 +42,10 @@
             @if ($suggested_users)
                 <div class="row">
                     <div class="col-auto">
-                        <p class="fw-bold text-secondary">Suggestions For You</p>
+                        <p class="fw-bold text-secondary">{{ __('messages.suggestions_for_you') }}</p>
                     </div>
                     <div class="col text-end">
-                        <a href="#" class="fw-bold text-dark text-decoration-none">See All</a>
+                        <a href="#" class="fw-bold text-dark text-decoration-none">{{ __('messages.see_all') }}</a>
                     </div>
                 </div>
                 @foreach ($suggested_users as $user)
@@ -67,7 +67,7 @@
                         <div class="col-auto">
                             <form action="{{ route('follow.store', $user->id) }}" method="post">
                                 @csrf
-                                <button type="submit" class="border-0 bg-transparent p-0 text-primary btn-sm">Follow</button>
+                                <button type="submit" class="border-0 bg-transparent p-0 text-primary btn-sm">{{ __('messages.follow') }}</button>
                             </form>
                         </div>
                     </div>
