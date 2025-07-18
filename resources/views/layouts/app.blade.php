@@ -24,9 +24,6 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-<<<<<<< HEAD
-
-=======
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -223,12 +220,11 @@
         }
     </style>
 
->>>>>>> c47b4c06b22b061ac7aaa3a55b73573ccfe18dae
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light shadow-sm navbar-custom navbar-light-theme">
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm navbar-custom navbar-light-theme"> {{-- クラスを統一しました --}}
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <h1 class="h5 mb-0">{{ config('app.name') }}</h1>
@@ -241,6 +237,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
+                {{-- [SOON] Search bar here. Show it when a user logs in --}}
                 @auth
                     @if (!request()->is('admin/*'))
                         <ul class="navbar-nav ms-auto">
@@ -255,9 +252,12 @@
                     @endif
                 @endauth
 
+
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
+                    <!-- Authentication Links -->
                     @guest
+                        {{-- ログイン/登録ボタンは削除済みのため、ここには何も表示されません --}}
                     @else
                         {{-- Home --}}
                         <li class="nav-item" title="Home">
@@ -282,42 +282,34 @@
                             </button>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="account-dropdown">
+                                {{-- [SOON] Admin Controls --}}
                                 @can('admin')
                                     <a href="{{ route('admin.users') }}" class="dropdown-item">
                                         <i class="fa-solid fa-user-gear"></i> Admin
                                     </a>
+
                                     <hr class="dropdown-divider">
                                 @endcan
+                                {{-- Profile --}}
                                 <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">
                                     <i class="fa-solid fa-circle-user"></i> Profile
                                 </a>
+
+                                {{-- Logout --}}
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
+                                             document.getElementById('logout-form').submit();">
                                     <i class="fa-solid fa-right-from-bracket"></i> {{ __('Logout') }}
                                 </a>
+
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </div>
                         </li>
-
-                        {{-- 言語選択リンクのリストに変更 --}}
-                        <li class="nav-item d-flex align-items-center lang-switcher-links">
-                            <a href="{{ route('lang.switch', 'en') }}"
-                                class="lang-switcher-link {{ app()->getLocale() == 'en' ? 'active-lang' : '' }}">EN</a>
-                            <span class="lang-separator">|</span>
-                            <a href="{{ route('lang.switch', 'ja') }}"
-                                class="lang-switcher-link {{ app()->getLocale() == 'ja' ? 'active-lang' : '' }}">JP</a>
-                            <span class="lang-separator">|</span>
-                            <a href="{{ route('lang.switch', 'fil') }}"
-                                class="lang-switcher-link {{ app()->getLocale() == 'fil' ? 'active-lang' : '' }}">PH</a>
-                        </li>
                     @endguest
                 </ul>
             </div>
-<<<<<<< HEAD
-=======
         </div>
         <div class="me-2">
             <form action="{{ route('lang.switch', app()->getLocale()) }}" method="get" id="lang-form">
@@ -332,7 +324,6 @@
                 </select>
             </form>
         </div>
->>>>>>> c47b4c06b22b061ac7aaa3a55b73573ccfe18dae
     </nav>
 
 
