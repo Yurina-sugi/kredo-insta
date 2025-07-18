@@ -24,10 +24,47 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        /**
+         * Like button animation
+         */
+        function animateHeart(btn) {
+            const heart = btn.querySelector('.heart-icon');
+            heart.classList.add('animate');
+            heart.classList.toggle('liked');
+            heart.addEventListener('animationend', function handler() {
+                heart.classList.remove('animate');
+                heart.removeEventListener('animationend', handler);
+            });
+        }
 
+        function showFloatingHearts(btn) {
 
+        const container = btn.parentElement.querySelector('.floating-hearts-container');
+        for (let i = 0; i < 3; i++) { // 3つのハートを舞わせる
+            const heart = document.createElement('i');
+            heart.className = 'fa-solid fa-heart floating-heart';
+            // ランダムな左右位置・大きさ・回転
+            const offset = (Math.random() - 0.5) * 60; // -30px〜+30px
+            const scale = 1 + Math.random() * 0.5; // 1〜1.5倍
+            const rotate = (Math.random() - 0.5) * 40; // -20〜+20度
+            heart.style.left = `calc(50% + ${offset}px)`;
+            heart.style.fontSize = `${2 * scale}rem`;
+            heart.style.transform = `translate(-50%, 0) scale(${scale}) rotate(${rotate}deg)`;
+            // 色をランダムにしたい場合
+            // heart.style.color = ['#e0245e', '#ff69b4', '#ffb6c1'][Math.floor(Math.random()*3)];
+            container.appendChild(heart);
+
+            // アニメーション終了後に削除
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+        // 既存のlikeアニメーションも同時に発火したい場合はここで呼ぶ
+        animateHeart(btn);
+    }
+    </script>
+        
     <style>
         /* ナビゲーションバーの共通スタイル */
         .navbar-custom {
@@ -179,6 +216,7 @@
             /* ネイビー */
         }
     </style>
+
 </head>
 
 <body>
