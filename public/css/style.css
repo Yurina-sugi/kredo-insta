@@ -76,7 +76,6 @@ following and followers
 .liked-users span {
     margin-right: 5px;
     font-size: 0.9em;
-<<<<<<< HEAD
     color: #555; /* 必要であればこの色もテーマカラーに調整 */
 }
 
@@ -389,4 +388,3 @@ body {
         opacity: 0;
     }
 }
->>>>>>> c47b4c06b22b061ac7aaa3a55b73573ccfe18dae

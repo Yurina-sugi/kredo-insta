@@ -219,8 +219,6 @@
             /* ネイビー */
         }
     </style>
-
->>>>>>> c47b4c06b22b061ac7aaa3a55b73573ccfe18dae
 </head>
 
 <body>
