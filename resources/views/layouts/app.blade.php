@@ -42,12 +42,13 @@
                         @if (!request()->is('admin/*'))
                             <ul class="navbar-nav ms-auto">
                                 <form action="{{ route('search') }}" style="width: 300px">
-                                    <input type="search" name="search" class="form-control form-control-sm" placeholder="Search...">
+                                    <input type="search" name="search" class="form-control form-control-sm"
+                                        placeholder="Search...">
                                 </form>
                             </ul>
                         @endif
                     @endauth
-                    
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -90,66 +91,78 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="account-dropdown">
                                     {{-- [SOON] Admin Controls --}}
-                                @can('admin')
-                                    <a href="{{ route('admin.users') }}" class="dropdown-item">
-                                        <i class="fa-solid fa-user-gear"></i> Admin
+                                    @can('admin')
+                                        <a href="{{ route('admin.users') }}" class="dropdown-item">
+                                            <i class="fa-solid fa-user-gear"></i> Admin
+                                        </a>
+
+                                        <hr class="dropdown-divider">
+                                    @endcan
+                                    {{-- Profile --}}
+                                    <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">
+                                        <i class="fa-solid fa-circle-user"></i> Profile
                                     </a>
 
-                                    <hr class="dropdown-divider">
-                                @endcan
-                                {{-- Profile --}}
-                                <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">
-                                    <i class="fa-solid fa-circle-user"></i> Profile
-                                </a>
-
-                                {{-- Logout --}}
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
+                                    {{-- Logout --}}
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    <i class="fa-solid fa-right-from-bracket"></i> {{ __('Logout') }}
-                                </a>
+                                        <i class="fa-solid fa-right-from-bracket"></i> {{ __('Logout') }}
+                                    </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <main class="py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                {{-- [SOON] Admin Menu (col-3) --}}
-                @if (request()->is('admin/*'))
-                    <div class="col-3">
-                        <div class="list-group">
-                            <a href="{{ route('admin.users') }}"
-                                class="list-group-item {{ request()->is('admin/users') ? 'active' : '' }}">
-                                <i class="fa-solid fa-users"></i> Users
-                            </a>
-                            <a href="{{ route('admin.posts') }}"
-                                class="list-group-item {{ request()->is('admin/posts') ? 'active' : '' }}">
-                                <i class="fa-solid fa-newspaper"></i> Posts
-                            </a>
-                            <a href="{{ route('admin.categories') }}"
-                                class="list-group-item {{ request()->is('admin/categories') ? 'active' : '' }}"">
-                                <i class="fa-solid fa-tags"></i> Categories
-                            </a>
-                        </div>
-                    </div>
-                @endif
-
-                <div class="col-9">
-                    @yield('content')
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
                 </div>
             </div>
-        </div>
-    </main>
-</div>
+            <div class="me-2">
+                <form action="{{ route('lang.switch', app()->getLocale()) }}" method="get" id="lang-form">
+                    <select class="form-control fs-small" name="locale" onchange="window.location.href='/lang/' + this.value;">
+                        <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English
+                        </option>
+                        <option value="ja" {{ app()->getLocale() == 'ja' ? 'selected' : '' }}>日本語
+                        </option>
+                        <option value="fil" {{ app()->getLocale() == 'fil' ? 'selected' : '' }}>Filipino
+                        </option>
+                    </select>
+                </form>
+            </div>
+        </nav>
+
+        <main class="py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    {{-- [SOON] Admin Menu (col-3) --}}
+                    @if (request()->is('admin/*'))
+                        <div class="col-3">
+                            <div class="list-group">
+                                <a href="{{ route('admin.users') }}"
+                                    class="list-group-item {{ request()->is('admin/users') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-users"></i> Users
+                                </a>
+                                <a href="{{ route('admin.posts') }}"
+                                    class="list-group-item {{ request()->is('admin/posts') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-newspaper"></i> Posts
+                                </a>
+                                <a href="{{ route('admin.categories') }}"
+                                    class="list-group-item {{ request()->is('admin/categories') ? 'active' : '' }}"">
+                                    <i class="fa-solid fa-tags"></i> Categories
+                                </a>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="col-9">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 
 </html>
