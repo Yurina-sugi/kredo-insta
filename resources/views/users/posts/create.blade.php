@@ -33,14 +33,14 @@
         @enderror
 
         <div class="mb-4">
-            <label for="image" class="form-label fw-bold">Image</label>
-            <input type="file" name="image" id="image" class="form-control" aria-describedby="image-info">
+            <label for="images[]" class="form-label fw-bold">Image (Maximum 4 images)</label>
+            <input type="file" name="images[]" id="images[]" multiple class="form-control" aria-describedby="image-info">
             <div id="image-info" class="form-text">
                 The acceptable formats are jpeg,jpg,png, and gif only. <br>
                 Max file size is 1048kb.
             </div>
             {{-- Error --}}
-            @error('image')
+            @error('images[]')
                 <div class="text-danger small">{{ $message }}</div>
             @enderror
         </div>

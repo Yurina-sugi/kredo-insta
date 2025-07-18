@@ -12,11 +12,91 @@
             position: absolute;
             top: 65px;
         }
+
+        .img-fixed {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            /* 画像比率を維持 */
+        }
+
+        .swiper {
+            width: 100%;
+            height: auto;
+            position: relative;
+        }
+
+        .swiper-wrapper {
+            height: 450px;
+            /* スライドの高さ固定 */
+        }
+
+        .swiper-pagination-fraction {
+            color: #000;
+            /* 黒文字 */
+            font-weight: bold;
+            font-size: 13px;
+            position: static;
+            /* 画像の下に自然に配置 */
+            text-align: center;
+        }
+
+        /* ナビゲーション矢印 */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #000;
+        }
     </style>
     <div class="row border shadow">
-        <div class="col p-0 border-end">
+        {{-- <div class="col p-0 border-end">
             <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="w-100">
+        </div> --}}
+        <div class="col-8 p-0 border-end">
+            @php
+                $images = json_decode($post->image, true);
+            @endphp
+
+            @if (is_array($images))
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        @foreach ($images as $img)
+                            <div class="swiper-slide d-flex justify-content-center align-items-center">
+                                <a href="{{ route('post.show', $post->id) }}">
+                                    <img src="{{ $img }}" alt="post image" class="img-fixed">
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <!-- ページ数（画像の下に表示） -->
+                    <div class="swiper-pagination swiper-pagination-fraction"></div>
+
+                    <!-- 矢印（必要なら） -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            @else
+                <a href="{{ route('post.show', $post->id) }}">
+                    <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="w-100 img-fixed">
+                </a>
+            @endif
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                new Swiper('.mySwiper', {
+                    loop: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        type: 'fraction',
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
+            });
+        </script>
         <div class="col-4 px-0 bg-white">
             <div class="card border-0">
                 <div class="card-header bg-white py-3">

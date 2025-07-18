@@ -18,8 +18,15 @@
     {{-- Custom CSS --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+    {{-- Image swiper --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 
     <style>
         /* ナビゲーションバーの共通スタイル */
@@ -265,7 +272,8 @@
         </div>
         <div class="me-2">
             <form action="{{ route('lang.switch', app()->getLocale()) }}" method="get" id="lang-form">
-                <select class="form-control fs-small" name="locale" onchange="window.location.href='/lang/' + this.value;">
+                <select class="form-control fs-small" name="locale"
+                    onchange="window.location.href='/lang/' + this.value;">
                     <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English
                     </option>
                     <option value="ja" {{ app()->getLocale() == 'ja' ? 'selected' : '' }}>日本語
