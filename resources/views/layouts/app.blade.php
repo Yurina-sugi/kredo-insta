@@ -20,148 +20,293 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        /* ナビゲーションバーの共通スタイル */
+        .navbar-custom {
+            border-bottom: none;
+        }
+
+        /* ライトテーマ（ログイン状態に関わらず統一） */
+        .navbar-light-theme {
+            background-color: #F9F5EE !important;
+            /* 白 */
+            border-bottom: none;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .navbar-light-theme .navbar-brand,
+        .navbar-light-theme .nav-link,
+        .navbar-light-theme .navbar-toggler-icon {
+            color: #B39A84 !important;
+            /* ベージュ */
+            font-family: sans-serif;
+        }
+
+        .navbar-light-theme .navbar-brand h1 {
+            color: #B39A84 !important;
+            /* ベージュ */
+        }
+
+        .navbar-light-theme .navbar-toggler {
+            border-color: #B39A84;
+            /* ベージュ */
+        }
+
+        .navbar-light-theme .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28179, 154, 132, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        /* 検索バーのスタイル */
+        .navbar-light-theme .search-bar-container {
+            position: relative;
+            display: flex;
+            /* アイコンと入力フィールドを整列 */
+            align-items: center;
+            width: 300px;
+            /* フォームの幅を維持 */
+        }
+
+        .navbar-light-theme .search-icon {
+            position: absolute;
+            /* コンテナ内で絶対位置指定 */
+            left: 5px;
+            /* アイコンの左からの位置 */
+            color: #B39A84;
+            /* ベージュ色 (虫眼鏡アイコンの色) */
+            font-size: 1rem;
+            z-index: 1;
+            /* アイコンが入力フィールドの上に表示されるように */
+        }
+
+        .navbar-light-theme .search-input {
+            border: none;
+            /* デフォルトのボーダーを削除 */
+            border-bottom: 1px solid #B39A84;
+            /* ベージュ色のアンダーライン */
+            background-color: transparent;
+            /* 背景を透明に */
+            padding-left: 30px;
+            /* アイコンのためのスペース */
+            padding-right: 5px;
+            /* 右側の小さなパディング */
+            color: #0A1E54;
+            /* ネイビーの文字色 */
+            border-radius: 0;
+            /* 角丸を削除 */
+            box-shadow: none;
+            /* 影を削除 */
+            width: 100%;
+            /* コンテナの全幅を使用 */
+        }
+
+        .navbar-light-theme .search-input::placeholder {
+            color: rgba(10, 30, 84, 0.7);
+            /* 半透明のネイビーのプレースホルダー */
+        }
+
+        .navbar-light-theme .search-input:focus {
+            background-color: transparent;
+            /* フォーカス時も透明を維持 */
+            border-color: #0A1E54;
+            /* フォーカス時はネイビーのアンダーライン */
+            box-shadow: none;
+            color: #0A1E54;
+        }
+
+        /* 既存のフォームコントロールスタイルは、より具体的な.search-inputで上書きされる */
+        .navbar-light-theme .form-control {
+            /* このスタイルは、.search-inputによって上書きされるため、
+       他のフォームコントロールに影響を与える場合にのみ調整が必要 */
+            border-color: #B39A84;
+            /* ベージュ */
+            background-color: transparent;
+            /* 半透明のベージュ */
+            color: #0A1E54;
+
+        }
+
+        .navbar-light-theme .form-control::placeholder {
+            color: rgba(10, 30, 84, 0.7);
+            /* 半透明のネイビー */
+        }
+
+        .navbar-light-theme .form-control:focus {
+            background-color: transparent;
+            border-color: #B39A84;
+            box-shadow: none;
+            color: #0A1E54;
+        }
+
+
+        .navbar-light-theme .icon-sm {
+            color: #B39A84 !important;
+            /* ベージュ */
+        }
+
+        .navbar-light-theme .avatar-sm {
+            border: 1px solid #B39A84;
+            /* ベージュ */
+        }
+
+        /* ドロップダウンメニュー（統一テーマで共通） */
+        .dropdown-menu {
+            background-color: #F9F5EE;
+            /* 白 */
+            border: 1px solid #CFC7C8;
+            /* グレー */
+            border-radius: 5px;
+        }
+
+        .dropdown-item {
+            color: #0A1E54;
+            /* ネイビー */
+            font-family: sans-serif;
+        }
+
+        .dropdown-item:hover {
+            background-color: #CFC7C8;
+            /* グレー */
+            color: #0A1E54;
+            /* ネイビー */
+        }
+    </style>
 </head>
 
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <h1 class="h5 mb-0">{{ config('app.name') }}</h1>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    {{-- [SOON] Search bar here. Show it when a user logs in --}}
-                    @auth
-                        @if (!request()->is('admin/*'))
-                            <ul class="navbar-nav ms-auto">
-                                <form action="{{ route('search') }}" style="width: 300px">
-                                    <input type="search" name="search" class="form-control form-control-sm"
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm navbar-custom navbar-light-theme"> {{-- クラスを統一しました --}}
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <h1 class="h5 mb-0">{{ config('app.name') }}</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                {{-- [SOON] Search bar here. Show it when a user logs in --}}
+                @auth
+                    @if (!request()->is('admin/*'))
+                        <ul class="navbar-nav ms-auto">
+                            <form action="{{ route('search') }}" style="width: 300px">
+                                <div class="search-bar-container">
+                                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                                    <input type="search" name="search" class="form-control form-control-sm search-input"
                                         placeholder="Search...">
-                                </form>
-                            </ul>
-                        @endif
-                    @endauth
-
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            {{-- Home --}}
-                            <li class="nav-item" title="Home">
-                                <a href="{{ route('index') }}" class="nav-link"><i
-                                        class="fa-solid fa-house text-dark icon-sm"></i></a>
-                            </li>
-
-                            {{-- Create Post --}}
-                            <li class="nav-item" title="Create Post">
-                                <a href="{{ route('post.create') }}" class="nav-link"><i
-                                        class="fa-solid fa-circle-plus text-dark icon-sm"></i></a>
-                            </li>
-
-                            {{-- Account --}}
-                            <li class="nav-item dropdown">
-                                <button id="account-dropdown" class="btn shadow-none nav-link" data-bs-toggle="dropdown">
-                                    @if (Auth::user()->avatar)
-                                        <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}"
-                                            class="rounded-circle avatar-sm">
-                                    @else
-                                        <i class="fa-solid fa-circle-user text-dark icon-sm"></i>
-                                    @endif
-                                </button>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="account-dropdown">
-                                    {{-- [SOON] Admin Controls --}}
-                                    @can('admin')
-                                        <a href="{{ route('admin.users') }}" class="dropdown-item">
-                                            <i class="fa-solid fa-user-gear"></i> Admin
-                                        </a>
-
-                                        <hr class="dropdown-divider">
-                                    @endcan
-                                    {{-- Profile --}}
-                                    <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">
-                                        <i class="fa-solid fa-circle-user"></i> Profile
-                                    </a>
-
-                                    {{-- Logout --}}
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <i class="fa-solid fa-right-from-bracket"></i> {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
                                 </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-            <div class="me-2">
-                <form action="{{ route('lang.switch', app()->getLocale()) }}" method="get" id="lang-form">
-                    <select class="form-control fs-small" name="locale" onchange="window.location.href='/lang/' + this.value;">
-                        <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English
-                        </option>
-                        <option value="ja" {{ app()->getLocale() == 'ja' ? 'selected' : '' }}>日本語
-                        </option>
-                        <option value="fil" {{ app()->getLocale() == 'fil' ? 'selected' : '' }}>Filipino
-                        </option>
-                    </select>
-                </form>
-            </div>
-        </nav>
-
-        <main class="py-5">
-            <div class="container">
-                <div class="row justify-content-center">
-                    {{-- [SOON] Admin Menu (col-3) --}}
-                    @if (request()->is('admin/*'))
-                        <div class="col-3">
-                            <div class="list-group">
-                                <a href="{{ route('admin.users') }}"
-                                    class="list-group-item {{ request()->is('admin/users') ? 'active' : '' }}">
-                                    <i class="fa-solid fa-users"></i> Users
-                                </a>
-                                <a href="{{ route('admin.posts') }}"
-                                    class="list-group-item {{ request()->is('admin/posts') ? 'active' : '' }}">
-                                    <i class="fa-solid fa-newspaper"></i> Posts
-                                </a>
-                                <a href="{{ route('admin.categories') }}"
-                                    class="list-group-item {{ request()->is('admin/categories') ? 'active' : '' }}"">
-                                    <i class="fa-solid fa-tags"></i> Categories
-                                </a>
-                            </div>
-                        </div>
+                            </form>
+                        </ul>
                     @endif
+                @endauth
 
-                    <div class="col-9">
-                        @yield('content')
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ms-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        {{-- ログイン/登録ボタンは削除済みのため、ここには何も表示されません --}}
+                    @else
+                        {{-- Home --}}
+                        <li class="nav-item" title="Home">
+                            <a href="{{ route('index') }}" class="nav-link"><i class="fa-solid fa-house icon-sm"></i></a>
+                        </li>
+
+                        {{-- Create Post --}}
+                        <li class="nav-item" title="Create Post">
+                            <a href="{{ route('post.create') }}" class="nav-link"><i
+                                    class="fa-solid fa-circle-plus icon-sm"></i></a>
+                        </li>
+
+                        {{-- Account --}}
+                        <li class="nav-item dropdown">
+                            <button id="account-dropdown" class="btn shadow-none nav-link" data-bs-toggle="dropdown">
+                                @if (Auth::user()->avatar)
+                                    <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}"
+                                        class="rounded-circle avatar-sm">
+                                @else
+                                    <i class="fa-solid fa-circle-user icon-sm"></i>
+                                @endif
+                            </button>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="account-dropdown">
+                                {{-- [SOON] Admin Controls --}}
+                                @can('admin')
+                                    <a href="{{ route('admin.users') }}" class="dropdown-item">
+                                        <i class="fa-solid fa-user-gear"></i> Admin
+                                    </a>
+
+                                    <hr class="dropdown-divider">
+                                @endcan
+                                {{-- Profile --}}
+                                <a href="{{ route('profile.show', Auth::user()->id) }}" class="dropdown-item">
+                                    <i class="fa-solid fa-circle-user"></i> Profile
+                                </a>
+
+                                {{-- Logout --}}
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    <i class="fa-solid fa-right-from-bracket"></i> {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
+            </div>
+        </div>
+        <div class="me-2">
+            <form action="{{ route('lang.switch', app()->getLocale()) }}" method="get" id="lang-form">
+                <select class="form-control fs-small" name="locale" onchange="window.location.href='/lang/' + this.value;">
+                    <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English
+                    </option>
+                    <option value="ja" {{ app()->getLocale() == 'ja' ? 'selected' : '' }}>日本語
+                    </option>
+                    <option value="fil" {{ app()->getLocale() == 'fil' ? 'selected' : '' }}>Filipino
+                    </option>
+                </select>
+            </form>
+        </div>
+    </nav>
+
+
+    <main class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                {{-- [SOON] Admin Menu (col-3) --}}
+                @if (request()->is('admin/*'))
+                    <div class="col-3">
+                        <div class="list-group">
+                            <a href="{{ route('admin.users') }}"
+                                class="list-group-item {{ request()->is('admin/users') ? 'active' : '' }}">
+                                <i class="fa-solid fa-users"></i> Users
+                            </a>
+                            <a href="{{ route('admin.posts') }}"
+                                class="list-group-item {{ request()->is('admin/posts') ? 'active' : '' }}">
+                                <i class="fa-solid fa-newspaper"></i> Posts
+                            </a>
+                            <a href="{{ route('admin.categories') }}"
+                                class="list-group-item {{ request()->is('admin/categories') ? 'active' : '' }}"">
+                                <i class="fa-solid fa-tags"></i> Categories
+                            </a>
+                        </div>
                     </div>
+                @endif
+
+                <div class="col-9">
+                    @yield('content')
                 </div>
             </div>
-        </main>
+        </div>
+    </main>
     </div>
 </body>
 
