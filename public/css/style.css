@@ -88,3 +88,28 @@ following and followers
     80%  { transform: scale(0.98); }
     100% { transform: scale(1); }
 }
+
+.floating-heart {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    font-size: 2rem;
+    color: #e0245e;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: float-heart 1s ease-out forwards;
+}
+
+@keyframes float-heart {
+    0% {
+        transform: translate(-50%, 0) scale(1) rotate(0deg);
+        opacity: 0.5;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -120px) scale(1.5) rotate(20deg);
+        opacity: 0;
+    }
+}
