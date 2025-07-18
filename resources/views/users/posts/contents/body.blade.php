@@ -12,15 +12,15 @@
                 <form action="{{ route('like.destroy', $post->id) }}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-sm p-0">
-                        <i class="fa-solid fa-heart text-danger"></i>
+                    <button type="submit" class="like-btn btn btn-sm p-0" onclick="animateHeart(this)">
+                        <i class="fa-heart fa-2x fa-solid heart-icon liked"></i>
                     </button>
                 </form>
             @else
                 <form action="{{ route('like.store', $post->id) }}" method="post">
                     @csrf
-                    <button type="submit" class="btn btn-sm shadow-none p-0">
-                        <i class="fa-regular fa-heart"></i>
+                    <button type="submit" class="like-btn btn btn-sm p-0" onclick="animateHeart(this)">
+                        <i class="fa-heart fa-2x fa-regular heart-icon"></i>
                     </button>
                 </form>
             @endif

@@ -21,6 +21,21 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+    <script>
+        /**
+         * Like button animation
+         */
+        function animateHeart(btn) {
+            const heart = btn.querySelector('.heart-icon');
+            heart.classList.add('animate');
+            heart.classList.toggle('liked');
+            heart.addEventListener('animationend', function handler() {
+                heart.classList.remove('animate');
+                heart.removeEventListener('animationend', handler);
+            });
+        }
+    </script>
+        
     <style>
         /* ナビゲーションバーの共通スタイル */
         .navbar-custom {
@@ -172,6 +187,7 @@
             /* ネイビー */
         }
     </style>
+
 </head>
 
 <body>
