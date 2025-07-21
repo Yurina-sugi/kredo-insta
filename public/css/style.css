@@ -166,16 +166,32 @@ body {
     border-radius: 10px; /* 角丸を維持 */
 }
 
+.card-login-register {
+    background-color: transparent !important; /* 背景を完全に透明に強制 */
+    border: none !important; /* 枠を削除を強制 */
+    box-shadow: none !important; 
+}
+
+.btn-primary {
+    background-color: #0A1E54 !important; /* 背景色をネイビーに */
+    border-color: #0A1E54 !important; /* ボーダー色をネイビーに */
+    color: #F9F5EE !important; /* テキスト色を白に */
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
 .card-header {
-    background-color: transparent; /* ヘッダーの背景を透明に */
-    border-bottom: none; /* ヘッダーの下線を削除 */
-    padding-bottom: 0; /* 下パディングを調整 */
+    background-color: transparent !important; /* ヘッダーの背景を透明に */
+    border-bottom: none !important; /* ヘッダーの下線を削除 */
+    padding-bottom: 0 ; /* 下パディングを調整 */
 }
 
 /* フォームラベルのスタイル */
 .form-label {
     color: #B39A84; /* ラベルの色をベージュに */
     font-weight: bold; /* 太字 */
+    font-family: 'Times New Roman', Times, serif;
 }
 
 /* フォーム入力コントロールのスタイル */
@@ -215,14 +231,16 @@ body {
 }
 
 /* リンクボタンのスタイル（例: Forgot Your Password?） */
-.btn-link {
-    color: #B39A84; /* ベージュ色に */
-    font-weight: bold;
-    text-decoration: none; /* 下線をなくす */
+.forgot-password-link {
+    color: #B39A84 !important; /* ベージュ色に */
+    font-weight: bold !important;
+    text-decoration: none !important; /* 下線をなくす */
+    font-family: 'Times New Roman', Times, serif;
+
 }
 
 .btn-link:hover {
-    color: #0A1E54; /* ホバー時はネイビーに */
+    color: #0A1E54 !important; /* ホバー時はネイビーに */
     text-decoration: underline; /* ホバー時に下線を表示 */
 }
 
@@ -361,6 +379,7 @@ body {
     background-color: #CFC7C8; /* グレー */
     color: #0A1E54; /* ネイビー */
 }
+
 
 .heart-icon {
     color: #aaa;
