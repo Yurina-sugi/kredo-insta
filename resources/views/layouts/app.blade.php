@@ -44,7 +44,7 @@
         function showFloatingHearts(btn) {
 
         const container = btn.parentElement.querySelector('.floating-hearts-container');
-        for (let i = 0; i < 3; i++) { // 3つのハートを舞わせる
+        for (let i = 0; i < 2; i++) { // 2つのハートを舞わせる
             const heart = document.createElement('i');
             heart.className = 'fa-solid fa-heart floating-heart';
             // ランダムな左右位置・大きさ・回転
@@ -66,6 +66,32 @@
         // 既存のlikeアニメーションも同時に発火したい場合はここで呼ぶ
         animateHeart(btn);
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleBtn = document.getElementById('mode-toggle');
+        const modeIcon = document.getElementById('mode-icon');
+        const modeLabel = document.getElementById('mode-label');
+
+        // ローカルストレージからモードを取得
+        let mode = localStorage.getItem('color-mode') || 'light';
+        setMode(mode);
+
+        toggleBtn.addEventListener('click', function() {
+            mode = (mode === 'light') ? 'dark' : 'light';
+            setMode(mode);
+            localStorage.setItem('color-mode', mode);
+        });
+
+        function setMode(mode) {
+            document.body.classList.remove('light-mode', 'dark-mode');
+            document.body.classList.add(mode + '-mode');
+            if (mode === 'dark') {
+                modeIcon.className = 'fa fa-sun';
+            } else {
+                modeIcon.className = 'fa fa-moon';
+            }
+        }
+    });
     </script>
         
     <style>
@@ -309,6 +335,11 @@
                             class="lang-switcher-link {{ app()->getLocale() == 'fil' ? 'active-lang' : '' }}">PH</a>
                     </li>
                 </ul>
+            </div>
+            <div class="me-2 text-end">
+                <button id="mode-toggle" class="btn btn-outline-secondary">
+                    <span id="mode-icon" class="fa fa-moon"></span>
+                </button>
             </div>
         </div>
     </nav>

@@ -19,6 +19,25 @@ Suggestions
 following and followers
 **/
 
+body.light-mode {
+    background: #F9F5EE;
+    color: #222;
+}
+
+body.dark-mode {
+    background: #181818;
+    color: #eee;
+}
+
+.navbar, .card {
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark-mode .navbar, body.dark-mode .card {
+    background: #222;
+    color: #eee;
+}
+
 .icon-sm {
     font-size: 2rem;
 }
@@ -32,6 +51,11 @@ following and followers
 /* like button */
 .fa-heart {
     font-size: 1.5rem;
+}
+
+.floating-hearts-container {
+    z-index: 9999;
+    position: absolute;
 }
 
 /* dates */
@@ -367,7 +391,7 @@ body {
     left: 50%;
     font-size: 2rem;
     color: #e0245e;
-    opacity: 0.8;
+    opacity: 0.5;
     pointer-events: none;
     animation: float-heart 1s ease-out forwards;
 }
@@ -375,7 +399,7 @@ body {
 @keyframes float-heart {
     0% {
         transform: translate(-50%, 0) scale(1) rotate(0deg);
-        opacity: 0.5;
+        opacity: 0.2;
     }
     80% {
         opacity: 1;
@@ -385,3 +409,4 @@ body {
         opacity: 0;
     }
 }
+
