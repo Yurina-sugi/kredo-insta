@@ -24,9 +24,6 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-<<<<<<< HEAD
-
-=======
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -222,8 +219,6 @@
             /* ネイビー */
         }
     </style>
-
->>>>>>> c47b4c06b22b061ac7aaa3a55b73573ccfe18dae
 </head>
 
 <body>
@@ -301,38 +296,21 @@
                                 </form>
                             </div>
                         </li>
-
-                        {{-- 言語選択リンクのリストに変更 --}}
-                        <li class="nav-item d-flex align-items-center lang-switcher-links">
-                            <a href="{{ route('lang.switch', 'en') }}"
-                                class="lang-switcher-link {{ app()->getLocale() == 'en' ? 'active-lang' : '' }}">EN</a>
-                            <span class="lang-separator">|</span>
-                            <a href="{{ route('lang.switch', 'ja') }}"
-                                class="lang-switcher-link {{ app()->getLocale() == 'ja' ? 'active-lang' : '' }}">JP</a>
-                            <span class="lang-separator">|</span>
-                            <a href="{{ route('lang.switch', 'fil') }}"
-                                class="lang-switcher-link {{ app()->getLocale() == 'fil' ? 'active-lang' : '' }}">PH</a>
-                        </li>
                     @endguest
+                    {{-- 言語選択リンクのリストに変更 --}}
+                    <li class="nav-item d-flex align-items-center lang-switcher-links">
+                        <a href="{{ route('lang.switch', 'en') }}"
+                            class="lang-switcher-link {{ app()->getLocale() == 'en' ? 'active-lang' : '' }}">EN</a>
+                        <span class="lang-separator">|</span>
+                        <a href="{{ route('lang.switch', 'ja') }}"
+                            class="lang-switcher-link {{ app()->getLocale() == 'ja' ? 'active-lang' : '' }}">JP</a>
+                        <span class="lang-separator">|</span>
+                        <a href="{{ route('lang.switch', 'fil') }}"
+                            class="lang-switcher-link {{ app()->getLocale() == 'fil' ? 'active-lang' : '' }}">PH</a>
+                    </li>
                 </ul>
             </div>
-<<<<<<< HEAD
-=======
         </div>
-        <div class="me-2">
-            <form action="{{ route('lang.switch', app()->getLocale()) }}" method="get" id="lang-form">
-                <select class="form-control fs-small" name="locale"
-                    onchange="window.location.href='/lang/' + this.value;">
-                    <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English
-                    </option>
-                    <option value="ja" {{ app()->getLocale() == 'ja' ? 'selected' : '' }}>日本語
-                    </option>
-                    <option value="fil" {{ app()->getLocale() == 'fil' ? 'selected' : '' }}>Filipino
-                    </option>
-                </select>
-            </form>
-        </div>
->>>>>>> c47b4c06b22b061ac7aaa3a55b73573ccfe18dae
     </nav>
 
 
