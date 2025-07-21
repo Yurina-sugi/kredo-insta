@@ -3,6 +3,97 @@
 @section('title', 'Register')
 
 @section('content')
+    <style>
+        body {
+            background-color: #F9F5EE;
+            /* 変更後の白 */
+        }
+
+        .card {
+            background-color: #F9F5EE;
+            /* 変更後の白 */
+            border: none;
+            /* 枠を削除 */
+            box-shadow: none;
+            /* 影を削除 */
+            border-radius: 10px;
+        }
+
+        .card-header {
+            background-color: transparent;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .form-label {
+            color: #B39A84;
+            /* beige (茶色系) */
+            font-family: sans-serif;
+            /* 必要に応じてフォントを指定 */
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-color: #B39A84;
+            /* beige (茶色系) */
+        }
+
+        .btn-primary {
+            background-color: #0A1E54;
+            /* navy */
+            border-color: #0A1E54;
+        }
+
+        .btn-primary:hover {
+            background-color: #0A1E54;
+            border-color: #0A1E54;
+        }
+
+        .forgot-password-link {
+            color: #B39A84;
+            /* beige */
+            font-weight: bold;
+        }
+
+        .nav-tabs-custom {
+            border-bottom: 1px solid #CFC7C8;
+            /* gray */
+            margin-bottom: 20px;
+        }
+
+        .nav-tabs-custom .nav-item {
+            margin-right: 0;
+        }
+
+        .nav-tabs-custom .nav-link {
+            border: none;
+            border-bottom: 2px solid transparent;
+            background-color: #F9F5EE;
+            /* 変更後の白 */
+            color: #0A1E54;
+            /* navy */
+            border-radius: 5px 5px 0 0;
+            padding: 8px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s, border-bottom-color 0.3s;
+        }
+
+        .nav-tabs-custom .nav-link.active {
+            background-color: #F9F5EE;
+            /* 変更後の白 */
+            color: #B39A84;
+            /* beige (茶色系) */
+            border-bottom-color: #B39A84;
+            /* beige (茶色系) */
+        }
+
+        .nav-tabs-custom .nav-link:hover:not(.active) {
+            background-color: #CFC7C8;
+            /* gray */
+            color: #0A1E54;
+            /* navy */
+        }
+    </style>
 
     <div class="container py-5">
         <h1 class="text-center mb-4" style="color: #0A1E54; font-weight: bold;">Insta</h1>

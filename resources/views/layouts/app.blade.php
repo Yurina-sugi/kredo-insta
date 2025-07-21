@@ -296,19 +296,18 @@
                                 </form>
                             </div>
                         </li>
-
-                        {{-- 言語選択リンクのリストに変更 --}}
-                        <li class="nav-item d-flex align-items-center lang-switcher-links">
-                            <a href="{{ route('lang.switch', 'en') }}"
-                                class="lang-switcher-link {{ app()->getLocale() == 'en' ? 'active-lang' : '' }}">EN</a>
-                            <span class="lang-separator">|</span>
-                            <a href="{{ route('lang.switch', 'ja') }}"
-                                class="lang-switcher-link {{ app()->getLocale() == 'ja' ? 'active-lang' : '' }}">JP</a>
-                            <span class="lang-separator">|</span>
-                            <a href="{{ route('lang.switch', 'fil') }}"
-                                class="lang-switcher-link {{ app()->getLocale() == 'fil' ? 'active-lang' : '' }}">PH</a>
-                        </li>
                     @endguest
+                    {{-- 言語選択リンクのリストに変更 --}}
+                    <li class="nav-item d-flex align-items-center lang-switcher-links">
+                        <a href="{{ route('lang.switch', 'en') }}"
+                            class="lang-switcher-link {{ app()->getLocale() == 'en' ? 'active-lang' : '' }}">EN</a>
+                        <span class="lang-separator">|</span>
+                        <a href="{{ route('lang.switch', 'ja') }}"
+                            class="lang-switcher-link {{ app()->getLocale() == 'ja' ? 'active-lang' : '' }}">JP</a>
+                        <span class="lang-separator">|</span>
+                        <a href="{{ route('lang.switch', 'fil') }}"
+                            class="lang-switcher-link {{ app()->getLocale() == 'fil' ? 'active-lang' : '' }}">PH</a>
+                    </li>
                 </ul>
             </div>
         </div>
