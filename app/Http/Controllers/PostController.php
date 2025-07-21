@@ -30,7 +30,10 @@ class PostController extends Controller
             'category' => 'required|array|between:1,3',
             'description' => 'required|min:1|max:1000',
             'images' => 'required',
-            'images.*' => 'mimes:jpeg,jpg,png,gif|max:1048'
+            'images.*' => 'mimes:jpeg,jpg,png,gif|max:1048',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+            'location_name' => 'nullable|string|max:255',
         ]);
 
         if (count($request->file('images')) > 4) {
@@ -46,6 +49,14 @@ class PostController extends Controller
         $this->post->user_id = Auth::user()->id;
         $this->post->image = count($images) === 1 ? $images[0] : json_encode($images); // 1枚なら文字列、複数ならjson
         $this->post->description = $request->description;
+
+        // add location
+        if ($request->filled('latitude') && $request->filled('longitude')) {
+            $this->post->latitude = $request->latitude;
+            $this->post->longitude = $request->longitude;
+            $this->post->location_name = $request->location_name;
+        }
+        
         $this->post->save();
 
         foreach ($request->category as $category_id) {
@@ -125,12 +136,22 @@ class PostController extends Controller
         $request->validate([
             'category' => 'required|array|between:1,3',
             'description' => 'required|min:1|max:1000',
-            'image' => 'mimes:jpg,png,jpeg,gif|max:1048'
+            'image' => 'mimes:jpg,png,jpeg,gif|max:1048',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+            'location_name' => 'nullable|string|max:255',
         ]);
 
         #2. Update the post
         $post = $this->post->findOrFail($id);
         $post->description = $request->description;
+        
+        // add location
+        if ($request->filled('latitude') && $request->filled('longitude')) {
+            $post->latitude = $request->latitude;
+            $post->longitude = $request->longitude;
+            $post->location_name = $request->location_name;
+        }
 
         //If there is a new image...
         if ($request->image) {

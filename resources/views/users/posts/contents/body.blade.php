@@ -135,7 +135,13 @@
     &nbsp;
     <p class="d-inline fw-light">{{ $post->description }}</p>
     <p class="text-uppercase text-muted xsmall">{{ date('M d, Y', strtotime($post->created_at)) }}</p>
-
+    @if($post->location_name)
+        <p>
+            <a class="text-decoration-none text-muted " href="https://www.google.com/maps?q={{ urlencode($post->location_name) }}" target="_blank" rel="noopener">
+                {{ $post->location_name }}
+            </a>
+        </p>
+    @endif
     {{-- Include comments here --}}
     @include('users.posts.contents.comments')
 </div>
