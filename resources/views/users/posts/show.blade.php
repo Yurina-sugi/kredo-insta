@@ -206,6 +206,33 @@
                     &nbsp;
                     <p class="d-inline fw-light">{{ $post->description }}</p>
                     <p class="text-uppercase text-muted xsmall">{{ date('M d, Y', strtotime($post->created_at)) }}</p>
+                    
+                    {{-- Location information and Google Maps --}}
+                    @if($post->location_name)
+                        <p>
+                            <a class="text-decoration-none text-muted " href="https://www.google.com/maps?q={{ urlencode($post->location_name) }}" target="_blank" rel="noopener">
+                                {{ $post->location_name }}
+                            </a>
+                        </p>
+                    @endif
+                    @if($post->latitude && $post->longitude)
+                        <div id="post-map" style="height: 300px; width: 100%;"></div>
+                        <script>
+                        function initPostMap() {
+                            const latLng = { lat: {{ $post->latitude }}, lng: {{ $post->longitude }} };
+                            const map = new google.maps.Map(document.getElementById('post-map'), {
+                                center: latLng,
+                                zoom: 15,
+                            });
+                            new google.maps.Marker({
+                                position: latLng,
+                                map: map,
+                            });
+                        }
+                        window.initPostMap = initPostMap;
+                        </script>
+                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxIyTHVtRWu8CQG3mE_aO3RNTcGH6cN7c&callback=initPostMap" async defer></script>
+                    @endif
 
                     {{-- Include comments here --}}
                     <div class="mt-4">

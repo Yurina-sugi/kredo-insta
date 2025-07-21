@@ -45,6 +45,28 @@
             @enderror
         </div>
 
+        {{-- location --}}
+        <div class="mb-4">
+            <label for="location_search" class="form-label fw-bold">Add location</label>
+            <input type="text" id="location_search" placeholder="Input location..." class="form-control mb-2">
+            {{-- Error --}}
+            @error('location_name')
+                <div class="text-danger small">{{ $message }}</div>
+            @enderror
+        </div>
+
+        {{-- Map --}}
+        <div class="mb-4">
+            <div id="geolocation-alert" class="alert alert-info mb-2">
+                <i class="fa fa-info-circle"></i>
+                Please allow us to display your current location on the map.
+            </div>
+            <div id="map" style="height: 300px; width: 100%;"></div>
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+            <input type="hidden" id="location_name" name="location_name">
+        </div>
+
         <button type="submit" class="btn btn-primary px-5">Post</button>
     </form>
 @endsection
