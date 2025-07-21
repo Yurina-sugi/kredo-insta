@@ -92,7 +92,7 @@
                 <form action="{{ route('like.destroy', $post->id) }}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="like-btn btn btn-sm p-0" onclick="showFloatingHearts(this)">
+                    <button type="submit" class="like-btn btn btn-sm p-0" onclick="animateHeart(this)">
                         <i class="fa-heart fa-2x fa-solid heart-icon liked"></i>
                     </button>
                     <div class="floating-hearts-container" style="position: relative;"></div>
