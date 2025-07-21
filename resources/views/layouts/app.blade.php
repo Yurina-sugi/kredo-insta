@@ -244,6 +244,95 @@
             color: #0A1E54;
             /* ネイビー */
         }
+
+        body.dark-mode {
+            background: #181818;
+            color: #f5f5f5; /* 白に近い色 */
+        }
+        body.dark-mode p,
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode h4,
+        body.dark-mode h5,
+        body.dark-mode h6,
+        body.dark-mode span,
+        body.dark-mode li,
+        body.dark-mode a {
+            color: #f5f5f5 !important;
+        }
+
+        body.dark-mode .navbar {
+            background: #222 !important;
+            color: #f5f5f5 !important;
+            border-bottom: 1px solid #333;
+        }
+        body.dark-mode .navbar a,
+        body.dark-mode .navbar-brand,
+        body.dark-mode .navbar-nav .nav-link {
+            color: #f5f5f5 !important;
+        }
+
+        body.dark-mode .card {
+            background: #232323 !important;
+            color: #f5f5f5 !important;
+            border-color: #333 !important;
+        }
+
+        body.light-mode {
+            background: #fff;
+            color: #222;
+        }
+        body.light-mode .navbar {
+            background: #f8f9fa !important;
+            color: #222 !important;
+        }
+        body.light-mode .card {
+            background: #fff !important;
+            color: #222 !important;
+            border-color: #ddd !important;
+        }
+
+        body.dark-mode .username,
+        body.dark-mode .email {
+            color: #fff !important; /* もしくは #f5f5f5 など白系 */
+        }
+
+        body.dark-mode .text-muted,
+        body.dark-mode .text-secondary {
+            color: #bbb !important;
+        }
+
+        body.dark-mode a.username,
+        body.dark-mode a.email,
+        body.dark-mode li.username,
+        body.dark-mode li.email {
+            color: #fff !important;
+        }
+
+        body.dark-mode .user-info,
+        body.dark-mode .user-info * {
+            color: #f5f5f5 !important;
+        }
+
+        body.dark-mode .card-header {
+            background: #232323 !important;
+            color: #f5f5f5 !important;
+            border-bottom: 1px solid #333 !important;
+        }
+        body.dark-mode .bg-white {
+            background: #232323 !important;
+            color: #f5f5f5 !important;
+            border-color: #333 !important;
+        }
+        body.dark-mode .bg-white a,
+        body.dark-mode .card-header a {
+            color: #aad7ff !important;
+        }
+        body.dark-mode .bg-white .text-muted,
+        body.dark-mode .card-header .text-muted {
+            color: #bbb !important;
+        }
     </style>
 </head>
 
