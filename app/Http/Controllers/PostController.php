@@ -67,34 +67,6 @@ class PostController extends Controller
         return redirect()->route('index');
     }
 
-
-
-    // public function store(Request $request)
-    // {
-
-    //     #1. Validate all form data
-    //     $request->validate([
-    //         'category' => 'required|array|between:1,3',
-    //         'description' => 'required|min:1|max:1000',
-    //         'image' => 'required|mimes:jpeg,jpg,png,gif|max:1048'
-    //     ]);
-
-    //     #2. Save the post
-    //     $this->post->user_id = Auth::user()->id;
-    //     $this->post->image = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
-    //     $this->post->description = $request->description;
-    //     $this->post->save();
-
-    //     #3. Save the categories to the  category_post table
-    //     foreach ($request->category as $category_id) {
-    //         $category_post[] = ['category_id' => $category_id];
-    //     }
-    //     $this->post->categoryPost()->createMany($category_post);
-
-    //     #4. Go back to homepage
-    //     return redirect()->route('index');
-    // }
-
     public function show($id)
     {
 

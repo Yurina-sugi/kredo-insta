@@ -1,62 +1,3 @@
-<style>
-    .multi-photo-icon {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        background: rgba(0, 0, 0, 0.6);
-        color: white;
-        padding: 4px 6px;
-        border-radius: 5px;
-        font-size: 14px;
-    }
-
-    .grid-img {
-        width: 100%;
-        height: 230px;
-        object-fit: cover;
-        border-radius: 8px;
-    }
-
-    .ai-summary-box {
-        margin-bottom: 30px;
-        padding: 20px;
-        background: linear-gradient(to right, #4b6cb7, #182848);
-        color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    .ai-summary-box h5 {
-        font-weight: bold;
-        margin-bottom: 12px;
-        color: #ffd700;
-    }
-
-    .ai-summary-box p {
-        margin-bottom: 0;
-        font-size: 1rem;
-    }
-
-    .ai-tour-box {
-        padding: 20px;
-        background: #f4f9ff;
-        border-left: 5px solid #007bff;
-        border-radius: 10px;
-        margin-bottom: 35px;
-        transition: box-shadow 0.3s ease;
-    }
-
-    .ai-tour-box:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .ai-tour-box a {
-        font-weight: bold;
-        color: #007bff;
-        text-decoration: underline;
-    }
-</style>
-
 @extends('layouts.app')
 
 @section('title', $user->name . ' Profile')
@@ -109,7 +50,7 @@
                             @endphp
 
                             @if (is_array($images))
-                                <img src="{{ $images[0] }}" alt="post image" class="grid-img">
+                                <img src="{{ $images[0] }}" alt="post image" class="profile-grid-img">
                                 <div class="multi-photo-icon">
                                     <i class="fa-solid fa-clone"></i>
                                 </div>

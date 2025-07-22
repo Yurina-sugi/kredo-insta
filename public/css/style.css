@@ -19,11 +19,6 @@ Suggestions
 following and followers
 **/
 
-body.light-mode {
-    background: #B39A84;
-    color: #0A1E54;
-}
-
 body.dark-mode {
     background: #181818;
     color: #eee;
@@ -547,7 +542,6 @@ body {
     }
 }
 
-
 body.dark-mode {
     background: #181818;
     color: #f5f5f5;
@@ -914,6 +908,315 @@ body.dark-mode .table td {
 
 body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
     background-color: #2a2a2a !important;
+}
+
+/* ==========================================================================
+   Profile Show Page Styles
+   ========================================================================== */
+.multi-photo-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 4px 6px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.profile-grid-img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.ai-summary-box {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(to right, #4b6cb7, #182848);
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ai-summary-box h5 {
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #ffd700;
+}
+
+.ai-summary-box p {
+    margin-bottom: 0;
+    font-size: 1rem;
+}
+
+.ai-tour-box {
+    padding: 20px;
+    background: #f4f9ff;
+    border-left: 5px solid #007bff;
+    border-radius: 10px;
+    margin-bottom: 35px;
+    transition: box-shadow 0.3s ease;
+}
+
+.ai-tour-box:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ai-tour-box a {
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Post Show Page Styles
+   ========================================================================== */
+
+.post-show-col-4 {
+    overflow-y: scroll;
+}
+
+.post-show-card-body {
+    position: absolute;
+    top: 65px;
+}
+
+.img-fixed {
+    width: 100%;
+    height: 450px;
+    object-fit: contain;
+    /* Maintain image aspect ratio */
+}
+
+.swiper {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.swiper-wrapper {
+    height: 450px;
+    /* Fixed slide height */
+}
+
+.swiper-pagination-fraction {
+    color: #000;
+    /* Black text */
+    font-weight: bold;
+    font-size: 13px;
+    position: static;
+    /* Natural placement below image */
+    text-align: center;
+}
+
+/* Navigation arrows */
+.swiper-button-next,
+.swiper-button-prev {
+    color: #333;
+}
+
+/* ==========================================================================
+   Admin Posts Index Styles
+   ========================================================================== */
+.admin-multi-photo-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    /* Default top-right */
+    transform: translateX(-6px);
+    /* Shift left */
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   Email Template Styles
+   ========================================================================== */
+.email-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.email-header h1 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+.email-body p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+    margin: 0 0 5px;
+}
+
+.email-body {
+    padding: 20px;
+}
+
+.email-body .name {
+    font-weight: bold;
+}
+
+.email-footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.email-footer p {
+    font-size: 14px;
+    color: #999;
+    margin: 0;
+}
+
+.email-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 20px 0;
+    background-color: #0d6efd;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.email-body .not-me {
+    margin-top: 25px;
+    font-style: italic;
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   Layout App Styles (from app.blade.php)
+   ========================================================================== */
+.navbar-custom {
+    border-bottom: none;
+}
+
+.navbar-light-theme {
+    background-color: #F9F5EE !important;
+    /* White */
+    border-bottom: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.navbar-light-theme .navbar-brand,
+.navbar-light-theme .nav-link,
+.navbar-light-theme .navbar-toggler-icon {
+    color: #B39A84 !important;
+    /* Beige */
+    font-family: sans-serif;
+}
+
+.navbar-light-theme .navbar-brand h1 {
+    color: #B39A84 !important;
+    /* Beige */
+}
+
+.navbar-light-theme .navbar-toggler {
+    border-color: #B39A84;
+    /* Beige */
+}
+
+.navbar-light-theme .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28179, 154, 132, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* Search bar styles */
+.navbar-light-theme .search-bar-container {
+    position: relative;
+    display: flex;
+    /* Align icon and input field */
+    align-items: center;
+    width: 300px;
+    /* Maintain form width */
+}
+
+.navbar-light-theme .search-icon {
+    position: absolute;
+    /* Absolute positioning within container */
+    left: 5px;
+    /* Icon position from left */
+    color: #B39A84;
+    /* Beige color (magnifying glass icon) */
+    font-size: 1rem;
+    z-index: 1;
+    /* Icon appears above input field */
+}
+
+.navbar-light-theme .search-input {
+    border: none;
+    /* Remove default border */
+    border-bottom: 1px solid #B39A84;
+    /* Beige underline */
+    background-color: transparent;
+    /* Transparent background */
+    padding-left: 30px;
+    /* Space for icon */
+    padding-right: 5px;
+    /* Small right padding */
+    color: #0A1E54;
+    /* Navy text color */
+    border-radius: 0;
+    /* Remove rounded corners */
+    box-shadow: none;
+    /* Remove shadow */
+    width: 100%;
+    /* Use full container width */
+}
+
+.navbar-light-theme .search-input::placeholder {
+    color: rgba(10, 30, 84, 0.7);
+    /* Semi-transparent navy placeholder */
+}
+
+.navbar-light-theme .search-input:focus {
+    background-color: transparent;
+    /* Maintain transparency on focus */
+    border-color: #0A1E54;
+    /* Navy underline on focus */
+    box-shadow: none;
+    color: #0A1E54;
+}
+
+/* Existing form control styles are overridden by more specific .search-input */
+.navbar-light-theme .form-control {
+    /* This style is overridden by .search-input, so it only affects other form controls if needed */
+    border-color: #B39A84;
+    /* Beige */
+    background-color: transparent;
+    /* Semi-transparent beige */
+    color: #0A1E54;
+}
+
+.navbar-light-theme .form-control::placeholder {
+    color: rgba(10, 30, 84, 0.7);
+    /* Semi-transparent navy */
+}
+
+.navbar-light-theme .form-control:focus {
+    background-color: transparent;
+    border-color: #B39A84;
+    box-shadow: none;
+    color: #0A1E54;
+}
+
+.navbar-light-theme .icon-sm {
+    color: #B39A84 !important;
+    /* Beige */
+}
+
+.navbar-light-theme .avatar-sm {
+    border: 1px solid #B39A84;
+    /* Beige */
 }
 
 /* ==========================================================================
