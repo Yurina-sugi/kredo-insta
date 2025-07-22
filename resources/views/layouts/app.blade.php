@@ -31,9 +31,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxIyTHVtRWu8CQG3mE_aO3RNTcGH6cN7c&libraries=places" async
         defer></script>
 
-
-
-
 </head>
 
 <body>
