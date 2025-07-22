@@ -19,7 +19,7 @@
         </div>
     @endif
 
-    {{-- 🟡 投稿一覧 --}}
+    {{-- 🟡 Post list --}}
     <div class="row gx-5">
         <div class="col-8">
             @forelse ($home_posts as $post)

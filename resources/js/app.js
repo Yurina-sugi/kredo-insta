@@ -428,4 +428,32 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 100);
         }
     }
+
+    // Navbar scroll animation
+    const navbar = document.querySelector('.navbar-light-theme');
+    if (navbar) {
+        let lastScrollTop = 0;
+
+        window.addEventListener('scroll', function () {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Add scrolled class when scrolling down
+            if (scrollTop > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Hide/show navbar on scroll with smooth animation
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down - hide navbar
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up - show navbar
+                navbar.style.transform = 'translateY(0)';
+            }
+
+            lastScrollTop = scrollTop;
+        });
+    }
 });

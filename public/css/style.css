@@ -644,7 +644,7 @@ body.dark-mode .card-header .text-muted {
    Comprehensive dark mode style modifications
    ========================================================================== */
 
-/* ダークモード用のドロップダウンスタイル */
+/* Dark mode dropdown styles */
 body.dark-mode .dropdown-menu {
     background-color: #333 !important;
     border-color: #555 !important;
@@ -670,7 +670,7 @@ body.dark-mode .dropdown-divider {
     border-color: #555 !important;
 }
 
-/* ダークモード用のタブスタイル */
+/* Dark mode tab styles */
 body.dark-mode .nav-tabs-custom {
     border-bottom-color: #555;
 }
@@ -693,7 +693,7 @@ body.dark-mode .nav-tabs-custom .nav-link:hover:not(.active) {
     color: #fff;
 }
 
-/* ダークモード用のフォームスタイル */
+/* Dark mode form styles */
 body.dark-mode .form-label {
     color: #f5f5f5 !important;
 }
@@ -715,7 +715,7 @@ body.dark-mode .form-control:focus {
     box-shadow: 0 0 0 0.2rem rgba(170, 215, 255, 0.25) !important;
 }
 
-/* ダークモード用のボタンスタイル */
+/* Dark mode button styles */
 body.dark-mode .btn-primary {
     background-color: #aad7ff !important;
     border-color: #aad7ff !important;
@@ -738,7 +738,7 @@ body.dark-mode .btn-outline-secondary:hover {
     color: #f5f5f5 !important;
 }
 
-/* ダークモード用のリンクスタイル */
+/* Dark mode link styles */
 body.dark-mode .text-decoration-none {
     color: #f5f5f5 !important;
 }
@@ -763,7 +763,7 @@ body.dark-mode .forgot-password-link:hover {
     color: #8bc6ff !important;
 }
 
-/* ダークモード用のアイコンとアバター */
+/* Dark mode icons and avatars */
 body.dark-mode .icon-sm {
     color: #f5f5f5 !important;
 }
@@ -772,7 +772,7 @@ body.dark-mode .avatar-sm {
     border-color: #555 !important;
 }
 
-/* ダークモード用のハートアイコン */
+/* Dark mode heart icon */
 body.dark-mode .heart-icon {
     color: #666 !important;
 }
@@ -781,7 +781,7 @@ body.dark-mode .heart-icon.liked {
     color: #e0245e !important;
 }
 
-/* ダークモード用の言語選択 */
+/* Dark mode language selection */
 body.dark-mode .lang-switcher-link {
     color: #f5f5f5 !important;
 }
@@ -799,7 +799,7 @@ body.dark-mode .lang-separator {
     color: #f5f5f5 !important;
 }
 
-/* ダークモード用の検索バー */
+/* Dark mode search bar */
 body.dark-mode .navbar-light-theme .search-input {
     background-color: #333 !important;
     border-bottom-color: #555 !important;
@@ -819,9 +819,18 @@ body.dark-mode .navbar-light-theme .search-icon {
     color: #f5f5f5 !important;
 }
 
-/* ダークモード用のナビゲーションバー */
+/* Dark mode navigation bar */
 body.dark-mode .navbar-light-theme {
-    background-color: #222 !important;
+    background-color: rgba(34, 34, 34, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+body.dark-mode .navbar-light-theme.scrolled {
+    background-color: rgba(34, 34, 34, 0.98) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
 }
 
 body.dark-mode .navbar-light-theme .navbar-brand,
@@ -838,7 +847,7 @@ body.dark-mode .navbar-light-theme .navbar-toggler {
     border-color: #555 !important;
 }
 
-/* ダークモード用のカード */
+/* Dark mode cards */
 body.dark-mode .card {
     background-color: #232323 !important;
     border-color: #333 !important;
@@ -848,12 +857,12 @@ body.dark-mode .card-login-register {
     background-color: transparent !important;
 }
 
-/* ダークモード用のテキスト */
+/* Dark mode text */
 body.dark-mode .liked-users span {
     color: #bbb !important;
 }
 
-/* ダークモード用のアラート */
+/* Dark mode alerts */
 body.dark-mode .alert {
     background-color: #333 !important;
     border-color: #555 !important;
@@ -872,7 +881,7 @@ body.dark-mode .alert-danger {
     color: #f8d7da !important;
 }
 
-/* ダークモード用のバリデーション */
+/* Dark mode validation */
 body.dark-mode .invalid-feedback {
     color: #f8d7da !important;
 }
@@ -881,7 +890,7 @@ body.dark-mode .is-invalid {
     border-color: #dc3545 !important;
 }
 
-/* ダークモード用のモーダル */
+/* Dark mode modals */
 body.dark-mode .modal-content {
     background-color: #232323 !important;
     border-color: #333 !important;
@@ -896,7 +905,7 @@ body.dark-mode .modal-footer {
     border-top-color: #333 !important;
 }
 
-/* ダークモード用のテーブル */
+/* Dark mode tables */
 body.dark-mode .table {
     color: #f5f5f5 !important;
 }
@@ -1106,6 +1115,28 @@ body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
     border-bottom: none;
     box-shadow: none;
     border-radius: 0;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1030 !important;
+    width: 100% !important;
+    transition: all 0.3s ease !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* Scroll animation for navbar */
+.navbar-light-theme.scrolled {
+    background-color: rgba(249, 245, 238, 0.95) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+}
+
+/* Add padding to body to account for fixed navbar */
+body {
+    padding-top: 80px !important;
 }
 
 .navbar-light-theme .navbar-brand,
@@ -1409,7 +1440,7 @@ body.dark-mode #map {
 input[type="hidden"]#latitude,
 input[type="hidden"]#longitude,
 input[type="hidden"]#location_name {
-    /* 通常は非表示なので特別なスタイルは不要 */
+    /* Usually hidden, so no special styles needed */
 }
 
 /* Location Form group styles */
