@@ -22,13 +22,13 @@ class ProfileController extends Controller
     {
         $user = User::with(['comments', 'posts.categoryPost.category'])->findOrFail($id);
 
-        // 環境変数が未設定の場合、AI機能なしで表示
+        // Display without AI features if environment variable is not set
         $token = env('LAOZHANG_API_TOKEN');
         if (empty($token)) {
             return view('users.profile.show')->with('user', $user);
         }
 
-        // 以下、AI機能が有効な場合の処理
+        // Process when AI features are enabled
         $categories = $user->posts->flatMap(function ($post) {
             if ($post->categoryPost && $post->categoryPost->isNotEmpty()) {
                 return $post->categoryPost->pluck('category.name')->toArray();

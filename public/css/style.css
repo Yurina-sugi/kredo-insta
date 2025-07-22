@@ -29,11 +29,13 @@ body.dark-mode {
     color: #eee;
 }
 
-.navbar, .card {
+.navbar,
+.card {
     transition: background 0.3s, color 0.3s;
 }
 
-body.dark-mode .navbar, body.dark-mode .card {
+body.dark-mode .navbar,
+body.dark-mode .card {
     background: #222;
     color: #eee;
 }
@@ -100,16 +102,20 @@ body.dark-mode .navbar, body.dark-mode .card {
 .liked-users span {
     margin-right: 5px;
     font-size: 0.9em;
-    color: #555; /* 必要であればこの色もテーマカラーに調整 */
+    color: #555;
+    /* 必要であればこの色もテーマカラーに調整 */
 }
 
 /* ==========================================================================
    追加・更新された共通スタイル
    ========================================================================== */
 body {
-    background-color: #B39A84; /* 全体の背景色を新しい白に統一 */
-    font-family: sans-serif; /* 全体のフォントを統一 */
-    color: #0A1E54; /* デフォルトのテキスト色をネイビーに */
+    background-color: #B39A84;
+    /* 全体の背景色を新しい白に統一 */
+    font-family: sans-serif;
+    /* 全体のフォントを統一 */
+    color: #0A1E54;
+    /* デフォルトのテキスト色をネイビーに */
 }
 
 /* 言語選択リンクのスタイル */
@@ -117,131 +123,178 @@ body {
     /* nav-item のデフォルトスタイルを継承しつつ、flexboxで中央揃え */
     display: flex !important;
     align-items: center;
-    gap: 0.25rem; /* リンク間の隙間 */
-    padding: 0.5rem 0.5rem; /* nav-linkのパディングに合わせる */
+    gap: 0.25rem;
+    /* リンク間の隙間 */
+    padding: 0.5rem 0.5rem;
+    /* nav-linkのパディングに合わせる */
 }
 
 .lang-switcher-link {
-    color: #B39A84 !important; /* ベージュ */
+    color: #B39A84 !important;
+    /* ベージュ */
     text-decoration: none;
     font-weight: bold;
-    padding: 0.25rem 0.25rem; /* 各リンクのパディング */
+    padding: 0.25rem 0.25rem;
+    /* 各リンクのパディング */
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
     font-family: 'Times New Roman', 'Yu Mincho';
 }
 
 .lang-switcher-link:hover {
-    background-color: #CFC7C8; /* グレー */
-    color: #0A1E54 !important; /* ネイビー */
+    background-color: #CFC7C8;
+    /* グレー */
+    color: #0A1E54 !important;
+    /* ネイビー */
 }
 
 .lang-switcher-link.active-lang {
-    background-color: transparent; /* 背景を透明に */
-    color: #B39A84 !important; /* テキスト色をベージュに維持 */
-    font-weight: bold; /* デフォルトの太字を維持 */
+    background-color: transparent;
+    /* 背景を透明に */
+    color: #B39A84 !important;
+    /* テキスト色をベージュに維持 */
+    font-weight: bold;
+    /* デフォルトの太字を維持 */
     text-decoration: underline;
 }
 
 .lang-separator {
-    color: #B39A84; /* セパレータの色をベージュに */
+    color: #B39A84;
+    /* セパレータの色をベージュに */
     font-weight: bold;
-    margin: 0 0.1rem; /* セパレータの左右の余白 */
+    margin: 0 0.1rem;
+    /* セパレータの左右の余白 */
     font-family: serif;
 }
 
-    .lang-select:focus {
-        background-color: #B39A84 !important; 
-        border-color: #F9F5EE !important; /* フォーカス時に白いボーダー */
-        color: #F9F5EE !important;
-        box-shadow: 0 0 0 0.25rem rgba(10, 30, 84, 0.25) !important; /* 控えめなシャドウ */
-    }
+.lang-select:focus {
+    background-color: #B39A84 !important;
+    border-color: #F9F5EE !important;
+    /* フォーカス時に白いボーダー */
+    color: #F9F5EE !important;
+    box-shadow: 0 0 0 0.25rem rgba(10, 30, 84, 0.25) !important;
+    /* 控えめなシャドウ */
+}
 
 
 /* カードのスタイル（ログイン/登録/パスワード確認画面など） */
 .card {
-    background-color: #F9F5EE; /* カードの背景色を新しい白に統一 */
-    border: none; /* 枠を削除 */
-    box-shadow: none; /* 影を削除 */
-    border-radius: 10px; /* 角丸を維持 */
+    background-color: #F9F5EE;
+    /* カードの背景色を新しい白に統一 */
+    border: none;
+    /* 枠を削除 */
+    box-shadow: none;
+    /* 影を削除 */
+    border-radius: 10px;
+    /* 角丸を維持 */
 }
 
 .card-login-register {
-    background-color: transparent !important; /* 背景を完全に透明に強制 */
-    border: none !important; /* 枠を削除を強制 */
-    box-shadow: none !important; 
+    background-color: transparent !important;
+    /* 背景を完全に透明に強制 */
+    border: none !important;
+    /* 枠を削除を強制 */
+    box-shadow: none !important;
 }
 
 .btn-primary {
-    background-color: #0A1E54 !important; /* 背景色をネイビーに */
-    border-color: #0A1E54 !important; /* ボーダー色をネイビーに */
-    color: #F9F5EE !important; /* テキスト色を白に */
+    background-color: #0A1E54 !important;
+    /* 背景色をネイビーに */
+    border-color: #0A1E54 !important;
+    /* ボーダー色をネイビーに */
+    color: #F9F5EE !important;
+    /* テキスト色を白に */
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s, border-color 0.3s;
 }
 
 .card-header {
-    background-color: transparent !important; /* ヘッダーの背景を透明に */
-    border-bottom: none !important; /* ヘッダーの下線を削除 */
-    padding-bottom: 0 ; /* 下パディングを調整 */
+    background-color: transparent !important;
+    /* ヘッダーの背景を透明に */
+    border-bottom: none !important;
+    /* ヘッダーの下線を削除 */
+    padding-bottom: 0;
+    /* 下パディングを調整 */
 }
 
 /* フォームラベルのスタイル */
 .form-label {
-    color: #B39A84; /* ラベルの色をベージュに */
-    font-weight: bold; /* 太字 */
+    color: #B39A84;
+    /* ラベルの色をベージュに */
+    font-weight: bold;
+    /* 太字 */
     font-family: 'Times New Roman', Times, serif;
 }
 
 /* フォーム入力コントロールのスタイル */
 .form-control {
-    border-color: #B39A84; /* ボーダー色をベージュに */
-    background-color: transparent; /* 背景を透明に */
-    color: #0A1E54; /* テキスト色をネイビーに */
-    border-radius: 5px; /* 角丸を維持 */
-    box-shadow: none; /* 影を削除 */
+    border-color: #B39A84;
+    /* ボーダー色をベージュに */
+    background-color: transparent;
+    /* 背景を透明に */
+    color: #0A1E54;
+    /* テキスト色をネイビーに */
+    border-radius: 5px;
+    /* 角丸を維持 */
+    box-shadow: none;
+    /* 影を削除 */
 }
 
 .form-control::placeholder {
-    color: rgba(10, 30, 84, 0.7); /* プレースホルダーの色を半透明ネイビーに */
+    color: rgba(10, 30, 84, 0.7);
+    /* プレースホルダーの色を半透明ネイビーに */
 }
 
 .form-control:focus {
-    background-color: transparent; /* フォーカス時も背景を透明に */
-    border-color: #0A1E54; /* フォーカス時はボーダー色をネイビーに */
-    box-shadow: none; /* 影を削除 */
-    color: #0A1E54; /* フォーカス時もテキスト色をネイビーに */
+    background-color: transparent;
+    /* フォーカス時も背景を透明に */
+    border-color: #0A1E54;
+    /* フォーカス時はボーダー色をネイビーに */
+    box-shadow: none;
+    /* 影を削除 */
+    color: #0A1E54;
+    /* フォーカス時もテキスト色をネイビーに */
 }
 
 /* プライマリボタンのスタイル */
 .btn-primary {
-    background-color: #0A1E54; /* 背景色をネイビーに */
-    border-color: #0A1E54; /* ボーダー色をネイビーに */
-    color: #F9F5EE; /* テキスト色を白に */
-    border-radius: 5px; /* 角丸を維持 */
+    background-color: #0A1E54;
+    /* 背景色をネイビーに */
+    border-color: #0A1E54;
+    /* ボーダー色をネイビーに */
+    color: #F9F5EE;
+    /* テキスト色を白に */
+    border-radius: 5px;
+    /* 角丸を維持 */
     font-weight: bold;
     transition: background-color 0.3s, border-color 0.3s;
 }
 
 .btn-primary:hover {
-    background-color: #0A1E54; /* ホバー時も同じネイビーを維持（必要であれば濃くする） */
+    background-color: #0A1E54;
+    /* ホバー時も同じネイビーを維持（必要であれば濃くする） */
     border-color: #0A1E54;
-    opacity: 0.9; /* ホバーで少し透明度を出す */
+    opacity: 0.9;
+    /* ホバーで少し透明度を出す */
 }
 
 /* リンクボタンのスタイル（例: Forgot Your Password?） */
 .forgot-password-link {
-    color: #B39A84 !important; /* ベージュ色に */
+    color: #B39A84 !important;
+    /* ベージュ色に */
     font-weight: bold !important;
-    text-decoration: none !important; /* 下線をなくす */
+    text-decoration: none !important;
+    /* 下線をなくす */
     font-family: 'Times New Roman', Times, serif;
 
 }
 
 .btn-link:hover {
-    color: #0A1E54 !important; /* ホバー時はネイビーに */
-    text-decoration: underline; /* ホバー時に下線を表示 */
+    color: #0A1E54 !important;
+    /* ホバー時はネイビーに */
+    text-decoration: underline;
+    /* ホバー時に下線を表示 */
 }
 
 
@@ -249,7 +302,8 @@ body {
    認証画面のタブナビゲーションスタイル
    ========================================================================== */
 .nav-tabs-custom {
-    border-bottom: 1px solid #CFC7C8; /* 下線をグレーに */
+    border-bottom: 1px solid #CFC7C8;
+    /* 下線をグレーに */
     margin-bottom: 20px;
 }
 
@@ -259,24 +313,33 @@ body {
 
 .nav-tabs-custom .nav-link {
     border: none;
-    border-bottom: 2px solid transparent; /* デフォルトの下線を透明に */
-    background-color: #F9F5EE; /* 背景色を新しい白に統一 */
-    color: #0A1E54; /* 文字色をネイビーに */
-    border-radius: 5px 5px 0 0; /* 上部を丸く */
+    border-bottom: 2px solid transparent;
+    /* デフォルトの下線を透明に */
+    background-color: #F9F5EE;
+    /* 背景色を新しい白に統一 */
+    color: #0A1E54;
+    /* 文字色をネイビーに */
+    border-radius: 5px 5px 0 0;
+    /* 上部を丸く */
     padding: 8px 20px;
     font-weight: bold;
     transition: background-color 0.3s, color 0.3s, border-bottom-color 0.3s;
 }
 
 .nav-tabs-custom .nav-link.active {
-    background-color: #F9F5EE; /* アクティブ時も背景色を新しい白に統一 */
-    color: #B39A84; /* アクティブ時の文字色をベージュに */
-    border-bottom-color: #B39A84; /* アクティブ時の下線をベージュに */
+    background-color: #F9F5EE;
+    /* アクティブ時も背景色を新しい白に統一 */
+    color: #B39A84;
+    /* アクティブ時の文字色をベージュに */
+    border-bottom-color: #B39A84;
+    /* アクティブ時の下線をベージュに */
 }
 
 .nav-tabs-custom .nav-link:hover:not(.active) {
-    background-color: #CFC7C8; /* ホバー時はグレーに */
-    color: #0A1E54; /* ホバー時の文字色をネイビーに */
+    background-color: #CFC7C8;
+    /* ホバー時はグレーに */
+    color: #0A1E54;
+    /* ホバー時の文字色をネイビーに */
 }
 
 /* ==========================================================================
@@ -285,26 +348,35 @@ body {
 .navbar-custom {
     border-bottom: none;
     box-shadow: none;
-    border-radius: 0; /* 角丸を削除 */
+    border-radius: 0;
+    /* 角丸を削除 */
 }
 
 /* ナビゲーションバーのライトテーマ（ログイン状態に関わらず統一） */
 .navbar-light-theme {
-    background-color: #B39A84 !important; /* 白 */
+    background-color: #B39A84 !important;
+    /* 白 */
 }
+
 .navbar-light-theme .navbar-brand,
 .navbar-light-theme .nav-link,
 .navbar-light-theme .navbar-toggler-icon {
-    color: #B39A84 !important; /* ベージュ */
+    color: #B39A84 !important;
+    /* ベージュ */
     font-family: sans-serif;
 }
+
 .navbar-light-theme .navbar-brand h1 {
-    color: #B39A84 !important; /* ベージュ */
+    color: #B39A84 !important;
+    /* ベージュ */
     font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'Times New Roman', Georgia, serif !important;
 }
+
 .navbar-light-theme .navbar-toggler {
-    border-color: #B39A84; /* ベージュ */
+    border-color: #B39A84;
+    /* ベージュ */
 }
+
 .navbar-light-theme .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28179, 154, 132, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
@@ -312,38 +384,56 @@ body {
 /* ナビゲーションバー内の検索バーのスタイル */
 .navbar-light-theme .search-bar-container {
     position: relative;
-    display: flex; /* アイコンと入力フィールドを整列 */
+    display: flex;
+    /* アイコンと入力フィールドを整列 */
     align-items: center;
-    width: 300px; /* フォームの幅を維持 */
+    width: 300px;
+    /* フォームの幅を維持 */
 }
 
 .navbar-light-theme .search-icon {
-    position: absolute; /* コンテナ内で絶対位置指定 */
-    left: 5px; /* アイコンの左からの位置 */
-    color: #B39A84; /* ベージュ色 (虫眼鏡アイコンの色) */
+    position: absolute;
+    /* コンテナ内で絶対位置指定 */
+    left: 5px;
+    /* アイコンの左からの位置 */
+    color: #B39A84;
+    /* ベージュ色 (虫眼鏡アイコンの色) */
     font-size: 1rem;
-    z-index: 1; /* アイコンが入力フィールドの上に表示されるように */
+    z-index: 1;
+    /* アイコンが入力フィールドの上に表示されるように */
 }
 
 .navbar-light-theme .search-input {
-    border: none; /* デフォルトのボーダーを削除 */
-    border-bottom: 1px solid #B39A84; /* ベージュ色のアンダーライン */
-    background-color: transparent; /* 背景を透明に */
-    padding-left: 30px; /* アイコンのためのスペース */
-    padding-right: 5px; /* 右側の小さなパディング */
-    color: #0A1E54; /* ネイビーの文字色 */
-    border-radius: 0; /* 角丸を削除 */
-    box-shadow: none; /* 影を削除 */
-    width: 100%; /* コンテナの全幅を使用 */
+    border: none;
+    /* デフォルトのボーダーを削除 */
+    border-bottom: 1px solid #B39A84;
+    /* ベージュ色のアンダーライン */
+    background-color: transparent;
+    /* 背景を透明に */
+    padding-left: 30px;
+    /* アイコンのためのスペース */
+    padding-right: 5px;
+    /* 右側の小さなパディング */
+    color: #0A1E54;
+    /* ネイビーの文字色 */
+    border-radius: 0;
+    /* 角丸を削除 */
+    box-shadow: none;
+    /* 影を削除 */
+    width: 100%;
+    /* コンテナの全幅を使用 */
 }
 
 .navbar-light-theme .search-input::placeholder {
-    color: rgba(10, 30, 84, 0.7); /* 半透明のネイビーのプレースホルダー */
+    color: rgba(10, 30, 84, 0.7);
+    /* 半透明のネイビーのプレースホルダー */
 }
 
 .navbar-light-theme .search-input:focus {
-    background-color: transparent; /* フォーカス時も透明を維持 */
-    border-color: #0A1E54; /* フォーカス時はネイビーのアンダーライン */
+    background-color: transparent;
+    /* フォーカス時も透明を維持 */
+    border-color: #0A1E54;
+    /* フォーカス時はネイビーのアンダーライン */
     box-shadow: none;
     color: #0A1E54;
 }
@@ -354,7 +444,8 @@ body {
 /* .icon-sm の再定義（既存の定義を上書き） */
 .icon-sm {
     font-size: 2rem;
-    color: #B39A84 !important; /* ナビゲーションバーのアイコン色をベージュに統一 */
+    color: #B39A84 !important;
+    /* ナビゲーションバーのアイコン色をベージュに統一 */
 }
 
 /* .avatar-sm の再定義（既存の定義を上書き） */
@@ -362,22 +453,30 @@ body {
     width: 2rem;
     height: 2rem;
     object-fit: cover;
-    border: 1px solid #B39A84; /* アバターのボーダー色をベージュに統一 */
+    border: 1px solid #B39A84;
+    /* アバターのボーダー色をベージュに統一 */
 }
 
 /* ドロップダウンメニュー（統一テーマで共通） */
 .dropdown-menu {
-    background-color: #B39A84; /* 白 */
-    border: 1px solid #CFC7C8; /* グレー */
+    background-color: #B39A84;
+    /* 白 */
+    border: 1px solid #CFC7C8;
+    /* グレー */
     border-radius: 5px;
 }
+
 .dropdown-item {
-    color: #0A1E54; /* ネイビー */
+    color: #0A1E54;
+    /* ネイビー */
     font-family: sans-serif;
 }
+
 .dropdown-item:hover {
-    background-color: #CFC7C8; /* グレー */
-    color: #0A1E54; /* ネイビー */
+    background-color: #CFC7C8;
+    /* グレー */
+    color: #0A1E54;
+    /* ネイビー */
 }
 
 
@@ -396,12 +495,29 @@ body {
 }
 
 @keyframes heart-bounce {
-    0%   { transform: scale(1); }
-    20%  { transform: scale(1.3); }
-    40%  { transform: scale(0.95); }
-    60%  { transform: scale(1.1); }
-    80%  { transform: scale(0.98); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(1.3);
+    }
+
+    40% {
+        transform: scale(0.95);
+    }
+
+    60% {
+        transform: scale(1.1);
+    }
+
+    80% {
+        transform: scale(0.98);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .floating-heart {
@@ -420,9 +536,11 @@ body {
         transform: translate(-50%, 0) scale(1) rotate(0deg);
         opacity: 0.2;
     }
+
     80% {
         opacity: 1;
     }
+
     100% {
         transform: translate(-50%, -120px) scale(1.5) rotate(20deg);
         opacity: 0;
@@ -432,8 +550,10 @@ body {
 
 body.dark-mode {
     background: #181818;
-    color: #f5f5f5; /* 白に近い色 */
+    color: #f5f5f5;
+    /* 白に近い色 */
 }
+
 body.dark-mode p,
 body.dark-mode h1,
 body.dark-mode h2,
@@ -452,6 +572,7 @@ body.dark-mode .navbar {
     color: #f5f5f5 !important;
     border-bottom: 1px solid #333;
 }
+
 body.dark-mode .navbar a,
 body.dark-mode .navbar-brand,
 body.dark-mode .navbar-nav .nav-link {
@@ -468,10 +589,12 @@ body.light-mode {
     background: #fff;
     color: #222;
 }
+
 body.light-mode .navbar {
     background: #f8f9fa !important;
     color: #222 !important;
 }
+
 body.light-mode .card {
     background: #fff !important;
     color: #222 !important;
@@ -480,7 +603,8 @@ body.light-mode .card {
 
 body.dark-mode .username,
 body.dark-mode .email {
-    color: #fff !important; /* もしくは #f5f5f5 など白系 */
+    color: #fff !important;
+    /* もしくは #f5f5f5 など白系 */
 }
 
 body.dark-mode .text-muted,
@@ -505,16 +629,497 @@ body.dark-mode .card-header {
     color: #f5f5f5 !important;
     border-bottom: 1px solid #333 !important;
 }
+
 body.dark-mode .bg-white {
     background: #232323 !important;
     color: #f5f5f5 !important;
     border-color: #333 !important;
 }
+
 body.dark-mode .bg-white a,
 body.dark-mode .card-header a {
     color: #aad7ff !important;
 }
+
 body.dark-mode .bg-white .text-muted,
 body.dark-mode .card-header .text-muted {
+    color: #bbb !important;
+}
+
+/* ==========================================================================
+   ダークモード用の包括的なスタイル修正
+   ========================================================================== */
+
+/* ダークモード用のドロップダウンスタイル */
+body.dark-mode .dropdown-menu {
+    background-color: #333 !important;
+    border-color: #555 !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .dropdown-item {
+    color: #f5f5f5 !important;
+    background-color: transparent !important;
+}
+
+body.dark-mode .dropdown-item:hover {
+    background-color: #555 !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .dropdown-item:focus {
+    background-color: #555 !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .dropdown-divider {
+    border-color: #555 !important;
+}
+
+/* ダークモード用のタブスタイル */
+body.dark-mode .nav-tabs-custom {
+    border-bottom-color: #555;
+}
+
+body.dark-mode .nav-tabs-custom .nav-link {
+    background-color: #333;
+    color: #f5f5f5;
+    border-bottom-color: transparent;
+}
+
+body.dark-mode .nav-tabs-custom .nav-link.active {
+    background-color: #333;
+    color: #fff;
+    border-bottom-color: #aad7ff;
+    font-weight: bold;
+}
+
+body.dark-mode .nav-tabs-custom .nav-link:hover:not(.active) {
+    background-color: #555;
+    color: #fff;
+}
+
+/* ダークモード用のフォームスタイル */
+body.dark-mode .form-label {
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .form-control {
+    background-color: #333 !important;
+    border-color: #555 !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .form-control::placeholder {
+    color: #bbb !important;
+}
+
+body.dark-mode .form-control:focus {
+    background-color: #333 !important;
+    border-color: #aad7ff !important;
+    color: #f5f5f5 !important;
+    box-shadow: 0 0 0 0.2rem rgba(170, 215, 255, 0.25) !important;
+}
+
+/* ダークモード用のボタンスタイル */
+body.dark-mode .btn-primary {
+    background-color: #aad7ff !important;
+    border-color: #aad7ff !important;
+    color: #222 !important;
+}
+
+body.dark-mode .btn-primary:hover {
+    background-color: #8bc6ff !important;
+    border-color: #8bc6ff !important;
+    color: #222 !important;
+}
+
+body.dark-mode .btn-outline-secondary {
+    color: #f5f5f5 !important;
+    border-color: #555 !important;
+}
+
+body.dark-mode .btn-outline-secondary:hover {
+    background-color: #555 !important;
+    color: #f5f5f5 !important;
+}
+
+/* ダークモード用のリンクスタイル */
+body.dark-mode .text-decoration-none {
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .text-decoration-none:hover {
+    color: #aad7ff !important;
+}
+
+body.dark-mode .text-dark {
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .text-dark:hover {
+    color: #aad7ff !important;
+}
+
+body.dark-mode .forgot-password-link {
+    color: #aad7ff !important;
+}
+
+body.dark-mode .forgot-password-link:hover {
+    color: #8bc6ff !important;
+}
+
+/* ダークモード用のアイコンとアバター */
+body.dark-mode .icon-sm {
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .avatar-sm {
+    border-color: #555 !important;
+}
+
+/* ダークモード用のハートアイコン */
+body.dark-mode .heart-icon {
+    color: #666 !important;
+}
+
+body.dark-mode .heart-icon.liked {
+    color: #e0245e !important;
+}
+
+/* ダークモード用の言語選択 */
+body.dark-mode .lang-switcher-link {
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .lang-switcher-link:hover {
+    background-color: #555 !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .lang-switcher-link.active-lang {
+    color: #aad7ff !important;
+}
+
+body.dark-mode .lang-separator {
+    color: #f5f5f5 !important;
+}
+
+/* ダークモード用の検索バー */
+body.dark-mode .navbar-light-theme .search-input {
+    background-color: #333 !important;
+    border-bottom-color: #555 !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .navbar-light-theme .search-input::placeholder {
+    color: #bbb !important;
+}
+
+body.dark-mode .navbar-light-theme .search-input:focus {
+    border-bottom-color: #aad7ff !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .navbar-light-theme .search-icon {
+    color: #f5f5f5 !important;
+}
+
+/* ダークモード用のナビゲーションバー */
+body.dark-mode .navbar-light-theme {
+    background-color: #222 !important;
+}
+
+body.dark-mode .navbar-light-theme .navbar-brand,
+body.dark-mode .navbar-light-theme .nav-link,
+body.dark-mode .navbar-light-theme .navbar-toggler-icon {
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .navbar-light-theme .navbar-brand h1 {
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .navbar-light-theme .navbar-toggler {
+    border-color: #555 !important;
+}
+
+/* ダークモード用のカード */
+body.dark-mode .card {
+    background-color: #232323 !important;
+    border-color: #333 !important;
+}
+
+body.dark-mode .card-login-register {
+    background-color: transparent !important;
+}
+
+/* ダークモード用のテキスト */
+body.dark-mode .liked-users span {
+    color: #bbb !important;
+}
+
+/* ダークモード用のアラート */
+body.dark-mode .alert {
+    background-color: #333 !important;
+    border-color: #555 !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .alert-success {
+    background-color: #1e4d2b !important;
+    border-color: #2d5a3a !important;
+    color: #d4edda !important;
+}
+
+body.dark-mode .alert-danger {
+    background-color: #4d1e1e !important;
+    border-color: #5a2d2d !important;
+    color: #f8d7da !important;
+}
+
+/* ダークモード用のバリデーション */
+body.dark-mode .invalid-feedback {
+    color: #f8d7da !important;
+}
+
+body.dark-mode .is-invalid {
+    border-color: #dc3545 !important;
+}
+
+/* ダークモード用のモーダル */
+body.dark-mode .modal-content {
+    background-color: #232323 !important;
+    border-color: #333 !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .modal-header {
+    border-bottom-color: #333 !important;
+}
+
+body.dark-mode .modal-footer {
+    border-top-color: #333 !important;
+}
+
+/* ダークモード用のテーブル */
+body.dark-mode .table {
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .table th,
+body.dark-mode .table td {
+    border-color: #333 !important;
+}
+
+body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #2a2a2a !important;
+}
+
+/* ==========================================================================
+   AI関連ボックスとドロップダウンボタンのスタイル
+   ========================================================================== */
+
+/* AI Tour Box のダークモード対応 */
+body.dark-mode .ai-tour-box {
+    background-color: #1a2a3a !important;
+    border-left-color: #aad7ff !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .ai-tour-box p {
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .ai-tour-box a {
+    color: #aad7ff !important;
+}
+
+body.dark-mode .ai-tour-box a:hover {
+    color: #8bc6ff !important;
+}
+
+/* AI Summary Box のダークモード対応 */
+body.dark-mode .ai-summary-box {
+    background: linear-gradient(to right, #1a2a3a, #0f1a2a) !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .ai-summary-box h5 {
+    color: #ffd700 !important;
+}
+
+body.dark-mode .ai-summary-box p {
+    color: #f5f5f5 !important;
+}
+
+/* ドロップダウンボタンのスタイル */
+.btn-sm.shadow-none {
+    background-color: transparent !important;
+    border: none !important;
+    color: #666 !important;
+    padding: 0.25rem 0.5rem !important;
+    transition: color 0.3s ease !important;
+}
+
+.btn-sm.shadow-none:hover {
+    color: #333 !important;
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.btn-sm.shadow-none:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* ダークモード用のドロップダウンボタン */
+body.dark-mode .btn-sm.shadow-none {
+    color: #bbb !important;
+}
+
+body.dark-mode .btn-sm.shadow-none:hover {
+    color: #f5f5f5 !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ドロップダウンメニュー内のボタンスタイル */
+.dropdown-item.border-0.bg-transparent {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0.5rem 1rem !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.dropdown-item.border-0.bg-transparent:hover {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+body.dark-mode .dropdown-item.border-0.bg-transparent {
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode .dropdown-item.border-0.bg-transparent:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .dropdown-item.border-0.bg-transparent.text-secondary {
+    color: #bbb !important;
+}
+
+body.dark-mode .dropdown-item.border-0.bg-transparent.text-primary {
+    color: #aad7ff !important;
+}
+
+body.dark-mode .dropdown-item.border-0.bg-transparent.text-danger {
+    color: #ff6b6b !important;
+}
+
+/* ==========================================================================
+   Location Input Form のスタイル調整
+   ========================================================================== */
+
+/* Location Input の基本スタイル */
+#location_search {
+    border-color: #B39A84;
+    background-color: transparent;
+    color: #0A1E54;
+    border-radius: 5px;
+    box-shadow: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#location_search::placeholder {
+    color: rgba(10, 30, 84, 0.7);
+}
+
+#location_search:focus {
+    background-color: transparent;
+    border-color: #0A1E54;
+    box-shadow: 0 0 0 0.2rem rgba(10, 30, 84, 0.25);
+    color: #0A1E54;
+}
+
+/* Location Input のダークモード対応 */
+body.dark-mode #location_search {
+    background-color: #333 !important;
+    border-color: #555 !important;
+    color: #f5f5f5 !important;
+}
+
+body.dark-mode #location_search::placeholder {
+    color: #bbb !important;
+}
+
+body.dark-mode #location_search:focus {
+    background-color: #333 !important;
+    border-color: #aad7ff !important;
+    color: #f5f5f5 !important;
+    box-shadow: 0 0 0 0.2rem rgba(170, 215, 255, 0.25) !important;
+}
+
+/* Location Label のスタイル */
+label[for="location_search"] {
+    color: #B39A84;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body.dark-mode label[for="location_search"] {
+    color: #f5f5f5 !important;
+}
+
+/* Location 関連のエラーメッセージ */
+.text-danger.small {
+    color: #dc3545 !important;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+body.dark-mode .text-danger.small {
+    color: #ff6b6b !important;
+}
+
+/* Location 関連のアラート */
+#geolocation-alert {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+body.dark-mode #geolocation-alert {
+    background-color: #1a2a3a !important;
+    border-color: #2d5a6a !important;
+    color: #aad7ff !important;
+}
+
+/* Map コンテナのスタイル */
+#map {
+    border-radius: 5px;
+    border: 1px solid #B39A84;
+}
+
+body.dark-mode #map {
+    border-color: #555 !important;
+}
+
+/* Hidden Inputs のスタイル（デバッグ用） */
+input[type="hidden"]#latitude,
+input[type="hidden"]#longitude,
+input[type="hidden"]#location_name {
+    /* 通常は非表示なので特別なスタイルは不要 */
+}
+
+/* Location Form グループのスタイル */
+.mb-4:has(#location_search) {
+    /* Location フォームグループの特別なスタイルがあれば追加 */
+}
+
+/* Location 関連のフォームテキスト */
+.form-text {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+body.dark-mode .form-text {
     color: #bbb !important;
 }

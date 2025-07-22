@@ -47,7 +47,7 @@ class PostController extends Controller
         }
 
         $this->post->user_id = Auth::user()->id;
-        $this->post->image = count($images) === 1 ? $images[0] : json_encode($images); // 1枚なら文字列、複数ならjson
+        $this->post->image = count($images) === 1 ? $images[0] : json_encode($images); // String if single image, JSON if multiple
         $this->post->description = $request->description;
 
         // add location
@@ -56,7 +56,7 @@ class PostController extends Controller
             $this->post->longitude = $request->longitude;
             $this->post->location_name = $request->location_name;
         }
-        
+
         $this->post->save();
 
         foreach ($request->category as $category_id) {
@@ -145,7 +145,7 @@ class PostController extends Controller
         #2. Update the post
         $post = $this->post->findOrFail($id);
         $post->description = $request->description;
-        
+
         // add location
         if ($request->filled('latitude') && $request->filled('longitude')) {
             $post->latitude = $request->latitude;

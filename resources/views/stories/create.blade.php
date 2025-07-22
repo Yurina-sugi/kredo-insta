@@ -45,7 +45,7 @@
     </div>
 
     <script>
-        // 🔵 画像プレビュー
+        // 🔵 Image preview
         document.getElementById('image').addEventListener('change', function(e) {
             const preview = document.getElementById('preview');
             const file = e.target.files[0];

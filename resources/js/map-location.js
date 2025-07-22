@@ -1,4 +1,4 @@
-window.initLocationMap = function(options) {
+window.initLocationMap = function (options) {
     // options: {
     //   mapId, searchInputId, latInputId, lngInputId, nameInputId, defaultLat, defaultLng
     // }
@@ -29,11 +29,11 @@ window.initLocationMap = function(options) {
             draggable: true,
         });
 
-        marker.addListener('dragend', function() {
+        marker.addListener('dragend', function () {
             updateHiddenFields(marker.getPosition());
         });
 
-        map.addListener('click', function(e) {
+        map.addListener('click', function (e) {
             marker.setPosition(e.latLng);
             updateHiddenFields(e.latLng);
         });
@@ -45,7 +45,7 @@ window.initLocationMap = function(options) {
         const input = document.getElementById(options.searchInputId);
         if (!input) return;
 
-        input.addEventListener('keydown', function(e) {
+        input.addEventListener('keydown', function (e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 return false;
@@ -54,10 +54,10 @@ window.initLocationMap = function(options) {
 
         autocomplete = new google.maps.places.Autocomplete(input, {
             types: ['geocode'],
-            // componentRestrictions: { country: 'jp' }, // 必要に応じて
+            // componentRestrictions: { country: 'jp' }, // if needed
         });
 
-        autocomplete.addListener('place_changed', function() {
+        autocomplete.addListener('place_changed', function () {
             const place = autocomplete.getPlace();
             if (!place.geometry) {
                 console.log("No geometry found for the selected place");
@@ -75,7 +75,7 @@ window.initLocationMap = function(options) {
         });
     }
 
-    // 初期値
+    // Initial values
     const initialLat = parseFloat(document.getElementById(options.latInputId).value) || options.defaultLat || 35.681236;
     const initialLng = parseFloat(document.getElementById(options.lngInputId).value) || options.defaultLng || 139.767125;
     const initialLatLng = new google.maps.LatLng(initialLat, initialLng);
