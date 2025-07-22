@@ -77,103 +77,32 @@
     </form>
 @endsection
 
+@section('map-scripts')
 <script>
-let map, marker, autocomplete;
-
-function initMap() {
-    const mapElement = document.getElementById('map');
-    if (!mapElement) {
-        console.error('Map element not found');
-        return;
-    }
-
-    // DBに保存されている位置情報を初期値に
-    const initialLat = parseFloat(document.getElementById('latitude').value) || 35.681236;
-    const initialLng = parseFloat(document.getElementById('longitude').value) || 139.767125;
-    const initialLatLng = new google.maps.LatLng(initialLat, initialLng);
-
-    initializeMapWithLocation(initialLatLng);
-    initializeAutocomplete();
-}
-
-function initializeMapWithLocation(latLng) {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: latLng,
-        zoom: 15,
-    });
-
-    marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        draggable: true,
-    });
-
-    marker.addListener('dragend', function() {
-        updateHiddenFields(marker.getPosition());
-    });
-
-    map.addListener('click', function(e) {
-        marker.setPosition(e.latLng);
-        updateHiddenFields(e.latLng);
-    });
-
-    updateHiddenFields(latLng);
-}
-
-function initializeAutocomplete() {
-    const input = document.getElementById('location_search');
-    if (!input) return;
-
-    // Enterキーでフォーム送信を防ぐ
-    input.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            return false;
-        }
-    });
-
-    autocomplete = new google.maps.places.Autocomplete(input, {
-        types: ['geocode'],
-        // componentRestrictions: { country: 'jp' }, // 必要に応じて
-    });
-
-    autocomplete.addListener('place_changed', function() {
-        const place = autocomplete.getPlace();
-        if (!place.geometry) {
-            console.log("No geometry found for the selected place");
-            return;
-        }
-        const latLng = place.geometry.location;
-        map.setCenter(latLng);
-        marker.setPosition(latLng);
-        if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-        } else {
-            map.setZoom(17);
-        }
-        updateHiddenFields(latLng, place.formatted_address);
-    });
-}
-
-function updateHiddenFields(latLng, address = null) {
-    const latInput = document.getElementById('latitude');
-    const lngInput = document.getElementById('longitude');
-    const addressInput = document.getElementById('location_name');
-    if (latInput && lngInput) {
-        latInput.value = latLng.lat();
-        lngInput.value = latLng.lng();
-    }
-    if (addressInput && address) {
-        addressInput.value = address;
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     if (typeof google !== 'undefined' && google.maps) {
-        initMap();
+        window.initLocationMap({
+            mapId: 'map',
+            searchInputId: 'location_search',
+            latInputId: 'latitude',
+            lngInputId: 'longitude',
+            nameInputId: 'location_name',
+            defaultLat: 35.681236,
+            defaultLng: 139.767125
+        });
     } else {
-        setTimeout(initMap, 1000);
+        setTimeout(function() {
+            window.initLocationMap({
+                mapId: 'map',
+                searchInputId: 'location_search',
+                latInputId: 'latitude',
+                lngInputId: 'longitude',
+                nameInputId: 'location_name',
+                defaultLat: 35.681236,
+                defaultLng: 139.767125
+            });
+        }, 1000);
     }
 });
-window.initMap = initMap;
 </script>
+@endsection
