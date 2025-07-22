@@ -456,4 +456,51 @@ document.addEventListener('DOMContentLoaded', function () {
             lastScrollTop = scrollTop;
         });
     }
+
+    // Loading animation control
+    const loadingOverlay = document.getElementById('loading-overlay');
+    if (loadingOverlay) {
+        // Hide loading overlay after page is fully loaded
+        window.addEventListener('load', function () {
+            setTimeout(() => {
+                loadingOverlay.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            }, 300);
+        });
+
+        // Fallback: hide loading overlay after 3 seconds if load event doesn't fire
+        setTimeout(() => {
+            if (loadingOverlay && !loadingOverlay.classList.contains('fade-out')) {
+                loadingOverlay.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            }
+        }, 3000);
+
+        // Show loading overlay on link clicks (for page transitions)
+        document.addEventListener('click', function (e) {
+            const link = e.target.closest('a');
+            if (link && link.href && !link.href.startsWith('javascript:') &&
+                !link.href.startsWith('#') && !link.target &&
+                link.hostname === window.location.hostname) {
+
+                // Show loading overlay
+                loadingOverlay.style.display = 'flex';
+                loadingOverlay.classList.remove('fade-out');
+            }
+        });
+
+        // Show loading overlay on form submissions
+        document.addEventListener('submit', function (e) {
+            const form = e.target;
+            if (form && form.tagName === 'FORM') {
+                // Show loading overlay
+                loadingOverlay.style.display = 'flex';
+                loadingOverlay.classList.remove('fade-out');
+            }
+        });
+    }
 });
