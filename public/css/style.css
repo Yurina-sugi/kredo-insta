@@ -20,8 +20,8 @@ following and followers
 **/
 
 body.light-mode {
-    background: #F9F5EE;
-    color: #222;
+    background: #B39A84;
+    color: #0A1E54;
 }
 
 body.dark-mode {
@@ -107,7 +107,7 @@ body.dark-mode .navbar, body.dark-mode .card {
    追加・更新された共通スタイル
    ========================================================================== */
 body {
-    background-color: #F9F5EE; /* 全体の背景色を新しい白に統一 */
+    background-color: #B39A84; /* 全体の背景色を新しい白に統一 */
     font-family: sans-serif; /* 全体のフォントを統一 */
     color: #0A1E54; /* デフォルトのテキスト色をネイビーに */
 }
@@ -290,7 +290,7 @@ body {
 
 /* ナビゲーションバーのライトテーマ（ログイン状態に関わらず統一） */
 .navbar-light-theme {
-    background-color: #F9F5EE !important; /* 白 */
+    background-color: #B39A84 !important; /* 白 */
 }
 .navbar-light-theme .navbar-brand,
 .navbar-light-theme .nav-link,
@@ -367,7 +367,7 @@ body {
 
 /* ドロップダウンメニュー（統一テーマで共通） */
 .dropdown-menu {
-    background-color: #F9F5EE; /* 白 */
+    background-color: #B39A84; /* 白 */
     border: 1px solid #CFC7C8; /* グレー */
     border-radius: 5px;
 }
