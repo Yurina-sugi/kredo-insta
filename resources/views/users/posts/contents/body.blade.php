@@ -17,10 +17,10 @@
                 @endforeach
             </div>
 
-            <!-- ページ数（画像の下に表示） -->
+            <!-- Page numbers (displayed below images) -->
             <div class="swiper-pagination swiper-pagination-fraction"></div>
 
-            <!-- 矢印（必要なら） -->
+            <!-- Arrows (if needed) -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
@@ -31,21 +31,7 @@
     @endif
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new Swiper('.mySwiper', {
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                type: 'fraction',
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    });
-</script>
+
 
 
 

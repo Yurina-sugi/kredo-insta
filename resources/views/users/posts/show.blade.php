@@ -25,10 +25,10 @@
                         @endforeach
                     </div>
 
-                    <!-- ページ数（画像の下に表示） -->
+                    <!-- Page numbers (displayed below images) -->
                     <div class="swiper-pagination swiper-pagination-fraction"></div>
 
-                    <!-- 矢印（必要なら） -->
+                    <!-- Arrows (if needed) -->
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
@@ -39,21 +39,7 @@
             @endif
         </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                new Swiper('.mySwiper', {
-                    loop: true,
-                    pagination: {
-                        el: '.swiper-pagination',
-                        type: 'fraction',
-                    },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                });
-            });
-        </script>
+
         <div class="col-4 px-0 bg-white post-show-col-4">
             <div class="card border-0">
                 <div class="card-header bg-white py-3">
@@ -176,26 +162,8 @@
                         </p>
                     @endif
                     @if ($post->latitude && $post->longitude)
-                        <div id="post-map" style="height: 300px; width: 100%;"></div>
-                        <script>
-                            function initPostMap() {
-                                const latLng = {
-                                    lat: {{ $post->latitude }},
-                                    lng: {{ $post->longitude }}
-                                };
-                                const map = new google.maps.Map(document.getElementById('post-map'), {
-                                    center: latLng,
-                                    zoom: 15,
-                                });
-                                new google.maps.Marker({
-                                    position: latLng,
-                                    map: map,
-                                });
-                            }
-                            window.initPostMap = initPostMap;
-                        </script>
-                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxIyTHVtRWu8CQG3mE_aO3RNTcGH6cN7c&callback=initPostMap"
-                            async defer></script>
+                        <div id="post-map" data-lat="{{ $post->latitude }}" data-lng="{{ $post->longitude }}"
+                            style="height: 300px; width: 100%;"></div>
                     @endif
 
                     {{-- Include comments here --}}

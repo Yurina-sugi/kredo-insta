@@ -42,7 +42,28 @@
         <div class="row mb-4">
             <div class="col-6">
                 <label for="image" class="form-label fw-bold">Image</label>
-                <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="img-thumbnail w-100">
+                @php
+                    $images = json_decode($post->image, true);
+                @endphp
+                @if (is_array($images))
+                    {{-- Multiple images with Swiper --}}
+                    <div class="swiper edit-post-swiper mb-2">
+                        <div class="swiper-wrapper">
+                            @foreach ($images as $index => $img)
+                                <div class="swiper-slide">
+                                    <img src="{{ $img }}" alt="post image {{ $index + 1 }}"
+                                        class="img-thumbnail w-100">
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                @else
+                    {{-- Single image --}}
+                    <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="img-thumbnail w-100 mb-2">
+                @endif
                 <input type="file" name="image" id="image" class="form-control mt-1" aria-describedby="image-info">
                 <div id="image-info" class="form-text">
                     The acceptable formats are jpeg,jpg,png, and gif only. <br>
@@ -58,7 +79,8 @@
         {{-- location --}}
         <div class="mb-4">
             <label for="location_search" class="form-label fw-bold">Edit location</label>
-            <input type="text" id="location_search" placeholder="Input location..." class="form-control mb-2" value="{{ old('location_name', $post->location_name) }}">
+            <input type="text" id="location_search" placeholder="Input location..." class="form-control mb-2"
+                value="{{ old('location_name', $post->location_name) }}">
             {{-- Error --}}
             @error('location_name')
                 <div class="text-danger small">{{ $message }}</div>
@@ -70,39 +92,54 @@
             <div id="map" style="height: 300px; width: 100%;"></div>
             <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude', $post->latitude) }}">
             <input type="hidden" id="longitude" name="longitude" value="{{ old('longitude', $post->longitude) }}">
-            <input type="hidden" id="location_name" name="location_name" value="{{ old('location_name', $post->location_name) }}">
+            <input type="hidden" id="location_name" name="location_name"
+                value="{{ old('location_name', $post->location_name) }}">
         </div>
 
         <button type="submit" class="btn btn-warning px-5">Save</button>
     </form>
-@endsection
 
-@section('map-scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    if (typeof google !== 'undefined' && google.maps) {
-        window.initLocationMap({
-            mapId: 'map',
-            searchInputId: 'location_search',
-            latInputId: 'latitude',
-            lngInputId: 'longitude',
-            nameInputId: 'location_name',
-            defaultLat: 35.681236,
-            defaultLng: 139.767125
-        });
-    } else {
-        setTimeout(function() {
-            window.initLocationMap({
-                mapId: 'map',
-                searchInputId: 'location_search',
-                latInputId: 'latitude',
-                lngInputId: 'longitude',
-                nameInputId: 'location_name',
-                defaultLat: 35.681236,
-                defaultLng: 139.767125
-            });
-        }, 1000);
-    }
-});
-</script>
+    <script>
+        // Wait for both DOM and Google Maps to be ready
+        function initializeEditMap() {
+            const latInput = document.getElementById('latitude');
+            const lngInput = document.getElementById('longitude');
+
+            if (!latInput || !lngInput) return;
+
+            const dbLat = parseFloat(latInput.value);
+            const dbLng = parseFloat(lngInput.value);
+
+            // Use DB values if they exist and are valid
+            const defaultLat = (!isNaN(dbLat) && dbLat !== 0) ? dbLat : 35.681236;
+            const defaultLng = (!isNaN(dbLng) && dbLng !== 0) ? dbLng : 139.767125;
+
+            if (typeof google !== 'undefined' && google.maps) {
+                // Clear any existing map
+                const mapElement = document.getElementById('map');
+                if (mapElement) {
+                    mapElement.innerHTML = '';
+                }
+
+                window.initLocationMap({
+                    mapId: 'map',
+                    searchInputId: 'location_search',
+                    latInputId: 'latitude',
+                    lngInputId: 'longitude',
+                    nameInputId: 'location_name',
+                    defaultLat: defaultLat,
+                    defaultLng: defaultLng
+                });
+            } else {
+                setTimeout(initializeEditMap, 1000);
+            }
+        }
+
+        // Initialize immediately if DOM is ready, otherwise wait
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeEditMap);
+        } else {
+            initializeEditMap();
+        }
+    </script>
 @endsection

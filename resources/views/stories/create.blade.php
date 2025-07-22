@@ -16,13 +16,13 @@
             <form action="{{ route('story.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                {{-- プレビュー表示 --}}
+                {{-- Preview display --}}
                 <div class="mb-3 text-center">
                     <img id="preview" src="#" alt="Preview" class="img-fluid rounded d-none"
                         style="max-height: 300px;">
                 </div>
 
-                {{-- 画像アップロード --}}
+                {{-- Image upload --}}
                 <div class="mb-3 text-center">
                     <label for="image" class="form-label d-block">
                         <div class="border rounded-3 p-4 bg-light" style="cursor: pointer;">
@@ -33,7 +33,7 @@
                     </label>
                 </div>
 
-                {{-- テキスト追加 --}}
+                {{-- Add text --}}
                 <div class="mb-3">
                     <label for="text" class="form-label">Optional message</label>
                     <input type="text" name="text" id="text" class="form-control" placeholder="Say something...">
@@ -44,15 +44,5 @@
         </div>
     </div>
 
-    <script>
-        // 🔵 Image preview
-        document.getElementById('image').addEventListener('change', function(e) {
-            const preview = document.getElementById('preview');
-            const file = e.target.files[0];
-            if (file) {
-                preview.src = URL.createObjectURL(file);
-                preview.classList.remove('d-none');
-            }
-        });
-    </script>
+
 @endsection

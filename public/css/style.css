@@ -1014,7 +1014,7 @@ body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
 /* Navigation arrows */
 .swiper-button-next,
 .swiper-button-prev {
-    color: #333;
+    color: #333 !important;
 }
 
 /* ==========================================================================

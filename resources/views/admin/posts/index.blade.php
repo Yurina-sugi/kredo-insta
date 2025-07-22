@@ -66,7 +66,7 @@
                             @if (is_array($images))
                                 <img src="{{ $images[0] }}" alt="post image" class="image-lg">
 
-                                {{-- 複数画像アイコン --}}
+                                {{-- Multiple images icon --}}
                                 <div class="admin-multi-photo-icon">
                                     <i class="fa-solid fa-clone"></i>
                                 </div>

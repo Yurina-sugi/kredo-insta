@@ -4,7 +4,7 @@
     <div class="container">
         <h2 class="mb-4">Story</h2>
 
-        {{-- 投稿フォーム --}}
+        {{-- Post form --}}
         <form action="{{ route('story.store') }}" method="POST" enctype="multipart/form-data" class="mb-5">
             @csrf
             <div class="d-flex align-items-center">
@@ -17,7 +17,7 @@
             @enderror
         </form>
 
-        {{-- ストーリーバー風の横スクロール --}}
+        {{-- Story bar style horizontal scroll --}}
         <div class="d-flex overflow-auto mb-4" style="gap: 16px;">
             @foreach ($stories as $userStories)
                 @php $story = $userStories->first(); @endphp
@@ -31,7 +31,7 @@
             @endforeach
         </div>
 
-        {{-- モーダル表示（ユーザーごと） --}}
+        {{-- Modal display (per user) --}}
         @foreach ($stories as $user_id => $userStories)
             <div class="modal fade" id="user{{ $user_id }}" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
