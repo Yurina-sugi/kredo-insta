@@ -11,6 +11,7 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\StoryController;
 
 
 
@@ -19,6 +20,14 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::get('/people', [HomeController::class, 'search'])->name('search');
+
+    # STORIES
+    Route::get('/stories/create', function () {
+        return view('stories.create');
+    })->middleware('auth');
+
+    Route::get('/stories', [StoryController::class, 'index'])->name('story.index');
+    Route::post('/stories/store', [StoryController::class, 'store'])->name('story.store');
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
         #USER
