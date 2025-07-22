@@ -1,7 +1,7 @@
 /**
- * アプリケーション全体の共通スタイル
+ * Common styles for the entire application
  *
- * カラーコード:
+ * Color codes:
  * white: #F9F5EE
  * gray:  #CFC7C8
  * beige: #B39A84
@@ -9,7 +9,7 @@
  */
 
 /* ==========================================================================
-   既存のスタイル（変更なし）
+   Existing styles (unchanged)
    ========================================================================== */
 /**
 navbar icons
@@ -98,39 +98,39 @@ body.dark-mode .card {
     margin-right: 5px;
     font-size: 0.9em;
     color: #555;
-    /* 必要であればこの色もテーマカラーに調整 */
+    /* Adjust this color to theme color if necessary */
 }
 
 /* ==========================================================================
-   追加・更新された共通スタイル
+   Added and updated common styles
    ========================================================================== */
 body {
     background-color: #B39A84;
-    /* 全体の背景色を新しい白に統一 */
+    /* Unify overall background color to new white */
     font-family: sans-serif;
-    /* 全体のフォントを統一 */
+    /* Unify overall font */
     color: #0A1E54;
-    /* デフォルトのテキスト色をネイビーに */
+    /* Set default text color to navy */
 }
 
-/* 言語選択リンクのスタイル */
+/* Language selection link styles */
 .lang-switcher-links {
-    /* nav-item のデフォルトスタイルを継承しつつ、flexboxで中央揃え */
+    /* Inherit nav-item default styles while centering with flexbox */
     display: flex !important;
     align-items: center;
     gap: 0.25rem;
-    /* リンク間の隙間 */
+    /* Gap between links */
     padding: 0.5rem 0.5rem;
-    /* nav-linkのパディングに合わせる */
+    /* Match nav-link padding */
 }
 
 .lang-switcher-link {
     color: #B39A84 !important;
-    /* ベージュ */
+    /* Beige */
     text-decoration: none;
     font-weight: bold;
     padding: 0.25rem 0.25rem;
-    /* 各リンクのパディング */
+    /* Padding for each link */
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
     font-family: 'Times New Roman', 'Yu Mincho';
@@ -138,67 +138,67 @@ body {
 
 .lang-switcher-link:hover {
     background-color: #CFC7C8;
-    /* グレー */
+    /* Gray */
     color: #0A1E54 !important;
-    /* ネイビー */
+    /* Navy */
 }
 
 .lang-switcher-link.active-lang {
     background-color: transparent;
-    /* 背景を透明に */
+    /* Make background transparent */
     color: #B39A84 !important;
-    /* テキスト色をベージュに維持 */
+    /* Maintain text color as beige */
     font-weight: bold;
-    /* デフォルトの太字を維持 */
+    /* Maintain default bold weight */
     text-decoration: underline;
 }
 
 .lang-separator {
     color: #B39A84;
-    /* セパレータの色をベージュに */
+    /* Set separator color to beige */
     font-weight: bold;
     margin: 0 0.1rem;
-    /* セパレータの左右の余白 */
+    /* Left and right margins for separator */
     font-family: serif;
 }
 
 .lang-select:focus {
     background-color: #B39A84 !important;
     border-color: #F9F5EE !important;
-    /* フォーカス時に白いボーダー */
+    /* White border on focus */
     color: #F9F5EE !important;
     box-shadow: 0 0 0 0.25rem rgba(10, 30, 84, 0.25) !important;
-    /* 控えめなシャドウ */
+    /* Subtle shadow */
 }
 
 
-/* カードのスタイル（ログイン/登録/パスワード確認画面など） */
+/* Card styles (login/register/password confirmation screens, etc.) */
 .card {
     background-color: #F9F5EE;
-    /* カードの背景色を新しい白に統一 */
+    /* Unify card background color to new white */
     border: none;
-    /* 枠を削除 */
+    /* Remove border */
     box-shadow: none;
-    /* 影を削除 */
+    /* Remove shadow */
     border-radius: 10px;
-    /* 角丸を維持 */
+    /* Maintain rounded corners */
 }
 
 .card-login-register {
     background-color: transparent !important;
-    /* 背景を完全に透明に強制 */
+    /* Force background to be completely transparent */
     border: none !important;
-    /* 枠を削除を強制 */
+    /* Force border removal */
     box-shadow: none !important;
 }
 
 .btn-primary {
     background-color: #0A1E54 !important;
-    /* 背景色をネイビーに */
+    /* Set background color to navy */
     border-color: #0A1E54 !important;
-    /* ボーダー色をネイビーに */
+    /* Set border color to navy */
     color: #F9F5EE !important;
-    /* テキスト色を白に */
+    /* Set text color to white */
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s, border-color 0.3s;
@@ -206,99 +206,99 @@ body {
 
 .card-header {
     background-color: transparent !important;
-    /* ヘッダーの背景を透明に */
+    /* Make header background transparent */
     border-bottom: none !important;
-    /* ヘッダーの下線を削除 */
+    /* Remove header bottom border */
     padding-bottom: 0;
-    /* 下パディングを調整 */
+    /* Adjust bottom padding */
 }
 
-/* フォームラベルのスタイル */
+/* Form label styles */
 .form-label {
     color: #B39A84;
-    /* ラベルの色をベージュに */
+    /* Set label color to beige */
     font-weight: bold;
-    /* 太字 */
+    /* Bold */
     font-family: 'Times New Roman', Times, serif;
 }
 
-/* フォーム入力コントロールのスタイル */
+/* Form input control styles */
 .form-control {
     border-color: #B39A84;
-    /* ボーダー色をベージュに */
+    /* Set border color to beige */
     background-color: transparent;
-    /* 背景を透明に */
+    /* Make background transparent */
     color: #0A1E54;
-    /* テキスト色をネイビーに */
+    /* Set text color to navy */
     border-radius: 5px;
-    /* 角丸を維持 */
+    /* Maintain rounded corners */
     box-shadow: none;
-    /* 影を削除 */
+    /* Remove shadow */
 }
 
 .form-control::placeholder {
     color: rgba(10, 30, 84, 0.7);
-    /* プレースホルダーの色を半透明ネイビーに */
+    /* Set placeholder color to semi-transparent navy */
 }
 
 .form-control:focus {
     background-color: transparent;
-    /* フォーカス時も背景を透明に */
+    /* Keep background transparent on focus */
     border-color: #0A1E54;
-    /* フォーカス時はボーダー色をネイビーに */
+    /* Set border color to navy on focus */
     box-shadow: none;
-    /* 影を削除 */
+    /* Remove shadow */
     color: #0A1E54;
-    /* フォーカス時もテキスト色をネイビーに */
+    /* Keep text color navy on focus */
 }
 
-/* プライマリボタンのスタイル */
+/* Primary button styles */
 .btn-primary {
     background-color: #0A1E54;
-    /* 背景色をネイビーに */
+    /* Set background color to navy */
     border-color: #0A1E54;
-    /* ボーダー色をネイビーに */
+    /* Set border color to navy */
     color: #F9F5EE;
-    /* テキスト色を白に */
+    /* Set text color to white */
     border-radius: 5px;
-    /* 角丸を維持 */
+    /* Maintain rounded corners */
     font-weight: bold;
     transition: background-color 0.3s, border-color 0.3s;
 }
 
 .btn-primary:hover {
     background-color: #0A1E54;
-    /* ホバー時も同じネイビーを維持（必要であれば濃くする） */
+    /* Maintain same navy on hover (darken if needed) */
     border-color: #0A1E54;
     opacity: 0.9;
-    /* ホバーで少し透明度を出す */
+    /* Add slight transparency on hover */
 }
 
-/* リンクボタンのスタイル（例: Forgot Your Password?） */
+/* Link button styles (e.g., Forgot Your Password?) */
 .forgot-password-link {
     color: #B39A84 !important;
-    /* ベージュ色に */
+    /* Set to beige color */
     font-weight: bold !important;
     text-decoration: none !important;
-    /* 下線をなくす */
+    /* Remove underline */
     font-family: 'Times New Roman', Times, serif;
 
 }
 
 .btn-link:hover {
     color: #0A1E54 !important;
-    /* ホバー時はネイビーに */
+    /* Set to navy on hover */
     text-decoration: underline;
-    /* ホバー時に下線を表示 */
+    /* Show underline on hover */
 }
 
 
 /* ==========================================================================
-   認証画面のタブナビゲーションスタイル
+   Authentication screen tab navigation styles
    ========================================================================== */
 .nav-tabs-custom {
     border-bottom: 1px solid #CFC7C8;
-    /* 下線をグレーに */
+    /* Set underline to gray */
     margin-bottom: 20px;
 }
 
@@ -309,13 +309,13 @@ body {
 .nav-tabs-custom .nav-link {
     border: none;
     border-bottom: 2px solid transparent;
-    /* デフォルトの下線を透明に */
+    /* Make default underline transparent */
     background-color: #F9F5EE;
-    /* 背景色を新しい白に統一 */
+    /* Unify background color to new white */
     color: #0A1E54;
-    /* 文字色をネイビーに */
+    /* Set text color to navy */
     border-radius: 5px 5px 0 0;
-    /* 上部を丸く */
+    /* Round top corners */
     padding: 8px 20px;
     font-weight: bold;
     transition: background-color 0.3s, color 0.3s, border-bottom-color 0.3s;
@@ -323,155 +323,155 @@ body {
 
 .nav-tabs-custom .nav-link.active {
     background-color: #F9F5EE;
-    /* アクティブ時も背景色を新しい白に統一 */
+    /* Unify background color to new white even when active */
     color: #B39A84;
-    /* アクティブ時の文字色をベージュに */
+    /* Set active text color to beige */
     border-bottom-color: #B39A84;
-    /* アクティブ時の下線をベージュに */
+    /* Set active underline to beige */
 }
 
 .nav-tabs-custom .nav-link:hover:not(.active) {
     background-color: #CFC7C8;
-    /* ホバー時はグレーに */
+    /* Set to gray on hover */
     color: #0A1E54;
-    /* ホバー時の文字色をネイビーに */
+    /* Set hover text color to navy */
 }
 
 /* ==========================================================================
-   ナビゲーションバーのスタイル
+   Navigation bar styles
    ========================================================================== */
 .navbar-custom {
     border-bottom: none;
     box-shadow: none;
     border-radius: 0;
-    /* 角丸を削除 */
+    /* Remove rounded corners */
 }
 
-/* ナビゲーションバーのライトテーマ（ログイン状態に関わらず統一） */
+/* Navigation bar light theme (unified regardless of login status) */
 .navbar-light-theme {
     background-color: #B39A84 !important;
-    /* 白 */
+    /* White */
 }
 
 .navbar-light-theme .navbar-brand,
 .navbar-light-theme .nav-link,
 .navbar-light-theme .navbar-toggler-icon {
     color: #B39A84 !important;
-    /* ベージュ */
+    /* Beige */
     font-family: sans-serif;
 }
 
 .navbar-light-theme .navbar-brand h1 {
     color: #B39A84 !important;
-    /* ベージュ */
+    /* Beige */
     font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'Times New Roman', Georgia, serif !important;
 }
 
 .navbar-light-theme .navbar-toggler {
     border-color: #B39A84;
-    /* ベージュ */
+    /* Beige */
 }
 
 .navbar-light-theme .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28179, 154, 132, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
-/* ナビゲーションバー内の検索バーのスタイル */
+/* Search bar styles within navigation bar */
 .navbar-light-theme .search-bar-container {
     position: relative;
     display: flex;
-    /* アイコンと入力フィールドを整列 */
+    /* Align icon and input field */
     align-items: center;
     width: 300px;
-    /* フォームの幅を維持 */
+    /* Maintain form width */
 }
 
 .navbar-light-theme .search-icon {
     position: absolute;
-    /* コンテナ内で絶対位置指定 */
+    /* Absolute positioning within container */
     left: 5px;
-    /* アイコンの左からの位置 */
+    /* Icon position from left */
     color: #B39A84;
-    /* ベージュ色 (虫眼鏡アイコンの色) */
+    /* Beige color (magnifying glass icon) */
     font-size: 1rem;
     z-index: 1;
-    /* アイコンが入力フィールドの上に表示されるように */
+    /* Icon appears above input field */
 }
 
 .navbar-light-theme .search-input {
     border: none;
-    /* デフォルトのボーダーを削除 */
+    /* Remove default border */
     border-bottom: 1px solid #B39A84;
-    /* ベージュ色のアンダーライン */
+    /* Beige underline */
     background-color: transparent;
-    /* 背景を透明に */
+    /* Transparent background */
     padding-left: 30px;
-    /* アイコンのためのスペース */
+    /* Space for icon */
     padding-right: 5px;
-    /* 右側の小さなパディング */
+    /* Small right padding */
     color: #0A1E54;
-    /* ネイビーの文字色 */
+    /* Navy text color */
     border-radius: 0;
-    /* 角丸を削除 */
+    /* Remove rounded corners */
     box-shadow: none;
-    /* 影を削除 */
+    /* Remove shadow */
     width: 100%;
-    /* コンテナの全幅を使用 */
+    /* Use full container width */
 }
 
 .navbar-light-theme .search-input::placeholder {
     color: rgba(10, 30, 84, 0.7);
-    /* 半透明のネイビーのプレースホルダー */
+    /* Semi-transparent navy placeholder */
 }
 
 .navbar-light-theme .search-input:focus {
     background-color: transparent;
-    /* フォーカス時も透明を維持 */
+    /* Maintain transparency on focus */
     border-color: #0A1E54;
-    /* フォーカス時はネイビーのアンダーライン */
+    /* Navy underline on focus */
     box-shadow: none;
     color: #0A1E54;
 }
 
 /* ==========================================================================
-   既存のスタイル（調整済み） - icon-sm, avatar-sm などの色をテーマに合わせる
+   Existing styles (adjusted) - Match icon-sm, avatar-sm, etc. colors to theme
    ========================================================================== */
-/* .icon-sm の再定義（既存の定義を上書き） */
+/* .icon-sm redefinition (override existing definition) */
 .icon-sm {
     font-size: 2rem;
     color: #B39A84 !important;
-    /* ナビゲーションバーのアイコン色をベージュに統一 */
+    /* Unify navigation bar icon color to beige */
 }
 
-/* .avatar-sm の再定義（既存の定義を上書き） */
+/* .avatar-sm redefinition (override existing definition) */
 .avatar-sm {
     width: 2rem;
     height: 2rem;
     object-fit: cover;
     border: 1px solid #B39A84;
-    /* アバターのボーダー色をベージュに統一 */
+    /* Unify avatar border color to beige */
 }
 
-/* ドロップダウンメニュー（統一テーマで共通） */
+/* Dropdown menu (common with unified theme) */
 .dropdown-menu {
     background-color: #B39A84;
-    /* 白 */
+    /* White */
     border: 1px solid #CFC7C8;
-    /* グレー */
+    /* Gray */
     border-radius: 5px;
 }
 
 .dropdown-item {
     color: #0A1E54;
-    /* ネイビー */
+    /* Navy */
     font-family: sans-serif;
 }
 
 .dropdown-item:hover {
     background-color: #CFC7C8;
-    /* グレー */
+    /* Gray */
     color: #0A1E54;
-    /* ネイビー */
+    /* Navy */
 }
 
 
@@ -545,7 +545,7 @@ body {
 body.dark-mode {
     background: #181818;
     color: #f5f5f5;
-    /* 白に近い色 */
+    /* Close to white color */
 }
 
 body.dark-mode p,
@@ -598,7 +598,7 @@ body.light-mode .card {
 body.dark-mode .username,
 body.dark-mode .email {
     color: #fff !important;
-    /* もしくは #f5f5f5 など白系 */
+    /* Or #f5f5f5 etc. white series */
 }
 
 body.dark-mode .text-muted,
@@ -641,7 +641,7 @@ body.dark-mode .card-header .text-muted {
 }
 
 /* ==========================================================================
-   ダークモード用の包括的なスタイル修正
+   Comprehensive dark mode style modifications
    ========================================================================== */
 
 /* ダークモード用のドロップダウンスタイル */
@@ -1220,10 +1220,10 @@ body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
 }
 
 /* ==========================================================================
-   AI関連ボックスとドロップダウンボタンのスタイル
+   AI-related boxes and dropdown button styles
    ========================================================================== */
 
-/* AI Tour Box のダークモード対応 */
+/* Dark mode support for AI Tour Box */
 body.dark-mode .ai-tour-box {
     background-color: #1a2a3a !important;
     border-left-color: #aad7ff !important;
@@ -1242,7 +1242,7 @@ body.dark-mode .ai-tour-box a:hover {
     color: #8bc6ff !important;
 }
 
-/* AI Summary Box のダークモード対応 */
+/* Dark mode support for AI Summary Box */
 body.dark-mode .ai-summary-box {
     background: linear-gradient(to right, #1a2a3a, #0f1a2a) !important;
     color: #f5f5f5 !important;
@@ -1256,7 +1256,7 @@ body.dark-mode .ai-summary-box p {
     color: #f5f5f5 !important;
 }
 
-/* ドロップダウンボタンのスタイル */
+/* Dropdown button styles */
 .btn-sm.shadow-none {
     background-color: transparent !important;
     border: none !important;
@@ -1275,7 +1275,7 @@ body.dark-mode .ai-summary-box p {
     outline: none !important;
 }
 
-/* ダークモード用のドロップダウンボタン */
+/* Dark mode dropdown button */
 body.dark-mode .btn-sm.shadow-none {
     color: #bbb !important;
 }
@@ -1285,7 +1285,7 @@ body.dark-mode .btn-sm.shadow-none:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* ドロップダウンメニュー内のボタンスタイル */
+/* Button styles within dropdown menu */
 .dropdown-item.border-0.bg-transparent {
     background-color: transparent !important;
     border: none !important;
@@ -1318,10 +1318,10 @@ body.dark-mode .dropdown-item.border-0.bg-transparent.text-danger {
 }
 
 /* ==========================================================================
-   Location Input Form のスタイル調整
+   Location Input Form style adjustments
    ========================================================================== */
 
-/* Location Input の基本スタイル */
+/* Basic styles for Location Input */
 #location_search {
     border-color: #B39A84;
     background-color: transparent;
@@ -1342,7 +1342,7 @@ body.dark-mode .dropdown-item.border-0.bg-transparent.text-danger {
     color: #0A1E54;
 }
 
-/* Location Input のダークモード対応 */
+/* Dark mode support for Location Input */
 body.dark-mode #location_search {
     background-color: #333 !important;
     border-color: #555 !important;
@@ -1360,7 +1360,7 @@ body.dark-mode #location_search:focus {
     box-shadow: 0 0 0 0.2rem rgba(170, 215, 255, 0.25) !important;
 }
 
-/* Location Label のスタイル */
+/* Location Label styles */
 label[for="location_search"] {
     color: #B39A84;
     font-weight: bold;
@@ -1371,7 +1371,7 @@ body.dark-mode label[for="location_search"] {
     color: #f5f5f5 !important;
 }
 
-/* Location 関連のエラーメッセージ */
+/* Location-related error messages */
 .text-danger.small {
     color: #dc3545 !important;
     font-size: 0.875rem;
@@ -1382,7 +1382,7 @@ body.dark-mode .text-danger.small {
     color: #ff6b6b !important;
 }
 
-/* Location 関連のアラート */
+/* Location-related alerts */
 #geolocation-alert {
     background-color: #d1ecf1;
     border-color: #bee5eb;
@@ -1395,7 +1395,7 @@ body.dark-mode #geolocation-alert {
     color: #aad7ff !important;
 }
 
-/* Map コンテナのスタイル */
+/* Map container styles */
 #map {
     border-radius: 5px;
     border: 1px solid #B39A84;
@@ -1405,19 +1405,19 @@ body.dark-mode #map {
     border-color: #555 !important;
 }
 
-/* Hidden Inputs のスタイル（デバッグ用） */
+/* Hidden Inputs styles (for debugging) */
 input[type="hidden"]#latitude,
 input[type="hidden"]#longitude,
 input[type="hidden"]#location_name {
     /* 通常は非表示なので特別なスタイルは不要 */
 }
 
-/* Location Form グループのスタイル */
+/* Location Form group styles */
 .mb-4:has(#location_search) {
-    /* Location フォームグループの特別なスタイルがあれば追加 */
+    /* Add special styles for Location form group if needed */
 }
 
-/* Location 関連のフォームテキスト */
+/* Location-related form text */
 .form-text {
     color: #6c757d;
     font-size: 0.875rem;
