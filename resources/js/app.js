@@ -13,7 +13,7 @@ function animateHeart(btn) {
     heart.classList.toggle('liked');
     heart.addEventListener('animationend', function handler() {
         heart.classList.remove('animate');
-        heart.removeEventListener('animationend', handler); xx
+        heart.removeEventListener('animationend', handler);
     });
 }
 
