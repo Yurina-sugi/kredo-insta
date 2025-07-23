@@ -1,4 +1,4 @@
-import './bootstrap';
+import "./bootstrap";
 
 // ==========================================================================
 // Consolidation of scattered JS code
@@ -8,20 +8,23 @@ import './bootstrap';
 // Like Button Animation
 // ==========================================================================
 function animateHeart(btn) {
-    const heart = btn.querySelector('.heart-icon');
-    heart.classList.add('animate');
-    heart.classList.toggle('liked');
-    heart.addEventListener('animationend', function handler() {
-        heart.classList.remove('animate');
-        heart.removeEventListener('animationend', handler);
+    const heart = btn.querySelector(".heart-icon");
+    heart.classList.add("animate");
+    heart.classList.toggle("liked");
+    heart.addEventListener("animationend", function handler() {
+        heart.classList.remove("animate");
+        heart.removeEventListener("animationend", handler);
     });
 }
 
 function showFloatingHearts(btn) {
-    const container = btn.parentElement.querySelector('.floating-hearts-container');
-    for (let i = 0; i < 2; i++) { // Create 2 floating hearts
-        const heart = document.createElement('i');
-        heart.className = 'fa-solid fa-heart floating-heart';
+    const container = btn.parentElement.querySelector(
+        ".floating-hearts-container"
+    );
+    for (let i = 0; i < 2; i++) {
+        // Create 2 floating hearts
+        const heart = document.createElement("i");
+        heart.className = "fa-solid fa-heart floating-heart";
         // Random left/right position, size, and rotation
         const offset = (Math.random() - 0.5) * 60; // -30px to +30px
         const scale = 1 + Math.random() * 0.5; // 1x to 1.5x
@@ -32,7 +35,7 @@ function showFloatingHearts(btn) {
         container.appendChild(heart);
 
         // Remove after animation ends
-        heart.addEventListener('animationend', () => {
+        heart.addEventListener("animationend", () => {
             heart.remove();
         });
     }
@@ -40,18 +43,16 @@ function showFloatingHearts(btn) {
     animateHeart(btn);
 }
 
-
-
 // ==========================================================================
 // Google Maps Integration
 // ==========================================================================
 let map, marker, autocomplete;
 
 function initMap() {
-    const mapElement = document.getElementById('map');
-    const geoAlert = document.getElementById('geolocation-alert');
+    const mapElement = document.getElementById("map");
+    const geoAlert = document.getElementById("geolocation-alert");
     if (!mapElement) {
-        console.error('Map element not found');
+        console.error("Map element not found");
         return;
     }
 
@@ -63,7 +64,7 @@ function initMap() {
         navigator.geolocation.getCurrentPosition(
             function (position) {
                 // Hide alert when geolocation succeeds
-                if (geoAlert) geoAlert.style.display = 'none';
+                if (geoAlert) geoAlert.style.display = "none";
 
                 const currentLatLng = new google.maps.LatLng(
                     position.coords.latitude,
@@ -74,7 +75,7 @@ function initMap() {
             },
             function (error) {
                 // Keep alert displayed on failure
-                console.log('Geolocation error:', error);
+                console.log("Geolocation error:", error);
                 initializeMapWithLocation(defaultLatLng);
                 initializeAutocomplete();
             }
@@ -86,7 +87,7 @@ function initMap() {
 }
 
 function initializeMapWithLocation(latLng) {
-    map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById("map"), {
         center: latLng,
         zoom: 15,
     });
@@ -98,12 +99,12 @@ function initializeMapWithLocation(latLng) {
     });
 
     // Set latitude and longitude to hidden fields when marker moves
-    marker.addListener('dragend', function () {
+    marker.addListener("dragend", function () {
         updateHiddenFields(marker.getPosition());
     });
 
     // Move marker on map click
-    map.addListener('click', function (e) {
+    map.addListener("click", function (e) {
         marker.setPosition(e.latLng);
         updateHiddenFields(e.latLng);
     });
@@ -113,12 +114,12 @@ function initializeMapWithLocation(latLng) {
 }
 
 function initializeAutocomplete() {
-    const input = document.getElementById('location_search');
+    const input = document.getElementById("location_search");
     if (!input) return;
 
     // Prevent form submission on Enter key
-    input.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
             e.preventDefault();
             return false;
         }
@@ -126,12 +127,12 @@ function initializeAutocomplete() {
 
     // Autocomplete settings
     autocomplete = new google.maps.places.Autocomplete(input, {
-        types: ['geocode'], // Address only
+        types: ["geocode"], // Address only
         //componentRestrictions: { country: 'jp' }, // Japan only (optional)
     });
 
     // Handle when address is selected
-    autocomplete.addListener('place_changed', function () {
+    autocomplete.addListener("place_changed", function () {
         const place = autocomplete.getPlace();
 
         if (!place.geometry) {
@@ -157,9 +158,9 @@ function initializeAutocomplete() {
 }
 
 function updateHiddenFields(latLng, address = null) {
-    const latInput = document.getElementById('latitude');
-    const lngInput = document.getElementById('longitude');
-    const addressInput = document.getElementById('location_name');
+    const latInput = document.getElementById("latitude");
+    const lngInput = document.getElementById("longitude");
+    const addressInput = document.getElementById("location_name");
 
     if (latInput && lngInput) {
         latInput.value = latLng.lat();
@@ -171,13 +172,11 @@ function updateHiddenFields(latLng, address = null) {
     }
 }
 
-
-
 // ==========================================================================
 // Post Map Initialization
 // ==========================================================================
 function initPostMap() {
-    const postMapElement = document.getElementById('post-map');
+    const postMapElement = document.getElementById("post-map");
     if (!postMapElement) return;
 
     const lat = parseFloat(postMapElement.dataset.lat);
@@ -214,7 +213,12 @@ function initLocationMap(options) {
 
     // Use DB values if available, otherwise use defaults
     let centerLat, centerLng;
-    if (!isNaN(initialLat) && !isNaN(initialLng) && initialLat !== 0 && initialLng !== 0) {
+    if (
+        !isNaN(initialLat) &&
+        !isNaN(initialLng) &&
+        initialLat !== 0 &&
+        initialLng !== 0
+    ) {
         centerLat = initialLat;
         centerLng = initialLng;
     } else {
@@ -245,14 +249,14 @@ function initLocationMap(options) {
     });
 
     // Update hidden fields when marker moves
-    marker.addListener('dragend', function () {
+    marker.addListener("dragend", function () {
         const position = marker.getPosition();
         latInput.value = position.lat();
         lngInput.value = position.lng();
     });
 
     // Move marker on map click
-    map.addListener('click', function (e) {
+    map.addListener("click", function (e) {
         marker.setPosition(e.latLng);
         latInput.value = e.latLng.lat();
         lngInput.value = e.latLng.lng();
@@ -261,8 +265,8 @@ function initLocationMap(options) {
     // Initialize autocomplete if search input exists
     if (searchInput) {
         // Prevent form submission on Enter key
-        searchInput.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') {
+        searchInput.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
                 e.preventDefault();
                 return false;
             }
@@ -270,11 +274,11 @@ function initLocationMap(options) {
 
         // Autocomplete settings
         const autocomplete = new google.maps.places.Autocomplete(searchInput, {
-            types: ['geocode'],
+            types: ["geocode"],
         });
 
         // Handle when address is selected
-        autocomplete.addListener('place_changed', function () {
+        autocomplete.addListener("place_changed", function () {
             const place = autocomplete.getPlace();
 
             if (!place.geometry) {
@@ -312,100 +316,102 @@ window.initPostMap = initPostMap;
 window.initLocationMap = initLocationMap;
 
 // Initialize functions when DOM is loaded
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
     // Initialize Swiper for all elements with class 'mySwiper'
-    const swiperElements = document.querySelectorAll('.mySwiper');
+    const swiperElements = document.querySelectorAll(".mySwiper");
     swiperElements.forEach(function (element) {
-        if (typeof Swiper !== 'undefined') {
+        if (typeof Swiper !== "undefined") {
             new Swiper(element, {
                 loop: true,
                 pagination: {
-                    el: '.swiper-pagination',
-                    type: 'fraction',
+                    el: ".swiper-pagination",
+                    type: "fraction",
                 },
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
                 },
             });
         }
     });
 
     // Initialize Swiper for edit post page
-    const editPostSwiperElements = document.querySelectorAll('.edit-post-swiper');
+    const editPostSwiperElements =
+        document.querySelectorAll(".edit-post-swiper");
     editPostSwiperElements.forEach(function (element) {
-        if (typeof Swiper !== 'undefined') {
+        if (typeof Swiper !== "undefined") {
             new Swiper(element, {
                 loop: true,
                 pagination: {
-                    el: '.swiper-pagination',
-                    type: 'bullets',
+                    el: ".swiper-pagination",
+                    type: "bullets",
                 },
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
                 },
             });
         }
     });
 
     // Initialize image preview
-    const imageInput = document.getElementById('image');
-    const preview = document.getElementById('preview');
+    const imageInput = document.getElementById("image");
+    const preview = document.getElementById("preview");
 
     if (imageInput && preview) {
-        imageInput.addEventListener('change', function (e) {
+        imageInput.addEventListener("change", function (e) {
             const file = e.target.files[0];
             if (file) {
                 preview.src = URL.createObjectURL(file);
-                preview.classList.remove('d-none');
+                preview.classList.remove("d-none");
             }
         });
     }
 
     // Initialize dark mode toggle
-    const toggleBtn = document.getElementById('mode-toggle');
-    const modeIcon = document.getElementById('mode-icon');
-    const modeLabel = document.getElementById('mode-label');
+    const toggleBtn = document.getElementById("mode-toggle");
+    const modeIcon = document.getElementById("mode-icon");
+    const modeLabel = document.getElementById("mode-label");
 
     if (toggleBtn) {
         // Get mode from localStorage
-        let mode = localStorage.getItem('color-mode') || 'light';
+        let mode = localStorage.getItem("color-mode") || "light";
         setMode(mode);
 
-        toggleBtn.addEventListener('click', function () {
-            mode = (mode === 'light') ? 'dark' : 'light';
+        toggleBtn.addEventListener("click", function () {
+            mode = mode === "light" ? "dark" : "light";
             setMode(mode);
-            localStorage.setItem('color-mode', mode);
+            localStorage.setItem("color-mode", mode);
         });
 
         function setMode(mode) {
-            document.body.classList.remove('light-mode', 'dark-mode');
-            document.body.classList.add(mode + '-mode');
-            if (mode === 'dark') {
-                modeIcon.className = 'fa fa-sun';
+            document.body.classList.remove("light-mode", "dark-mode");
+            document.body.classList.add(mode + "-mode");
+            if (mode === "dark") {
+                modeIcon.className = "fa fa-sun";
             } else {
-                modeIcon.className = 'fa fa-moon';
+                modeIcon.className = "fa fa-moon";
             }
         }
     }
 
     // Initialize map if Google Maps is available
-    const mapElement = document.getElementById('map');
-    const geolocationAlert = document.getElementById('geolocation-alert');
+    const mapElement = document.getElementById("map");
+    const geolocationAlert = document.getElementById("geolocation-alert");
 
     if (mapElement) {
         // Check if this is a create page (has geolocation alert) or edit page (has existing values)
         const isCreatePage = geolocationAlert !== null;
-        const hasExistingValues = document.getElementById('latitude') &&
-            document.getElementById('latitude').value &&
-            document.getElementById('longitude') &&
-            document.getElementById('longitude').value;
+        const hasExistingValues =
+            document.getElementById("latitude") &&
+            document.getElementById("latitude").value &&
+            document.getElementById("longitude") &&
+            document.getElementById("longitude").value;
 
         // For create pages, use initMap (current location)
         // For edit pages, let the page-specific script handle it
         if (isCreatePage && !hasExistingValues) {
-            if (typeof google !== 'undefined' && google.maps) {
+            if (typeof google !== "undefined" && google.maps) {
                 initMap();
             } else {
                 setTimeout(initMap, 1000);
@@ -414,14 +420,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Initialize post map for show pages
-    const postMapElement = document.getElementById('post-map');
+    const postMapElement = document.getElementById("post-map");
     if (postMapElement) {
-        if (typeof google !== 'undefined' && google.maps) {
+        if (typeof google !== "undefined" && google.maps) {
             initPostMap();
         } else {
             // Wait for Google Maps API to load
             const checkGoogleMaps = setInterval(() => {
-                if (typeof google !== 'undefined' && google.maps) {
+                if (typeof google !== "undefined" && google.maps) {
                     initPostMap();
                     clearInterval(checkGoogleMaps);
                 }
@@ -430,27 +436,28 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Navbar scroll animation
-    const navbar = document.querySelector('.navbar-light-theme');
+    const navbar = document.querySelector(".navbar-light-theme");
     if (navbar) {
         let lastScrollTop = 0;
 
-        window.addEventListener('scroll', function () {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        window.addEventListener("scroll", function () {
+            const scrollTop =
+                window.pageYOffset || document.documentElement.scrollTop;
 
             // Add scrolled class when scrolling down
             if (scrollTop > 50) {
-                navbar.classList.add('scrolled');
+                navbar.classList.add("scrolled");
             } else {
-                navbar.classList.remove('scrolled');
+                navbar.classList.remove("scrolled");
             }
 
             // Hide/show navbar on scroll with smooth animation
             if (scrollTop > lastScrollTop && scrollTop > 100) {
                 // Scrolling down - hide navbar
-                navbar.style.transform = 'translateY(-100%)';
+                navbar.style.transform = "translateY(-100%)";
             } else {
                 // Scrolling up - show navbar
-                navbar.style.transform = 'translateY(0)';
+                navbar.style.transform = "translateY(0)";
             }
 
             lastScrollTop = scrollTop;
@@ -458,7 +465,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Loading animation control
-    const loadingOverlay = document.getElementById('loading-overlay');
+    const loadingOverlay = document.getElementById("loading-overlay");
     if (loadingOverlay) {
         // Function to hide loading overlay
         const hideLoadingOverlay = () => {
@@ -557,37 +564,45 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Show loading overlay on link clicks (for page transitions)
-        document.addEventListener('click', function (e) {
-            const link = e.target.closest('a');
-            if (link && link.href && !link.href.startsWith('javascript:') &&
-                !link.href.startsWith('#') && !link.target &&
-                link.hostname === window.location.hostname) {
-
+        document.addEventListener("click", function (e) {
+            const link = e.target.closest("a");
+            if (
+                link &&
+                link.href &&
+                !link.href.startsWith("javascript:") &&
+                !link.href.startsWith("#") &&
+                !link.target &&
+                link.hostname === window.location.hostname
+            ) {
                 // Show loading overlay
-                loadingOverlay.style.display = 'flex';
-                loadingOverlay.classList.remove('fade-out');
+                loadingOverlay.style.display = "flex";
+                loadingOverlay.classList.remove("fade-out");
             }
         });
 
         // Prevent loading overlay on like button clicks and handle scroll to liked post
-        document.addEventListener('click', function (e) {
+        document.addEventListener("click", function (e) {
             const likeButton = e.target.closest('button[type="submit"]');
-            if (likeButton && likeButton.closest('form') &&
-                likeButton.closest('form').action &&
-                likeButton.closest('form').action.includes('like')) {
-
+            if (
+                likeButton &&
+                likeButton.closest("form") &&
+                likeButton.closest("form").action &&
+                likeButton.closest("form").action.includes("like")
+            ) {
                 // Don't show loading overlay for like button clicks
                 e.stopPropagation();
 
                 // Store the post element for scrolling after page reload
-                const postElement = likeButton.closest('.card, .post-show-card-body, .row, .col-lg-4');
+                const postElement = likeButton.closest(
+                    ".card, .post-show-card-body, .row, .col-lg-4"
+                );
                 if (postElement) {
                     // Try to get post ID from data attribute first
-                    let postId = postElement.getAttribute('data-post-id');
+                    let postId = postElement.getAttribute("data-post-id");
 
                     // If not found, try to extract from form action
                     if (!postId) {
-                        const formAction = likeButton.closest('form').action;
+                        const formAction = likeButton.closest("form").action;
                         const matches = formAction.match(/\/like\/(\d+)\//);
                         if (matches) {
                             postId = matches[1];
@@ -595,30 +610,73 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     if (postId) {
-                        sessionStorage.setItem('scrollToPost', postId);
-                        console.log('Stored scrollToPost ID:', postId);
+                        sessionStorage.setItem("scrollToPost", postId);
+                        console.log("Stored scrollToPost ID:", postId);
                     } else {
-                        console.log('Could not extract post ID from form action');
+                        console.log(
+                            "Could not extract post ID from form action"
+                        );
                     }
                 } else {
-                    console.log('Post element not found for like button');
+                    console.log("Post element not found for like button");
                 }
             }
         });
 
         // Show loading overlay on form submissions
-        document.addEventListener('submit', function (e) {
+        document.addEventListener("submit", function (e) {
             const form = e.target;
-            if (form && form.tagName === 'FORM') {
+            if (form && form.tagName === "FORM") {
                 // Don't show loading overlay for like form submissions
-                if (form.action && form.action.includes('like')) {
+                if (form.action && form.action.includes("like")) {
                     return;
                 }
 
                 // Show loading overlay for other form submissions
-                loadingOverlay.style.display = 'flex';
-                loadingOverlay.classList.remove('fade-out');
+                loadingOverlay.style.display = "flex";
+                loadingOverlay.classList.remove("fade-out");
             }
         });
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            async function (position) {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+
+                try {
+                    const response = await fetch(
+                        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+                    );
+                    const data = await response.json();
+                    const country = data.countryName;
+
+                    if (country) {
+                        const linkEl = document.querySelector(".ai-tour-box a");
+                        if (linkEl) {
+                            const baseUrl = linkEl.getAttribute("href");
+                            const searchQuery = decodeURIComponent(
+                                baseUrl.split("q=")[1] || ""
+                            );
+                            const newQuery = encodeURIComponent(
+                                (searchQuery + " " + country)
+                                    .replace(/\(.*?\)/g, "")
+                                    .trim()
+                            );
+                            const newUrl = `https://www.getyourguide.com/s/?q=${newQuery}`;
+                            linkEl.setAttribute("href", newUrl);
+                        }
+                    }
+                } catch (err) {
+                    console.warn("Error country:", err);
+                }
+            },
+            function (err) {
+                console.warn("Error location:", err);
+            }
+        );
     }
 });

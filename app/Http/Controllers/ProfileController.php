@@ -22,13 +22,12 @@ class ProfileController extends Controller
     {
         $user = User::with(['comments', 'posts.categoryPost.category'])->findOrFail($id);
 
-        // Display without AI features if environment variable is not set
         $token = env('LAOZHANG_API_TOKEN');
         if (empty($token)) {
             return view('users.profile.show')->with('user', $user);
         }
 
-        // Process when AI features are enabled
+
         $categories = $user->posts->flatMap(function ($post) {
             if ($post->categoryPost && $post->categoryPost->isNotEmpty()) {
                 return $post->categoryPost->pluck('category.name')->toArray();
@@ -40,8 +39,8 @@ class ProfileController extends Controller
 
         $apiUrl = 'https://api.laozhang.ai/v1/chat/completions';
 
-        // Tour search keyword via AI
         $recommendedTourLink = null;
+
         if (!empty($categories)) {
             $categoryText = implode(', ', $categories);
             $commentText = implode("\n", $comments);
@@ -70,11 +69,10 @@ EOT;
             $tourResult = $tourResponse->json();
             if (isset($tourResult['choices'][0]['message']['content'])) {
                 $searchQuery = trim($tourResult['choices'][0]['message']['content']);
-                $recommendedTourLink = "https://www.getyourguide.com/s/?q=" . urlencode($searchQuery);
+                $recommendedTourLink = 'https://www.getyourguide.com/s/?q=' . urlencode($searchQuery);
             }
         }
 
-        // Personality summary via AI
         $personalitySummary = null;
         if (!empty($categories) || !empty($comments)) {
             $personalityPrompt = "User is interested in: " . implode(', ', $categories) . "\n";
@@ -105,8 +103,8 @@ EOT;
             'recommendedTourLink' => $recommendedTourLink,
             'personalitySummary' => $personalitySummary
         ]);
-    }
 
+    }
 
     public function edit()
     {
