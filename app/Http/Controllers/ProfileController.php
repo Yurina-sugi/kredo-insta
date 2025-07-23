@@ -27,18 +27,6 @@ class ProfileController extends Controller
             return view('users.profile.show')->with('user', $user);
         }
 
-        $country = '';
-        try {
-            $locationResponse = Http::timeout(3)->get('https://ipwhois.app/json/');
-            if ($locationResponse->ok()) {
-                $locationData = $locationResponse->json();
-                if (isset($locationData['country'])) {
-                    $country = $locationData['country'];
-                }
-            }
-        } catch (\Exception $e) {
-            Log::warning('位置情報の取得に失敗しました: ' . $e->getMessage());
-        }
 
         $categories = $user->posts->flatMap(function ($post) {
             if ($post->categoryPost && $post->categoryPost->isNotEmpty()) {
@@ -81,10 +69,7 @@ EOT;
             $tourResult = $tourResponse->json();
             if (isset($tourResult['choices'][0]['message']['content'])) {
                 $searchQuery = trim($tourResult['choices'][0]['message']['content']);
-                if (!empty($country)) {
-                    $searchQuery .= ' ' . $country;
-                }
-                $recommendedTourLink = "https://www.getyourguide.com/s/?q=" . urlencode($searchQuery);
+                $recommendedTourLink = 'https://www.getyourguide.com/s/?q=' . urlencode($searchQuery);
             }
         }
 
@@ -118,6 +103,7 @@ EOT;
             'recommendedTourLink' => $recommendedTourLink,
             'personalitySummary' => $personalitySummary
         ]);
+
     }
 
     public function edit()
