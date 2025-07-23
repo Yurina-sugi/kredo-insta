@@ -43,7 +43,7 @@
         @if ($user->posts->isNotEmpty())
             <div class="row">
                 @foreach ($user->posts as $post)
-                    <div class="col-lg-4 col-md-6 mb-4 position-relative">
+                    <div class="col-lg-4 col-md-6 mb-4 position-relative" data-post-id="{{ $post->id }}">
                         <a href="{{ route('post.show', $post->id) }}" class="d-block position-relative">
                             @php
                                 $images = json_decode($post->image, true);

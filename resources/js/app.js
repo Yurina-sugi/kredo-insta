@@ -468,6 +468,55 @@ document.addEventListener('DOMContentLoaded', function () {
                     loadingOverlay.style.display = 'none';
                 }, 500);
             }, 300);
+
+            // Scroll to liked post after page reload
+            const scrollToPostId = sessionStorage.getItem('scrollToPost');
+            console.log('Checking for scrollToPost:', scrollToPostId);
+
+            if (scrollToPostId) {
+                // Clear the stored post ID
+                sessionStorage.removeItem('scrollToPost');
+                console.log('Found scrollToPost ID:', scrollToPostId);
+
+                // Try to scroll immediately and also after a delay
+                const tryScrollToPost = () => {
+                    // Try to find the post element with multiple selectors
+                    const postElement = document.querySelector(`[data-post-id="${scrollToPostId}"]`) ||
+                        document.querySelector(`.card[data-post-id="${scrollToPostId}"]`) ||
+                        document.querySelector(`.post-show-card-body[data-post-id="${scrollToPostId}"]`) ||
+                        document.querySelector(`.row[data-post-id="${scrollToPostId}"]`) ||
+                        document.querySelector(`.col-lg-4[data-post-id="${scrollToPostId}"]`);
+
+                    console.log('Found post element:', postElement);
+
+                    if (postElement) {
+                        // Smooth scroll to the post
+                        postElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+
+                        // Add a brief highlight effect
+                        postElement.style.transition = 'box-shadow 0.3s ease';
+                        postElement.style.boxShadow = '0 0 20px rgba(179, 154, 132, 0.5)';
+                        setTimeout(() => {
+                            postElement.style.boxShadow = '';
+                        }, 2000);
+
+                        console.log('Scrolled to post successfully');
+                        return true;
+                    } else {
+                        console.log('Post element not found for ID:', scrollToPostId);
+                        return false;
+                    }
+                };
+
+                // Try immediately
+                if (!tryScrollToPost()) {
+                    // If not found, try again after a delay
+                    setTimeout(tryScrollToPost, 1000);
+                }
+            }
         });
 
         // Fallback: hide loading overlay after 3 seconds if load event doesn't fire
@@ -493,11 +542,53 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
+        // Prevent loading overlay on like button clicks and handle scroll to liked post
+        document.addEventListener('click', function (e) {
+            const likeButton = e.target.closest('button[type="submit"]');
+            if (likeButton && likeButton.closest('form') &&
+                likeButton.closest('form').action &&
+                likeButton.closest('form').action.includes('like')) {
+
+                // Don't show loading overlay for like button clicks
+                e.stopPropagation();
+
+                // Store the post element for scrolling after page reload
+                const postElement = likeButton.closest('.card, .post-show-card-body, .row, .col-lg-4');
+                if (postElement) {
+                    // Try to get post ID from data attribute first
+                    let postId = postElement.getAttribute('data-post-id');
+
+                    // If not found, try to extract from form action
+                    if (!postId) {
+                        const formAction = likeButton.closest('form').action;
+                        const matches = formAction.match(/\/like\/(\d+)\//);
+                        if (matches) {
+                            postId = matches[1];
+                        }
+                    }
+
+                    if (postId) {
+                        sessionStorage.setItem('scrollToPost', postId);
+                        console.log('Stored scrollToPost ID:', postId);
+                    } else {
+                        console.log('Could not extract post ID from form action');
+                    }
+                } else {
+                    console.log('Post element not found for like button');
+                }
+            }
+        });
+
         // Show loading overlay on form submissions
         document.addEventListener('submit', function (e) {
             const form = e.target;
             if (form && form.tagName === 'FORM') {
-                // Show loading overlay
+                // Don't show loading overlay for like form submissions
+                if (form.action && form.action.includes('like')) {
+                    return;
+                }
+
+                // Show loading overlay for other form submissions
                 loadingOverlay.style.display = 'flex';
                 loadingOverlay.classList.remove('fade-out');
             }

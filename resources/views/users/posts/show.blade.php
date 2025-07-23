@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="row border shadow">
+    <div class="row border shadow" data-post-id="{{ $post->id }}">
         {{-- <div class="col p-0 border-end">
             <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="w-100">
         </div> --}}
