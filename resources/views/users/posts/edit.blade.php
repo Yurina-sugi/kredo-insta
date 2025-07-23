@@ -42,7 +42,28 @@
         <div class="row mb-4">
             <div class="col-6">
                 <label for="image" class="form-label fw-bold">Image</label>
-                <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="img-thumbnail w-100">
+                @php
+                    $images = json_decode($post->image, true);
+                @endphp
+                @if (is_array($images))
+                    {{-- Multiple images with Swiper --}}
+                    <div class="swiper edit-post-swiper mb-2">
+                        <div class="swiper-wrapper">
+                            @foreach ($images as $index => $img)
+                                <div class="swiper-slide">
+                                    <img src="{{ $img }}" alt="post image {{ $index + 1 }}"
+                                        class="img-thumbnail w-100">
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                @else
+                    {{-- Single image --}}
+                    <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="img-thumbnail w-100 mb-2">
+                @endif
                 <input type="file" name="image" id="image" class="form-control mt-1" aria-describedby="image-info">
                 <div id="image-info" class="form-text">
                     The acceptable formats are jpeg,jpg,png, and gif only. <br>
@@ -58,7 +79,8 @@
         {{-- location --}}
         <div class="mb-4">
             <label for="location_search" class="form-label fw-bold">Edit location</label>
-            <input type="text" id="location_search" placeholder="Input location..." class="form-control mb-2" value="{{ old('location_name', $post->location_name) }}">
+            <input type="text" id="location_search" placeholder="Input location..." class="form-control mb-2"
+                value="{{ old('location_name', $post->location_name) }}">
             {{-- Error --}}
             @error('location_name')
                 <div class="text-danger small">{{ $message }}</div>
@@ -70,110 +92,54 @@
             <div id="map" style="height: 300px; width: 100%;"></div>
             <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude', $post->latitude) }}">
             <input type="hidden" id="longitude" name="longitude" value="{{ old('longitude', $post->longitude) }}">
-            <input type="hidden" id="location_name" name="location_name" value="{{ old('location_name', $post->location_name) }}">
+            <input type="hidden" id="location_name" name="location_name"
+                value="{{ old('location_name', $post->location_name) }}">
         </div>
 
         <button type="submit" class="btn btn-warning px-5">Save</button>
     </form>
-@endsection
 
-<script>
-let map, marker, autocomplete;
+    <script>
+        // Wait for both DOM and Google Maps to be ready
+        function initializeEditMap() {
+            const latInput = document.getElementById('latitude');
+            const lngInput = document.getElementById('longitude');
 
-function initMap() {
-    const mapElement = document.getElementById('map');
-    if (!mapElement) {
-        console.error('Map element not found');
-        return;
-    }
+            if (!latInput || !lngInput) return;
 
-    // DBに保存されている位置情報を初期値に
-    const initialLat = parseFloat(document.getElementById('latitude').value) || 35.681236;
-    const initialLng = parseFloat(document.getElementById('longitude').value) || 139.767125;
-    const initialLatLng = new google.maps.LatLng(initialLat, initialLng);
+            const dbLat = parseFloat(latInput.value);
+            const dbLng = parseFloat(lngInput.value);
 
-    initializeMapWithLocation(initialLatLng);
-    initializeAutocomplete();
-}
+            // Use DB values if they exist and are valid
+            const defaultLat = (!isNaN(dbLat) && dbLat !== 0) ? dbLat : 35.681236;
+            const defaultLng = (!isNaN(dbLng) && dbLng !== 0) ? dbLng : 139.767125;
 
-function initializeMapWithLocation(latLng) {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: latLng,
-        zoom: 15,
-    });
+            if (typeof google !== 'undefined' && google.maps) {
+                // Clear any existing map
+                const mapElement = document.getElementById('map');
+                if (mapElement) {
+                    mapElement.innerHTML = '';
+                }
 
-    marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        draggable: true,
-    });
-
-    marker.addListener('dragend', function() {
-        updateHiddenFields(marker.getPosition());
-    });
-
-    map.addListener('click', function(e) {
-        marker.setPosition(e.latLng);
-        updateHiddenFields(e.latLng);
-    });
-
-    updateHiddenFields(latLng);
-}
-
-function initializeAutocomplete() {
-    const input = document.getElementById('location_search');
-    if (!input) return;
-
-    // Enterキーでフォーム送信を防ぐ
-    input.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            return false;
+                window.initLocationMap({
+                    mapId: 'map',
+                    searchInputId: 'location_search',
+                    latInputId: 'latitude',
+                    lngInputId: 'longitude',
+                    nameInputId: 'location_name',
+                    defaultLat: defaultLat,
+                    defaultLng: defaultLng
+                });
+            } else {
+                setTimeout(initializeEditMap, 1000);
+            }
         }
-    });
 
-    autocomplete = new google.maps.places.Autocomplete(input, {
-        types: ['geocode'],
-        // componentRestrictions: { country: 'jp' }, // 必要に応じて
-    });
-
-    autocomplete.addListener('place_changed', function() {
-        const place = autocomplete.getPlace();
-        if (!place.geometry) {
-            console.log("No geometry found for the selected place");
-            return;
-        }
-        const latLng = place.geometry.location;
-        map.setCenter(latLng);
-        marker.setPosition(latLng);
-        if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
+        // Initialize immediately if DOM is ready, otherwise wait
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeEditMap);
         } else {
-            map.setZoom(17);
+            initializeEditMap();
         }
-        updateHiddenFields(latLng, place.formatted_address);
-    });
-}
-
-function updateHiddenFields(latLng, address = null) {
-    const latInput = document.getElementById('latitude');
-    const lngInput = document.getElementById('longitude');
-    const addressInput = document.getElementById('location_name');
-    if (latInput && lngInput) {
-        latInput.value = latLng.lat();
-        lngInput.value = latLng.lng();
-    }
-    if (addressInput && address) {
-        addressInput.value = address;
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    if (typeof google !== 'undefined' && google.maps) {
-        initMap();
-    } else {
-        setTimeout(initMap, 1000);
-    }
-});
-window.initMap = initMap;
-</script>
+    </script>
+@endsection

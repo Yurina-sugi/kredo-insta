@@ -39,7 +39,7 @@ class PostsController extends Controller
 
         $all_posts = $query->latest()->paginate(10);
 
-        // オーナー（ユーザー）一覧とカテゴリ一覧を取得
+        // Get owner (user) list and category list
         $owners = User::orderBy('name')->get();
         $categories = Category::orderBy('name')->get();
 

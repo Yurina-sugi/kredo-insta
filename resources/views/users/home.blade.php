@@ -3,7 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
-    {{-- 🟣 ストーリーバー（丸アイコン＋名前＋クリックでモーダル） --}}
+    {{-- 🟣 Story bar (circular icons + names + click for modal) --}}
     @if ($stories->count())
         <div class="d-flex overflow-auto mb-4" style="gap: 16px;">
             @foreach ($stories as $user_id => $userStories)
@@ -19,11 +19,11 @@
         </div>
     @endif
 
-    {{-- 🟡 投稿一覧 --}}
+    {{-- 🟡 Post list --}}
     <div class="row gx-5">
         <div class="col-8">
             @forelse ($home_posts as $post)
-                <div class="card mb-4">
+                <div class="card mb-4" data-post-id="{{ $post->id }}">
                     @include('users.posts.contents.title')
                     @include('users.posts.contents.body')
                 </div>
@@ -36,7 +36,7 @@
             @endforelse
         </div>
 
-        {{-- 🔵 プロフィールとおすすめ --}}
+        {{-- 🔵 Profile and recommendations --}}
         <div class="col-4">
             <div class="row align-items-center mb-5 bg-white shadow-sm rounded-3 py-3">
                 <div class="col-auto">
@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    {{-- 🔮 ストーリーモーダル（クリック時に表示） --}}
+    {{-- 🔮 Story modal (displayed on click) --}}
     @foreach ($stories as $user_id => $userStories)
         <div class="modal fade" id="storyModal{{ $user_id }}" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
