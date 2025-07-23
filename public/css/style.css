@@ -108,6 +108,28 @@ body.dark-mode .loading-text {
     color: #f5f5f5;
 }
 
+/* Instagram-style gradient heart icon */
+.instagram-heart {
+    background: linear-gradient(45deg, #ff3040, #ff6b6b, #ff8e8e, #ff4757, #ff3838, #ff6b6b, #ff3040, #ff4757);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 2s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
 /* ==========================================================================
    Existing styles (unchanged)
    ========================================================================== */
@@ -582,7 +604,12 @@ body {
 }
 
 .heart-icon.liked {
-    color: #e0245e;
+    background: linear-gradient(45deg, #ff3040, #ff6b6b, #ff8e8e, #ff4757, #ff3838, #ff6b6b, #ff3040, #ff4757);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 2s ease-in-out infinite;
 }
 
 .heart-icon.animate {
@@ -620,10 +647,14 @@ body {
     bottom: 0;
     left: 50%;
     font-size: 2rem;
-    color: #e0245e;
+    background: linear-gradient(45deg, #ff3040, #ff6b6b, #ff8e8e, #ff4757, #ff3838, #ff6b6b, #ff3040, #ff4757);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     opacity: 0.5;
     pointer-events: none;
-    animation: float-heart 1s ease-out forwards;
+    animation: float-heart 1s ease-out forwards, gradient-shift 2s ease-in-out infinite;
 }
 
 @keyframes float-heart {
@@ -878,7 +909,12 @@ body.dark-mode .heart-icon {
 }
 
 body.dark-mode .heart-icon.liked {
-    color: #e0245e !important;
+    background: linear-gradient(45deg, #ff3040, #ff6b6b, #ff8e8e, #ff4757, #ff3838, #ff6b6b, #ff3040, #ff4757) !important;
+    background-size: 200% 200% !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    animation: gradient-shift 2s ease-in-out infinite !important;
 }
 
 /* Dark mode language selection */

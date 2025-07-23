@@ -7,11 +7,11 @@
             <div class="bg-white rounded-lg shadow-sm border notification-layout">
                 <!-- Header -->
                 <div class="notification-header">
-                    <h1 class="text-xl font-bold">Notifications</h1>
+                    <h1 class="text-xl font-bold">{{ __('messages.notifications') }}</h1>
                     @if ($notifications->where('read_at', null)->count() > 0)
                         <button id="markAllRead"
                             class="text-blue-500 hover:text-blue-700 text-sm font-medium border border-gray-300 px-3 py-1 rounded">
-                            Mark all as read
+                            {{ __('messages.mark_all_as_read') }}
                         </button>
                     @endif
                 </div>
@@ -56,7 +56,7 @@
                                             {{ $notification->sender->name }}
                                         </a>
                                     @else
-                                        <span class="font-semibold">Someone</span>
+                                        <span class="font-semibold">{{ __('messages.someone') }}</span>
                                     @endif
                                     <span class="text-gray-600">
                                         {{ $notification->getMessage() }}
@@ -77,25 +77,30 @@
                                             method="post" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="follow-btn-instagram following">Following</button>
+                                            <button type="submit"
+                                                class="follow-btn-instagram following">{{ __('messages.following') }}</button>
                                         </form>
                                     @else
                                         <form action="{{ route('follow.store', $notification->sender->id) }}"
                                             method="post" class="d-inline">
                                             @csrf
-                                            <button type="submit" class="follow-btn-instagram">Follow</button>
+                                            <button type="submit"
+                                                class="follow-btn-instagram">{{ __('messages.follow') }}</button>
                                         </form>
                                     @endif
                                 @endif
                                 @if ($notification->notifiable && in_array($notification->type, ['like', 'comment']))
                                     <div class="post-preview-right">
-                                        <span class="text-xs text-gray-600">Your post</span>
+                                        <a href="{{ route('post.show', $notification->notifiable->id) }}"
+                                            class="text-xs text-decoration-none text-muted hover:text-blue-600 transition-colors">
+                                            {{ __('messages.your_post') }}
+                                        </a>
 
                                         <!-- Heart icon and post image preview -->
                                         <div class="flex items-center space-x-3">
                                             <div class="w-8 h-8 bg-gray-100 rounded flex items-center justify-center">
                                                 @if ($notification->type === 'like')
-                                                    <i class="fas fa-heart text-red-500 text-sm"></i>
+                                                    <i class="fas fa-heart instagram-heart text-sm"></i>
                                                 @else
                                                     <i class="fas fa-comment text-blue-500 text-sm"></i>
                                                 @endif
@@ -103,8 +108,11 @@
 
                                             <!-- Post image preview if available -->
                                             @if ($notification->notifiable && method_exists($notification->notifiable, 'image'))
-                                                <img src="{{ $notification->notifiable->image ?? 'https://via.placeholder.com/32x32' }}"
-                                                    alt="Post preview" class="w-8 h-8 rounded object-cover">
+                                                <a href="{{ route('post.show', $notification->notifiable->id) }}">
+                                                    <img src="{{ $notification->notifiable->image ?? 'https://via.placeholder.com/32x32' }}"
+                                                        alt="Post preview"
+                                                        class="w-8 h-8 rounded object-cover hover:opacity-80 transition-opacity">
+                                                </a>
                                             @endif
                                         </div>
                                     </div>
@@ -120,8 +128,8 @@
                             <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <i class="fas fa-heart text-gray-400 text-2xl"></i>
                             </div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">All caught up!</h3>
-                            <p class="text-gray-500 text-sm">You're all caught up! Check back later for new notifications.
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ __('messages.all_caught_up') }}</h3>
+                            <p class="text-gray-500 text-sm">{{ __('messages.all_caught_up_message') }}
                             </p>
                         </div>
                     @endforelse

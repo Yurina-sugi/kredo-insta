@@ -31,15 +31,15 @@
         {{-- AI Powered Badge --}}
         <div
             style="position: absolute; top: -12px; left: 12px; background: #00bcd4; color: white; font-size: 0.75rem; padding: 4px 10px; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-            🚀 AI Powered
+            🚀 {{ __('messages.ai_powered') }}
         </div>
 
         <form action="{{ route('post.searchFromAI') }}" method="GET" class="d-flex flex-column gap-3 mt-3">
             <h4 class="text-dark fw-bold mb-0" style="font-size: 1.4rem;">
-                🔍 Discover Smarter Results with AI
+                🔍 {{ __('messages.discover_smarter_results_with_ai') }}
             </h4>
 
-            <input type="text" name="query" placeholder="Ask anything... AI will find it for you"
+            <input type="text" name="query" placeholder="{{ __('messages.ask_anything_ai_will_find_it_for_you') }}"
                 class="form-control border-0 rounded-4 px-4 py-2"
                 style="background-color: rgba(255,255,255,0.9); font-size: 1rem; box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);">
 
@@ -50,7 +50,7 @@
                    border-radius: 50px;
                    font-size: 1rem;
                    transition: all 0.3s ease;">
-                🔎 Search with AI
+                🔎 {{ __('messages.search_with_ai') }}
             </button>
         </form>
     </div>
@@ -66,9 +66,10 @@
                 </div>
             @empty
                 <div class="text-center py-5">
-                    <h2 class="fw-bold text-muted">No posts yet</h2>
-                    <p class="text-secondary">Your shared photos will appear here.</p>
-                    <a href="{{ route('post.create') }}" class="btn btn-outline-primary mt-2">Share your first photo</a>
+                    <h2 class="fw-bold text-muted">{{ __('messages.no_posts_yet') }}</h2>
+                    <p class="text-secondary">{{ __('messages.your_shared_photos_will_appear_here') }}</p>
+                    <a href="{{ route('post.create') }}"
+                        class="btn btn-outline-primary mt-2">{{ __('messages.share_your_first_photo') }}</a>
                 </div>
             @endforelse
         </div>
@@ -95,8 +96,8 @@
 
             @if ($suggested_users)
                 <div class="d-flex justify-content-between align-items-center mb-2">
-                    <p class="fw-bold text-muted mb-0">Suggested for you</p>
-                    <a href="#" class="fw-bold text-decoration-none text-dark small">See all</a>
+                    <p class="fw-bold text-muted mb-0">{{ __('messages.suggestions_for_you') }}</p>
+                    <a href="#" class="fw-bold text-decoration-none text-dark small">{{ __('messages.see_all') }}</a>
                 </div>
                 @foreach ($suggested_users as $user)
                     <div class="d-flex align-items-center mb-3">
@@ -119,7 +120,8 @@
                         <div>
                             <form action="{{ route('follow.store', $user->id) }}" method="post">
                                 @csrf
-                                <button type="submit" class="btn btn-sm btn-outline-primary rounded-pill">Follow</button>
+                                <button type="submit"
+                                    class="btn btn-sm btn-outline-primary rounded-pill">{{ __('messages.follow') }}</button>
                             </form>
                         </div>
                     </div>

@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Middleware\LocaleMiddleware;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,8 +25,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
-        Gate::define('admin', function($user){
+        Gate::define('admin', function ($user) {
             return $user->role_id === User::ADMIN_ROLE_ID;
         });
+
+        // Register LocaleMiddleware
+        $this->app['router']->pushMiddlewareToGroup('web', LocaleMiddleware::class);
     }
 }
