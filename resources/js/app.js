@@ -13,7 +13,7 @@ function animateHeart(btn) {
     heart.classList.toggle('liked');
     heart.addEventListener('animationend', function handler() {
         heart.classList.remove('animate');
-        heart.removeEventListener('animationend', handler);
+        heart.removeEventListener('animationend', handler); xx
     });
 }
 
@@ -460,74 +460,101 @@ document.addEventListener('DOMContentLoaded', function () {
     // Loading animation control
     const loadingOverlay = document.getElementById('loading-overlay');
     if (loadingOverlay) {
-        // Hide loading overlay after page is fully loaded
-        window.addEventListener('load', function () {
-            setTimeout(() => {
+        // Function to hide loading overlay
+        const hideLoadingOverlay = () => {
+            try {
                 loadingOverlay.classList.add('fade-out');
                 setTimeout(() => {
-                    loadingOverlay.style.display = 'none';
-                }, 500);
-            }, 300);
-
-            // Scroll to liked post after page reload
-            const scrollToPostId = sessionStorage.getItem('scrollToPost');
-            console.log('Checking for scrollToPost:', scrollToPostId);
-
-            if (scrollToPostId) {
-                // Clear the stored post ID
-                sessionStorage.removeItem('scrollToPost');
-                console.log('Found scrollToPost ID:', scrollToPostId);
-
-                // Try to scroll immediately and also after a delay
-                const tryScrollToPost = () => {
-                    // Try to find the post element with multiple selectors
-                    const postElement = document.querySelector(`[data-post-id="${scrollToPostId}"]`) ||
-                        document.querySelector(`.card[data-post-id="${scrollToPostId}"]`) ||
-                        document.querySelector(`.post-show-card-body[data-post-id="${scrollToPostId}"]`) ||
-                        document.querySelector(`.row[data-post-id="${scrollToPostId}"]`) ||
-                        document.querySelector(`.col-lg-4[data-post-id="${scrollToPostId}"]`);
-
-                    console.log('Found post element:', postElement);
-
-                    if (postElement) {
-                        // Smooth scroll to the post
-                        postElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'center'
-                        });
-
-                        // Add a brief highlight effect
-                        postElement.style.transition = 'box-shadow 0.3s ease';
-                        postElement.style.boxShadow = '0 0 20px rgba(179, 154, 132, 0.5)';
-                        setTimeout(() => {
-                            postElement.style.boxShadow = '';
-                        }, 2000);
-
-                        console.log('Scrolled to post successfully');
-                        return true;
-                    } else {
-                        console.log('Post element not found for ID:', scrollToPostId);
-                        return false;
+                    if (loadingOverlay) {
+                        loadingOverlay.style.display = 'none';
                     }
-                };
+                }, 500);
+            } catch (error) {
+                console.error('Error hiding loading overlay:', error);
+            }
+        };
 
-                // Try immediately
-                if (!tryScrollToPost()) {
-                    // If not found, try again after a delay
-                    setTimeout(tryScrollToPost, 1000);
-                }
+        // Hide loading overlay after DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                setTimeout(hideLoadingOverlay, 500);
+            });
+        } else {
+            // DOM is already ready
+            setTimeout(hideLoadingOverlay, 500);
+        }
+
+        // Fallback: hide loading overlay after 3 seconds
+        setTimeout(() => {
+            if (loadingOverlay && !loadingOverlay.classList.contains('fade-out')) {
+                hideLoadingOverlay();
+            }
+        }, 3000);
+
+        // Handle browser back/forward buttons
+        window.addEventListener('pageshow', function (event) {
+            // If page is loaded from cache (back/forward), hide loading overlay
+            if (event.persisted) {
+                setTimeout(hideLoadingOverlay, 100);
             }
         });
 
-        // Fallback: hide loading overlay after 3 seconds if load event doesn't fire
-        setTimeout(() => {
-            if (loadingOverlay && !loadingOverlay.classList.contains('fade-out')) {
-                loadingOverlay.classList.add('fade-out');
-                setTimeout(() => {
-                    loadingOverlay.style.display = 'none';
-                }, 500);
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) {
+                // Page became visible again, ensure loading overlay is hidden
+                setTimeout(hideLoadingOverlay, 100);
             }
-        }, 3000);
+        });
+
+        // Scroll to liked post after page reload
+        const scrollToPostId = sessionStorage.getItem('scrollToPost');
+        console.log('Checking for scrollToPost:', scrollToPostId);
+
+        if (scrollToPostId) {
+            // Clear the stored post ID
+            sessionStorage.removeItem('scrollToPost');
+            console.log('Found scrollToPost ID:', scrollToPostId);
+
+            // Try to scroll immediately and also after a delay
+            const tryScrollToPost = () => {
+                // Try to find the post element with multiple selectors
+                const postElement = document.querySelector(`[data-post-id="${scrollToPostId}"]`) ||
+                    document.querySelector(`.card[data-post-id="${scrollToPostId}"]`) ||
+                    document.querySelector(`.post-show-card-body[data-post-id="${scrollToPostId}"]`) ||
+                    document.querySelector(`.row[data-post-id="${scrollToPostId}"]`) ||
+                    document.querySelector(`.col-lg-4[data-post-id="${scrollToPostId}"]`);
+
+                console.log('Found post element:', postElement);
+
+                if (postElement) {
+                    // Smooth scroll to the post
+                    postElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+
+                    // Add a brief highlight effect
+                    postElement.style.transition = 'box-shadow 0.3s ease';
+                    postElement.style.boxShadow = '0 0 20px rgba(179, 154, 132, 0.5)';
+                    setTimeout(() => {
+                        postElement.style.boxShadow = '';
+                    }, 2000);
+
+                    console.log('Scrolled to post successfully');
+                    return true;
+                } else {
+                    console.log('Post element not found for ID:', scrollToPostId);
+                    return false;
+                }
+            };
+
+            // Try immediately
+            if (!tryScrollToPost()) {
+                // If not found, try again after a delay
+                setTimeout(tryScrollToPost, 1000);
+            }
+        }
 
         // Show loading overlay on link clicks (for page transitions)
         document.addEventListener('click', function (e) {
