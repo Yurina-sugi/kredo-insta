@@ -22,13 +22,24 @@ class ProfileController extends Controller
     {
         $user = User::with(['comments', 'posts.categoryPost.category'])->findOrFail($id);
 
-        // Display without AI features if environment variable is not set
         $token = env('LAOZHANG_API_TOKEN');
         if (empty($token)) {
             return view('users.profile.show')->with('user', $user);
         }
 
-        // Process when AI features are enabled
+        $country = '';
+        try {
+            $locationResponse = Http::timeout(3)->get('https://ipwhois.app/json/');
+            if ($locationResponse->ok()) {
+                $locationData = $locationResponse->json();
+                if (isset($locationData['country'])) {
+                    $country = $locationData['country'];
+                }
+            }
+        } catch (\Exception $e) {
+            Log::warning('位置情報の取得に失敗しました: ' . $e->getMessage());
+        }
+
         $categories = $user->posts->flatMap(function ($post) {
             if ($post->categoryPost && $post->categoryPost->isNotEmpty()) {
                 return $post->categoryPost->pluck('category.name')->toArray();
@@ -40,8 +51,8 @@ class ProfileController extends Controller
 
         $apiUrl = 'https://api.laozhang.ai/v1/chat/completions';
 
-        // Tour search keyword via AI
         $recommendedTourLink = null;
+
         if (!empty($categories)) {
             $categoryText = implode(', ', $categories);
             $commentText = implode("\n", $comments);
@@ -70,11 +81,13 @@ EOT;
             $tourResult = $tourResponse->json();
             if (isset($tourResult['choices'][0]['message']['content'])) {
                 $searchQuery = trim($tourResult['choices'][0]['message']['content']);
+                if (!empty($country)) {
+                    $searchQuery .= ' ' . $country;
+                }
                 $recommendedTourLink = "https://www.getyourguide.com/s/?q=" . urlencode($searchQuery);
             }
         }
 
-        // Personality summary via AI
         $personalitySummary = null;
         if (!empty($categories) || !empty($comments)) {
             $personalityPrompt = "User is interested in: " . implode(', ', $categories) . "\n";
@@ -106,7 +119,6 @@ EOT;
             'personalitySummary' => $personalitySummary
         ]);
     }
-
 
     public function edit()
     {
