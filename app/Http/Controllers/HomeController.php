@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Story;
 
 class HomeController extends Controller
 {
@@ -30,25 +31,32 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $all_posts = $this->post->latest()->get();
-        // return view('users.home')
-        //         ->with('all_posts', $all_posts);
-
         $home_posts = $this->getHomePosts();
         $suggested_users = $this->getSuggestedUsers();
-        return view('users.home')
-                ->with('home_posts', $home_posts)
-                ->with('suggested_users', $suggested_users);
 
+        // 🟡 Get stories
+        $stories = Story::where('created_at', '>=', now()->subHours(24))
+            ->with('user')
+            ->latest()
+            ->get()
+            ->groupBy('user_id');
+
+        // ✅ Pass in return!
+        return view('users.home')
+            ->with('home_posts', $home_posts)
+            ->with('suggested_users', $suggested_users)
+            ->with('stories', $stories);
     }
 
+
     #Get the posts  of the users Auth follows
-    public function getHomePosts() {
+    public function getHomePosts()
+    {
         $all_posts = $this->post->latest()->get();
         $home_posts = [];
 
-        foreach($all_posts as $post){
-            if($post->user->isFollowed() || $post->user->id === Auth::user()->id){
+        foreach ($all_posts as $post) {
+            if ($post->user->isFollowed() || $post->user->id === Auth::user()->id) {
                 $home_posts[] = $post;
             }
         }
@@ -56,12 +64,13 @@ class HomeController extends Controller
         return $home_posts;
     }
 
-    public function getSuggestedUsers() {
+    public function getSuggestedUsers()
+    {
         $all_users = $this->user->all()->except(Auth::user()->id);
         $suggested_users = [];
 
-        foreach($all_users as $user){
-            if(!$user->isFollowed()){
+        foreach ($all_users as $user) {
+            if (!$user->isFollowed()) {
                 $suggested_users[] = $user;
             }
         }
@@ -69,8 +78,9 @@ class HomeController extends Controller
         return $suggested_users;
     }
 
-    public function search(Request $request) {
-        $users = $this->user->where('name', 'like', '%'.$request->search.'%')->get();
+    public function search(Request $request)
+    {
+        $users = $this->user->where('name', 'like', '%' . $request->search . '%')->get();
         return view('users.search')->with('users', $users)->with('search', $request->search);
     }
 }

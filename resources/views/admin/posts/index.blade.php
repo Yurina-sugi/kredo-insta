@@ -1,18 +1,3 @@
-<style>
-.multi-photo-icon {
-    position: absolute;
-    top: 8px;
-    right: 8px; /* 基本は右上 */
-    transform: translateX(-6px); /* 左にずらす */
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    padding: 2px 4px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-}
-
-
-</style>
 @extends('layouts.app')
 
 @section('title', 'Admin: Posts')
@@ -81,8 +66,8 @@
                             @if (is_array($images))
                                 <img src="{{ $images[0] }}" alt="post image" class="image-lg">
 
-                                {{-- 複数画像アイコン --}}
-                                <div class="multi-photo-icon">
+                                {{-- Multiple images icon --}}
+                                <div class="admin-multi-photo-icon">
                                     <i class="fa-solid fa-clone"></i>
                                 </div>
                             @else

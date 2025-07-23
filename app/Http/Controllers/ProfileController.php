@@ -69,14 +69,14 @@ EOT;
                 'Authorization' => "Bearer {$token}",
                 'Content-Type' => 'application/json'
             ])->post($apiUrl, [
-                'model' => 'gpt-3.5-turbo',
-                'messages' => [
-                    ['role' => 'system', 'content' => 'Respond with only the raw search query.'],
-                    ['role' => 'user', 'content' => $tourPrompt]
-                ],
-                'max_tokens' => 20,
-                'temperature' => 0.8
-            ]);
+                        'model' => 'gpt-3.5-turbo',
+                        'messages' => [
+                            ['role' => 'system', 'content' => 'Respond with only the raw search query.'],
+                            ['role' => 'user', 'content' => $tourPrompt]
+                        ],
+                        'max_tokens' => 20,
+                        'temperature' => 0.8
+                    ]);
 
             $tourResult = $tourResponse->json();
             if (isset($tourResult['choices'][0]['message']['content'])) {
@@ -98,14 +98,14 @@ EOT;
                 'Authorization' => "Bearer {$token}",
                 'Content-Type' => 'application/json'
             ])->post($apiUrl, [
-                'model' => 'gpt-3.5-turbo',
-                'messages' => [
-                    ['role' => 'system', 'content' => 'Respond with one friendly English sentence.'],
-                    ['role' => 'user', 'content' => $personalityPrompt]
-                ],
-                'max_tokens' => 80,
-                'temperature' => 0.7
-            ]);
+                        'model' => 'gpt-3.5-turbo',
+                        'messages' => [
+                            ['role' => 'system', 'content' => 'Respond with one friendly English sentence.'],
+                            ['role' => 'user', 'content' => $personalityPrompt]
+                        ],
+                        'max_tokens' => 80,
+                        'temperature' => 0.7
+                    ]);
 
             $personalityResult = $personalityResponse->json();
             $personalitySummary = $personalityResult['choices'][0]['message']['content'] ?? null;
@@ -126,7 +126,7 @@ EOT;
         return view('users.profile.edit')->with('user', $user);
     }
 
-    public function update(Request $request)
+    public function update(Request $request): mixed|RedirectResponse
     {
         $request->validate([
             'name' => 'required|min:1|max:50',
