@@ -85,6 +85,18 @@
                                     class="fa-solid fa-circle-plus icon-sm"></i></a>
                         </li>
 
+                        {{-- Notifications --}}
+                        <li class="nav-item" title="Notifications">
+                            <a href="{{ route('notifications.index') }}" class="nav-link position-relative">
+                                <i class="fa-solid fa-heart icon-sm"></i>
+                                <span id="notification-badge"
+                                    class="position-absolute badge rounded-pill notification-badge"
+                                    style="display: none; top: 2px; right: 2px; font-size: 10px; min-width: 20px; height: 20px; line-height: 16px; padding: 0 4px; background: #ff3040; border: 2px solid #fff;">
+                                    0
+                                </span>
+                            </a>
+                        </li>
+
                         {{-- Account --}}
                         <li class="nav-item dropdown">
                             <button id="account-dropdown" class="btn shadow-none nav-link" data-bs-toggle="dropdown">
@@ -169,6 +181,74 @@
         </div>
     </main>
     </div>
+
+    <script>
+        // Update notification badge
+        function updateNotificationBadge() {
+            // Only update if user is authenticated and not on login/register pages
+            if (window.location.pathname.includes('/login') || window.location.pathname.includes('/register')) {
+                return;
+            }
+
+            fetch('/notifications/unread-count', {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json',
+                    },
+                    credentials: 'same-origin'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const badge = document.getElementById('notification-badge');
+                    if (badge && data.count > 0) {
+                        badge.textContent = data.count;
+                        badge.style.display = 'block';
+                    } else if (badge) {
+                        badge.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching notification count:', error);
+                });
+        }
+
+        // Disable prettyprint
+        function disablePrettyPrint() {
+            // Remove prettyprint classes
+            document.querySelectorAll('.prettyprint').forEach(element => {
+                element.classList.remove('prettyprint');
+            });
+
+            // Remove prettyprint scripts
+            document.querySelectorAll('script[src*="prettify"], script[src*="prettyprint"]').forEach(script => {
+                script.remove();
+            });
+
+            // Remove prettyprint stylesheets
+            document.querySelectorAll('link[href*="prettify"], link[href*="prettyprint"]').forEach(link => {
+                link.remove();
+            });
+        }
+
+        // Update badge on page load with delay
+        document.addEventListener('DOMContentLoaded', function() {
+            disablePrettyPrint();
+
+            // Delay notification badge update to avoid interfering with login redirect
+            setTimeout(() => {
+                updateNotificationBadge();
+            }, 1000);
+
+            // Update badge every 30 seconds
+            setInterval(updateNotificationBadge, 30000);
+        });
+    </script>
 </body>
 
 </html>

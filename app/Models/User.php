@@ -76,4 +76,59 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * Relationship with notifications received by the user
+     */
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'recipient_id')->latest();
+    }
+
+    /**
+     * Relationship with notifications sent by the user
+     */
+    public function sentNotifications()
+    {
+        return $this->hasMany(Notification::class, 'sender_id');
+    }
+
+    /**
+     * Get unread notifications
+     */
+    public function unreadNotifications()
+    {
+        return $this->notifications()->whereNull('read_at');
+    }
+
+    /**
+     * Get count of unread notifications
+     */
+    public function unreadNotificationsCount()
+    {
+        return $this->unreadNotifications()->count();
+    }
+
+    /**
+     * Create a notification
+     */
+    public function createNotification($type, $recipientId, $notifiable = null, $data = [])
+    {
+        return Notification::create([
+            'sender_id' => $this->id,
+            'recipient_id' => $recipientId,
+            'type' => $type,
+            'notifiable_id' => $notifiable ? $notifiable->id : null,
+            'notifiable_type' => $notifiable ? get_class($notifiable) : null,
+            'data' => $data
+        ]);
+    }
+
+    /**
+     * Mark all notifications as read
+     */
+    public function markAllNotificationsAsRead()
+    {
+        $this->unreadNotifications()->update(['read_at' => now()]);
+    }
 }

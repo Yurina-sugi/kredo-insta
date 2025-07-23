@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\StoryController;
+use App\Http\Controllers\NotificationController;
 
 
 
@@ -76,6 +77,14 @@ Route::group(['middleware' => 'auth'], function () {
     #FOLLOW
     Route::post('/follow/{user_id}/store', [FollowController::class, 'store'])->name('follow.store');
     Route::delete('/follow/{user_id}/destroy', [FollowController::class, 'destroy'])->name('follow.destroy');
+
+    #NOTIFICATIONS
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{id}/mark-read', [NotificationController::class, 'markAsRead'])->name('notifications.mark-read');
+    Route::post('/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
+    Route::get('/notifications/unread-count', [NotificationController::class, 'getUnreadCount'])->name('notifications.unread-count');
+    Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
+    Route::get('/notifications/{id}/show', [NotificationController::class, 'show'])->name('notifications.show');
 });
 
 Route::get('lang/{locale}', function ($locale) {

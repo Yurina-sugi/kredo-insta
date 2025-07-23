@@ -680,3 +680,98 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 });
+
+// Notification functionality
+document.addEventListener('DOMContentLoaded', function () {
+    // Mark all as read
+    const markAllReadBtn = document.getElementById('markAllRead');
+    if (markAllReadBtn) {
+        markAllReadBtn.addEventListener('click', function () {
+            fetch('/notifications/mark-all-read', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        // Remove unread indicators
+                        document.querySelectorAll('.unread-indicator').forEach(el => {
+                            el.remove();
+                        });
+
+                        // Hide the mark all as read button
+                        markAllReadBtn.style.display = 'none';
+
+                        // Hide the notification badge in header
+                        const headerBadge = document.getElementById('notification-badge');
+                        if (headerBadge) {
+                            headerBadge.style.display = 'none';
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    }
+
+    // Mark individual notification as read
+    document.querySelectorAll('.notification-item-instagram').forEach(element => {
+        element.addEventListener('click', function (e) {
+            if (!e.target.classList.contains('follow-btn-instagram')) {
+                const notificationId = this.getAttribute('data-notification-id');
+
+                fetch(`/notifications/${notificationId}/mark-read`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            const unreadDot = this.querySelector('.unread-indicator');
+                            if (unreadDot) {
+                                unreadDot.remove();
+                            }
+
+                            // Check if there are any remaining unread notifications
+                            const remainingUnread = document.querySelectorAll('.unread-indicator');
+                            if (remainingUnread.length === 0) {
+                                // Hide the mark all as read button
+                                const markAllReadBtn = document.getElementById('markAllRead');
+                                if (markAllReadBtn) {
+                                    markAllReadBtn.style.display = 'none';
+                                }
+
+                                // Hide the notification badge in header
+                                const headerBadge = document.getElementById('notification-badge');
+                                if (headerBadge) {
+                                    headerBadge.style.display = 'none';
+                                }
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        });
+    });
+});
