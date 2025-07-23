@@ -126,7 +126,7 @@ EOT;
         return view('users.profile.edit')->with('user', $user);
     }
 
-    public function update(Request $request): mixed|RedirectResponse
+    public function update(Request $request)
     {
         $request->validate([
             'name' => 'required|min:1|max:50',
