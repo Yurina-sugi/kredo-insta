@@ -19,24 +19,29 @@ class ProfileController extends Controller
         $this->user = $user;
     }
 
+    // public function show($id)
+    // {
+    //     $user = $this->user->findOrFail($id);
+    //     $stories = Story::with('user')
+    //         ->where('user_id', $user->id)
+    //         ->latest()
+    //         ->get()
+    //         ->groupBy('user_id');
     public function show($id)
     {
-        $user = $this->user->findOrFail($id);
+        $user = User::with(['comments', 'posts.categoryPost.category'])->findOrFail($id);
         $stories = Story::with('user')
             ->where('user_id', $user->id)
             ->latest()
             ->get()
             ->groupBy('user_id');
-    public function show($id)
-    {
-        $user = User::with(['comments', 'posts.categoryPost.category'])->findOrFail($id);
 
         $token = env('LAOZHANG_API_TOKEN');
         if (empty($token)) {
             return view('users.profile.show')->with([
-            'user' => $user,
-            'stories' => $stories, // ← これで Blade に渡せる！
-        ]);
+                'user' => $user,
+                'stories' => $stories, // ← これで Blade に渡せる！
+            ]);
         }
 
 
@@ -159,4 +164,4 @@ EOT;
         return view('users.profile.following')->with('user', $user);
     }
 }
-}
+

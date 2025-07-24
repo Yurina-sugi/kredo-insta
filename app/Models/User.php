@@ -51,30 +51,26 @@ class User extends Authenticatable
     }
 
     #To get all the posts of a user
-    public function posts()
-    {
+
     public function posts()
     {
         return $this->hasMany(Post::class)->latest();
     }
 
     #To get all the followers of a user
-    public function followers()
-    {
+
     public function followers()
     {
         return $this->hasMany(Follow::class, 'following_id');
     }
 
-    public function following()
-    {
+
     public function following()
     {
         return $this->hasMany(Follow::class, 'follower_id');
     }
 
-    public function isFollowed()
-    {
+
     public function isFollowed()
     {
         return $this->followers()->where('follower_id', Auth::user()->id)->exists();
