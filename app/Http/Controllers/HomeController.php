@@ -34,18 +34,25 @@ class HomeController extends Controller
         $home_posts = $this->getHomePosts();
         $suggested_users = $this->getSuggestedUsers();
 
-        // 🟡 ストーリーを取得
+        // 🟡 すべてのユーザーのストーリー（過去24時間以内）を取得
         $stories = Story::where('created_at', '>=', now()->subHours(24))
             ->with('user')
             ->latest()
             ->get()
             ->groupBy('user_id');
 
-        // ✅ return の中で渡す！
+        // 🟣 自分のストーリーだけ取得（過去24時間以内）
+        $myStories = auth()->user()
+            ->stories()
+            ->where('created_at', '>=', now()->subHours(24))
+            ->latest()
+            ->get();
+
         return view('users.home')
             ->with('home_posts', $home_posts)
             ->with('suggested_users', $suggested_users)
-            ->with('stories', $stories);
+            ->with('stories', $stories)
+            ->with('myStories', $myStories);
     }
 
 

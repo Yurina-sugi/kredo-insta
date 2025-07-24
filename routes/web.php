@@ -21,13 +21,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::get('/people', [HomeController::class, 'search'])->name('search');
 
-    # STORIES
-    Route::get('/stories/create', function () {
-        return view('stories.create');
-    })->middleware('auth');
-
+    #STORY
     Route::get('/stories', [StoryController::class, 'index'])->name('story.index');
-    Route::post('/stories/store', [StoryController::class, 'store'])->name('story.store');
+    Route::get('/stories/create', [StoryController::class, 'create'])->name('stories.create');
+    Route::post('/stories', [StoryController::class, 'store'])->name('stories.store');
+    Route::delete('/stories/{story}', [StoryController::class, 'destroy'])->name('stories.destroy');
+
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function () {
         #USER

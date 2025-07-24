@@ -3,21 +3,77 @@
 @section('title', 'Home')
 
 @section('content')
-    {{-- 🟣 ストーリーバー（丸アイコン＋名前＋クリックでモーダル） --}}
-    @if ($stories->count())
-        <div class="d-flex overflow-auto mb-4" style="gap: 16px;">
+
+    {{-- ストーリーバー --}}
+    <div class="d-flex overflow-auto mb-4" style="gap: 16px;">
+        <div class="d-flex overflow-auto" style="gap: 16px; max-width: 100%; padding: 0 8px;">
+            {{-- 🔵 自分のストーリー --}}
+            <div class="text-decoration-none text-center">
+                <div class="position-relative d-inline-block">
+                    @if (Auth::user()->avatar)
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#storyModal{{ Auth::id() }}">
+                            <div class="story-ring">
+                                <img src="{{ Auth::user()->avatar }}" alt="your avatar" class="rounded-circle"
+                                    style="width: 64px; height: 64px; object-fit: cover;">
+                            </div>
+                        </a>
+                    @else
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#storyModal{{ Auth::id() }}">
+                            <div class="story-ring">
+                                <div class="d-flex align-items-center justify-content-center rounded-circle bg-light"
+                                    style="width: 60px; height: 60px;">
+                                    <i class="fas fa-user fa-2x text-secondary"></i>
+                                </div>
+                            </div>
+                        </a>
+                    @endif
+
+                    <a href="{{ route('stories.create') }}"
+                        class="btn btn-primary position-absolute d-flex justify-content-center align-items-center p-0"
+                        style="width: 20px; height: 20px; font-size: 14px;
+                border-radius: 50%;
+                border: 3px solid white;
+                transform: translate(20%, 20%);
+                bottom: 0;
+                right: 0;">
+                        +
+                    </a>
+                </div>
+                <div class="small text-dark mt-1 text-truncate" style="width: 64px;">
+                    {{ Auth::user()->name }}
+                </div>
+            </div>
+
+            {{-- 🔴 他のユーザーのストーリー --}}
             @foreach ($stories as $user_id => $userStories)
+                @if ($user_id == Auth::id())
+                    @continue
+                @endif
+
                 @php $user = $userStories->first()->user; @endphp
                 <div class="text-center">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#storyModal{{ $user_id }}">
-                        <img src="{{ $user->avatar ?? '/default-avatar.png' }}" class="rounded-circle border border-primary"
-                            style="width: 60px; height: 60px; object-fit: cover;">
+                        @if ($user->avatar)
+                            <div class="story-ring">
+                                <img src="{{ $user->avatar }}" class="rounded-circle"
+                                    style="width: 60px; height: 60px; object-fit: cover;">
+                            </div>
+                        @else
+                            <div class="story-ring">
+                                <div class="d-flex align-items-center justify-content-center rounded-circle bg-light"
+                                    style="width: 60px; height: 60px;">
+                                    <i class="fas fa-user fa-2x text-secondary"></i>
+                                </div>
+                            </div>
+                        @endif
                     </a>
                     <div class="small mt-1 text-dark text-truncate" style="width: 60px;">{{ $user->name }}</div>
                 </div>
             @endforeach
         </div>
-    @endif
+    </div>
+
+
 
     {{-- 🟡 投稿一覧 --}}
     <div class="row gx-5">
@@ -96,26 +152,6 @@
         </div>
     </div>
 
-    {{-- 🔮 ストーリーモーダル（クリック時に表示） --}}
-    @foreach ($stories as $user_id => $userStories)
-        <div class="modal fade" id="storyModal{{ $user_id }}" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content bg-black text-white">
-                    <div class="modal-body p-0">
-                        @foreach ($userStories as $story)
-                            <div class="position-relative">
-                                <img src="{{ asset('storage/' . $story->image_path) }}" class="w-100"
-                                    style="object-fit: contain;">
-                                @if ($story->text)
-                                    <div class="position-absolute bottom-0 start-0 p-3 bg-dark bg-opacity-50 w-100">
-                                        {{ $story->text }}
-                                    </div>
-                                @endif
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
+    @include('stories.modals.story')
+
 @endsection

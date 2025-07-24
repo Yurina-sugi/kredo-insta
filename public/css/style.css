@@ -9,184 +9,116 @@
  */
 
 /* ==========================================================================
-   既存のスタイル（変更なし）
+   共通基本スタイル
    ========================================================================== */
-/**
-navbar icons
-title.blade.php
-posts/show.blade.php
-Suggestions
-following and followers
-**/
-
-body.light-mode {
-    background: #B39A84;
-    color: #0A1E54;
-}
-
-body.dark-mode {
-    background: #181818;
-    color: #eee;
-}
-
-.navbar, .card {
-    transition: background 0.3s, color 0.3s;
-}
-
-body.dark-mode .navbar, body.dark-mode .card {
-    background: #222;
-    color: #eee;
-}
-
-.icon-sm {
-    font-size: 2rem;
-}
-
-.image-lg {
-    width: 9rem;
-    height: 9rem;
-    object-fit: cover;
-}
-
-/* like button */
-.fa-heart {
-    font-size: 1.5rem;
-}
-
-.floating-hearts-container {
-    z-index: 9999;
-    position: absolute;
-}
-
-/* dates */
-.xsmall {
-    font-size: 0.65rem;
-}
-
-/* Large */
-.icon-lg {
-    font-size: 9rem;
-}
-
-.grid-img {
-    width: 100%;
-    height: 300px;
-    /* height is not dynamic. optimized for widescreen */
-    object-fit: cover;
-}
-
-.avatar-lg {
-    width: 9rem;
-    height: 9rem;
-    object-fit: cover;
-}
-
-.avatar-sm {
-    width: 2rem;
-    height: 2rem;
-    object-fit: cover;
-}
-
-.icon-md {
-    font-size: 3.5rem;
-}
-
-.avatar-md {
-    width: 3.5rem;
-    height: 3.5rem;
-    object-fit: cover;
-}
-
-.liked-users span {
-    margin-right: 5px;
-    font-size: 0.9em;
-    color: #555; /* 必要であればこの色もテーマカラーに調整 */
+body {
+    font-family: sans-serif; /* 全体のフォントを統一 */
+    /* デフォルトの背景色とテキスト色はテーマモードで上書きされる */
 }
 
 /* ==========================================================================
-   追加・更新された共通スタイル
+   テーマモード（ライトモード、ダークモード）
    ========================================================================== */
-body {
-    background-color: #B39A84; /* 全体の背景色を新しい白に統一 */
-    font-family: sans-serif; /* 全体のフォントを統一 */
-    color: #0A1E54; /* デフォルトのテキスト色をネイビーに */
+body.light-mode {
+    background: #F9F5EE; /* ライトモードの背景色をナビバーと同じ白に設定 */
+    color: #0A1E54;      /* ライトモードのテキスト色をネイビーに設定 */
 }
 
-/* 言語選択リンクのスタイル */
-.lang-switcher-links {
-    /* nav-item のデフォルトスタイルを継承しつつ、flexboxで中央揃え */
-    display: flex !important;
-    align-items: center;
-    gap: 0.25rem; /* リンク間の隙間 */
-    padding: 0.5rem 0.5rem; /* nav-linkのパディングに合わせる */
+body.dark-mode {
+    background: #181818; /* ダークモードの背景色 */
+    color: #f5f5f5;      /* ダークモードのテキスト色 */
 }
 
-.lang-switcher-link {
-    color: #B39A84 !important; /* ベージュ */
-    text-decoration: none;
-    font-weight: bold;
-    padding: 0.25rem 0.25rem; /* 各リンクのパディング */
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-    font-family: 'Times New Roman', 'Yu Mincho';
+/* ダークモード時の汎用的なテキスト色 */
+body.dark-mode p,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode span,
+body.dark-mode li,
+body.dark-mode a {
+    color: #F9F5EE !important; /* 強制的に白に近い色に */
 }
 
-.lang-switcher-link:hover {
-    background-color: #CFC7C8; /* グレー */
-    color: #0A1E54 !important; /* ネイビー */
+/* ダークモード時の特定の要素のテキスト色 */
+body.dark-mode .username,
+body.dark-mode .email,
+body.dark-mode a.username,
+body.dark-mode a.email,
+body.dark-mode li.username,
+body.dark-mode li.email,
+body.dark-mode .user-info,
+body.dark-mode .user-info * {
+    color: #f5f5f5 !important;
 }
 
-.lang-switcher-link.active-lang {
-    background-color: transparent; /* 背景を透明に */
-    color: #B39A84 !important; /* テキスト色をベージュに維持 */
-    font-weight: bold; /* デフォルトの太字を維持 */
-    text-decoration: underline;
+body.dark-mode .text-muted,
+body.dark-mode .text-secondary {
+    color: #bbb !important; /* ダークモード時のミュート/セカンダリテキスト色 */
 }
 
-.lang-separator {
-    color: #B39A84; /* セパレータの色をベージュに */
-    font-weight: bold;
-    margin: 0 0.1rem; /* セパレータの左右の余白 */
-    font-family: serif;
-}
-
-    .lang-select:focus {
-        background-color: #B39A84 !important; 
-        border-color: #F9F5EE !important; /* フォーカス時に白いボーダー */
-        color: #F9F5EE !important;
-        box-shadow: 0 0 0 0.25rem rgba(10, 30, 84, 0.25) !important; /* 控えめなシャドウ */
-    }
-
-
-/* カードのスタイル（ログイン/登録/パスワード確認画面など） */
+/* ==========================================================================
+   カード（ログイン/登録/パスワード確認画面など）
+   ========================================================================== */
 .card {
-    background-color: #F9F5EE; /* カードの背景色を新しい白に統一 */
-    border: none; /* 枠を削除 */
-    box-shadow: none; /* 影を削除 */
-    border-radius: 10px; /* 角丸を維持 */
+    background-color: #F9F5EE ;
+    border: none;              /* 枠を削除 */
+    box-shadow: none;          /* 影を削除 */
+    border-radius: 10px;       /* 角丸を維持 */
+    transition: background 0.3s, color 0.3s, border-color 0.3s; /* テーマ切り替え時のアニメーション */
 }
 
+body.dark-mode .card {
+    background: #232323 !important; /* ダークモード時のカード背景 */
+    color: #f5f5f5 !important;      /* ダークモード時のカードテキスト色 */
+    border-color: #333 !important;  /* ダークモード時のカードボーダー色 */
+}
 .card-login-register {
     background-color: transparent !important; /* 背景を完全に透明に強制 */
-    border: none !important; /* 枠を削除を強制 */
-    box-shadow: none !important; 
-}
-
-.btn-primary {
-    background-color: #0A1E54 !important; /* 背景色をネイビーに */
-    border-color: #0A1E54 !important; /* ボーダー色をネイビーに */
-    color: #F9F5EE !important; /* テキスト色を白に */
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s, border-color 0.3s;
+    border: none !important;                  /* 枠を削除を強制 */
+    box-shadow: none !important;              /* 影を削除を強制 */
 }
 
 .card-header {
     background-color: transparent !important; /* ヘッダーの背景を透明に */
-    border-bottom: none !important; /* ヘッダーの下線を削除 */
-    padding-bottom: 0 ; /* 下パディングを調整 */
+    border-bottom: none !important;           /* ヘッダーの下線を削除 */
+    padding-bottom: 0 ;                       /* 下パディングを調整 */
 }
 
+.title{
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
+    color: #0A1E54;
+    
+}
+
+body.dark-mode .card-header {
+    background: #232323 !important;
+    color: #f5f5f5 !important;
+    border-bottom: 1px solid #333 !important;
+}
+
+body.dark-mode .bg-white { /* bg-whiteクラスが使われている箇所をダークモード対応 */
+    background: #232323 !important;
+    color: #f5f5f5 !important;
+    border-color: #333 !important;
+}
+body.dark-mode .bg-white a,
+body.dark-mode .card-header a {
+    color: #aad7ff !important; /* リンク色 */
+}
+body.dark-mode .bg-white .text-muted,
+body.dark-mode .card-header .text-muted {
+    color: #bbb !important;
+}
+
+
+/* ==========================================================================
+   フォーム関連
+   ========================================================================== */
 /* フォームラベルのスタイル */
 .form-label {
     color: #B39A84; /* ラベルの色をベージュに */
@@ -214,19 +146,22 @@ body {
     color: #0A1E54; /* フォーカス時もテキスト色をネイビーに */
 }
 
+/* ==========================================================================
+   ボタン
+   ========================================================================== */
 /* プライマリボタンのスタイル */
 .btn-primary {
-    background-color: #0A1E54; /* 背景色をネイビーに */
-    border-color: #0A1E54; /* ボーダー色をネイビーに */
-    color: #F9F5EE; /* テキスト色を白に */
-    border-radius: 5px; /* 角丸を維持 */
+    background-color: #0A1E54 !important; /* 背景色をネイビーに */
+    border-color: #0A1E54 !important; /* ボーダー色をネイビーに */
+    color: #F9F5EE !important; /* テキスト色を白に */
+    border-radius: 5px;
     font-weight: bold;
-    transition: background-color 0.3s, border-color 0.3s;
+    transition: background-color 0.3s, border-color 0.3s, opacity 0.3s;
 }
 
 .btn-primary:hover {
-    background-color: #0A1E54; /* ホバー時も同じネイビーを維持（必要であれば濃くする） */
-    border-color: #0A1E54;
+    background-color: #0A1E54 !important; /* ホバー時も同じネイビーを維持 */
+    border-color: #0A1E54 !important;
     opacity: 0.9; /* ホバーで少し透明度を出す */
 }
 
@@ -236,7 +171,6 @@ body {
     font-weight: bold !important;
     text-decoration: none !important; /* 下線をなくす */
     font-family: 'Times New Roman', Times, serif;
-
 }
 
 .btn-link:hover {
@@ -244,69 +178,46 @@ body {
     text-decoration: underline; /* ホバー時に下線を表示 */
 }
 
-
 /* ==========================================================================
-   認証画面のタブナビゲーションスタイル
+   ナビゲーションバー
    ========================================================================== */
-.nav-tabs-custom {
-    border-bottom: 1px solid #CFC7C8; /* 下線をグレーに */
-    margin-bottom: 20px;
+.navbar {
+    transition: background 0.3s, color 0.3s; /* テーマ切り替え時のアニメーション */
 }
 
-.nav-tabs-custom .nav-item {
-    margin-right: 0;
+body.dark-mode .navbar {
+    background: #222 !important;       /* ダークモード時のナビバー背景 */
+    color: #f5f5f5 !important;         /* ダークモード時のナビバーテキスト色 */
+    border-bottom: 1px solid #333;     /* ダークモード時のナビバー下線 */
 }
-
-.nav-tabs-custom .nav-link {
-    border: none;
-    border-bottom: 2px solid transparent; /* デフォルトの下線を透明に */
-    background-color: #F9F5EE; /* 背景色を新しい白に統一 */
-    color: #0A1E54; /* 文字色をネイビーに */
-    border-radius: 5px 5px 0 0; /* 上部を丸く */
-    padding: 8px 20px;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s, border-bottom-color 0.3s;
-}
-
-.nav-tabs-custom .nav-link.active {
-    background-color: #F9F5EE; /* アクティブ時も背景色を新しい白に統一 */
-    color: #B39A84; /* アクティブ時の文字色をベージュに */
-    border-bottom-color: #B39A84; /* アクティブ時の下線をベージュに */
-}
-
-.nav-tabs-custom .nav-link:hover:not(.active) {
-    background-color: #CFC7C8; /* ホバー時はグレーに */
-    color: #0A1E54; /* ホバー時の文字色をネイビーに */
-}
-
-/* ==========================================================================
-   ナビゲーションバーのスタイル
-   ========================================================================== */
-.navbar-custom {
-    border-bottom: none;
-    box-shadow: none;
-    border-radius: 0; /* 角丸を削除 */
+body.dark-mode .navbar a,
+body.dark-mode .navbar-brand,
+body.dark-mode .navbar-nav .nav-link {
+    color: #f5f5f5 !important; /* ダークモード時のナビバーリンク/ブランド色 */
 }
 
 /* ナビゲーションバーのライトテーマ（ログイン状態に関わらず統一） */
 .navbar-light-theme {
-    background-color: #B39A84 !important; /* 白 */
+    background-color: #F9F5EE !important; /* ライトモードのナビバー背景を白に */
+    border-bottom: none;
+    box-shadow: none;
+    border-radius: 0; /* 角丸を削除 */
 }
 .navbar-light-theme .navbar-brand,
 .navbar-light-theme .nav-link,
 .navbar-light-theme .navbar-toggler-icon {
-    color: #B39A84 !important; /* ベージュ */
+    color: #0A1E54 !important; /* ライトモードのナビバーアイコン色をネイビーに */
     font-family: sans-serif;
 }
 .navbar-light-theme .navbar-brand h1 {
-    color: #B39A84 !important; /* ベージュ */
+    color: #0A1E54 !important; /* ライトモードのナビバーブランドH1色をネイビーに */
     font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'Times New Roman', Georgia, serif !important;
 }
 .navbar-light-theme .navbar-toggler {
-    border-color: #B39A84; /* ベージュ */
+    border-color: #0A1E54; /* ネイビー */
 }
 .navbar-light-theme .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28179, 154, 132, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2810, 30, 84, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
 /* ナビゲーションバー内の検索バーのスタイル */
@@ -349,15 +260,67 @@ body {
 }
 
 /* ==========================================================================
-   既存のスタイル（調整済み） - icon-sm, avatar-sm などの色をテーマに合わせる
+   認証画面のタブナビゲーションスタイル
    ========================================================================== */
-/* .icon-sm の再定義（既存の定義を上書き） */
+.nav-tabs-custom {
+    border-bottom: 1px solid #CFC7C8; /* 下線をグレーに */
+    margin-bottom: 20px;
+}
+
+.nav-tabs-custom .nav-item {
+    margin-right: 0;
+}
+
+.nav-tabs-custom .nav-link {
+    border: none;
+    border-bottom: 2px solid transparent; /* デフォルトの下線を透明に */
+    background-color: #F9F5EE; /* 背景色を白に統一 */
+    color: #0A1E54; /* 文字色をネイビーに */
+    border-radius: 5px 5px 0 0; /* 上部を丸く */
+    padding: 8px 20px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, border-bottom-color 0.3s;
+}
+
+.nav-tabs-custom .nav-link.active {
+    background-color: #F9F5EE; /* アクティブ時も背景色を白に統一 */
+    color: #B39A84; /* アクティブ時の文字色をベージュに */
+    border-bottom-color: #B39A84; /* アクティブ時の下線をベージュに */
+}
+
+.nav-tabs-custom .nav-link:hover:not(.active) {
+    background-color: #CFC7C8; /* ホバー時はグレーに */
+    color: #0A1E54; /* ホバー時の文字色をネイビーに */
+}
+
+/* ==========================================================================
+   アイコン・画像・アバターサイズ
+   ========================================================================== */
 .icon-sm {
     font-size: 2rem;
     color: #B39A84 !important; /* ナビゲーションバーのアイコン色をベージュに統一 */
 }
 
-/* .avatar-sm の再定義（既存の定義を上書き） */
+.icon-md {
+    font-size: 3.5rem;
+}
+
+.icon-lg {
+    font-size: 9rem;
+}
+
+.image-lg {
+    width: 9rem;
+    height: 9rem;
+    object-fit: cover;
+}
+
+.grid-img {
+    width: 100%;
+    height: 300px; /* height is not dynamic. optimized for widescreen */
+    object-fit: cover;
+}
+
 .avatar-sm {
     width: 2rem;
     height: 2rem;
@@ -365,21 +328,31 @@ body {
     border: 1px solid #B39A84; /* アバターのボーダー色をベージュに統一 */
 }
 
-/* ドロップダウンメニュー（統一テーマで共通） */
-.dropdown-menu {
-    background-color: #B39A84; /* 白 */
-    border: 1px solid #CFC7C8; /* グレー */
-    border-radius: 5px;
-}
-.dropdown-item {
-    color: #0A1E54; /* ネイビー */
-    font-family: sans-serif;
-}
-.dropdown-item:hover {
-    background-color: #CFC7C8; /* グレー */
-    color: #0A1E54; /* ネイビー */
+.avatar-md {
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: cover;
 }
 
+.avatar-lg {
+    width: 9rem;
+    height: 9rem;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   いいねボタンとアニメーション
+   ========================================================================== */
+/* like button */
+.fa-heart {
+    font-size: 1.5rem;
+}
+
+.liked-users span {
+    margin-right: 5px;
+    font-size: 0.9em;
+    color: #555; /* 必要であればこの色もテーマカラーに調整 */
+}
 
 .heart-icon {
     color: #aaa;
@@ -402,6 +375,11 @@ body {
     60%  { transform: scale(1.1); }
     80%  { transform: scale(0.98); }
     100% { transform: scale(1); }
+}
+
+.floating-hearts-container {
+    z-index: 9999;
+    position: absolute;
 }
 
 .floating-heart {
@@ -429,92 +407,80 @@ body {
     }
 }
 
-
-body.dark-mode {
-    background: #181818;
-    color: #f5f5f5; /* 白に近い色 */
+/* ==========================================================================
+   ドロップダウンメニュー
+   ========================================================================== */
+.dropdown-menu {
+    background-color: #B39A84; /* ベージュ */
+    border: 1px solid #CFC7C8; /* グレー */
+    border-radius: 5px;
 }
-body.dark-mode p,
-body.dark-mode h1,
-body.dark-mode h2,
-body.dark-mode h3,
-body.dark-mode h4,
-body.dark-mode h5,
-body.dark-mode h6,
-body.dark-mode span,
-body.dark-mode li,
-body.dark-mode a {
-    color: #f5f5f5 !important;
+.dropdown-item {
+    color: #0A1E54; /* ネイビー */
+    font-family: sans-serif;
 }
-
-body.dark-mode .navbar {
-    background: #222 !important;
-    color: #f5f5f5 !important;
-    border-bottom: 1px solid #333;
-}
-body.dark-mode .navbar a,
-body.dark-mode .navbar-brand,
-body.dark-mode .navbar-nav .nav-link {
-    color: #f5f5f5 !important;
+.dropdown-item:hover {
+    background-color: #CFC7C8; /* グレー */
+    color: #0A1E54; /* ネイビー */
 }
 
-body.dark-mode .card {
-    background: #232323 !important;
-    color: #f5f5f5 !important;
-    border-color: #333 !important;
+/* ==========================================================================
+   その他ユーティリティ
+   ========================================================================== */
+/* dates */
+.xsmall {
+    font-size: 0.65rem;
 }
 
-body.light-mode {
-    background: #fff;
-    color: #222;
-}
-body.light-mode .navbar {
-    background: #f8f9fa !important;
-    color: #222 !important;
-}
-body.light-mode .card {
-    background: #fff !important;
-    color: #222 !important;
-    border-color: #ddd !important;
+/* 言語選択リンクのスタイル */
+.lang-switcher-links {
+    display: flex !important;
+    align-items: center;
+    gap: 0.25rem; /* リンク間の隙間 */
+    padding: 0.5rem 0.5rem; /* nav-linkのパディングに合わせる */
 }
 
-body.dark-mode .username,
-body.dark-mode .email {
-    color: #fff !important; /* もしくは #f5f5f5 など白系 */
+.lang-switcher-link {
+    color: #B39A84 !important; /* ベージュ */
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.25rem 0.25rem; /* 各リンクのパディング */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Times New Roman', 'Yu Mincho';
 }
 
-body.dark-mode .text-muted,
-body.dark-mode .text-secondary {
-    color: #bbb !important;
+.lang-switcher-link:hover {
+    background-color: #CFC7C8; /* グレー */
+    color: #0A1E54 !important; /* ネイビー */
 }
 
-body.dark-mode a.username,
-body.dark-mode a.email,
-body.dark-mode li.username,
-body.dark-mode li.email {
-    color: #fff !important;
+.lang-switcher-link.active-lang {
+    background-color: transparent; /* 背景を透明に */
+    color: #B39A84 !important; /* テキスト色をベージュに維持 */
+    font-weight: bold; /* デフォルトの太字を維持 */
+    text-decoration: underline;
 }
 
-body.dark-mode .user-info,
-body.dark-mode .user-info * {
-    color: #f5f5f5 !important;
+.lang-separator {
+    color: #B39A84; /* セパレータの色をベージュに */
+    font-weight: bold;
+    margin: 0 0.1rem; /* セパレータの左右の余白 */
+    font-family: serif;
 }
 
-body.dark-mode .card-header {
-    background: #232323 !important;
-    color: #f5f5f5 !important;
-    border-bottom: 1px solid #333 !important;
+.lang-select:focus {
+    background-color: #B39A84 !important;
+    border-color: #F9F5EE !important; /* フォーカス時に白いボーダー */
+    color: #F9F5EE !important;
+    box-shadow: 0 0 0 0.25rem rgba(10, 30, 84, 0.25) !important; /* 控えめなシャドウ */
 }
-body.dark-mode .bg-white {
-    background: #232323 !important;
-    color: #f5f5f5 !important;
-    border-color: #333 !important;
-}
-body.dark-mode .bg-white a,
-body.dark-mode .card-header a {
-    color: #aad7ff !important;
-}
-body.dark-mode .bg-white .text-muted,
-body.dark-mode .card-header .text-muted {
-    color: #bbb !important;
+
+
+/* story */
+.story-ring {
+    padding: 3px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); /* インスタ風 */
+    display: inline-block;
 }

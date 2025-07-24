@@ -5,22 +5,34 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Story;
 
 class ProfileController extends Controller
 {
     private $user;
 
-    public function __construct(User $user) {
+    public function __construct(User $user)
+    {
         $this->user = $user;
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $user = $this->user->findOrFail($id);
+        $stories = Story::with('user')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->get()
+            ->groupBy('user_id');
 
-        return view('users.profile.show')->with('user', $user);
+        return view('users.profile.show')->with([
+            'user' => $user,
+            'stories' => $stories, // ← これで Blade に渡せる！
+        ]);
     }
 
-    public function edit() {
+    public function edit()
+    {
         $user = $this->user->findOrFail(Auth::user()->id);
 
         return view('users.profile.edit')->with('user', $user);
