@@ -16,8 +16,6 @@ class ProfileController extends Controller
 
     public function __construct(User $user)
     {
-    public function __construct(User $user)
-    {
         $this->user = $user;
     }
 
@@ -160,4 +158,5 @@ EOT;
         $user = $this->user->findOrFail($id);
         return view('users.profile.following')->with('user', $user);
     }
+}
 }
