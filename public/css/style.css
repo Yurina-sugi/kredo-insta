@@ -483,7 +483,7 @@ body.dark-mode .card-header .text-muted {
    Navigation bar styles
    ========================================================================== */
 .navbar-custom {
-.navbar {
+
     transition: background 0.3s, color 0.3s; /* テーマ切り替え時のアニメーション */
 }
 
@@ -682,7 +682,7 @@ body.dark-mode .navbar-nav .nav-link {
     color: #0A1E54;
     /* Navy */
     font-family: sans-serif;
-
+}
 /* ==========================================================================
    いいねボタンとアニメーション
    ========================================================================== */
@@ -696,7 +696,7 @@ body.dark-mode .navbar-nav .nav-link {
     /* Gray */
     color: #0A1E54;
     /* Navy */
-
+}
 .liked-users span {
     margin-right: 5px;
     font-size: 0.9em;
@@ -792,7 +792,7 @@ body.dark-mode span,
 body.dark-mode li,
 body.dark-mode a {
     color: #f5f5f5 !important;
-
+}
 /* ==========================================================================
    ドロップダウンメニュー
    ========================================================================== */
@@ -832,6 +832,7 @@ body.light-mode {
 body.light-mode .navbar {
     background: #f8f9fa !important;
     color: #222 !important;
+}
 .dropdown-item:hover {
     background-color: #CFC7C8; /* グレー */
     color: #0A1E54; /* ネイビー */
@@ -890,6 +891,7 @@ body.dark-mode li.email {
 body.dark-mode .user-info,
 body.dark-mode .user-info * {
     color: #f5f5f5 !important;
+}
 
 .lang-switcher-link:hover {
     background-color: #CFC7C8; /* グレー */
@@ -930,6 +932,7 @@ body.dark-mode .card-header a {
 body.dark-mode .bg-white .text-muted,
 body.dark-mode .card-header .text-muted {
     color: #bbb !important;
+}
 .lang-select:focus {
     background-color: #B39A84 !important;
     border-color: #F9F5EE !important; /* フォーカス時に白いボーダー */
