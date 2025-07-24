@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
 
 
 class PostController extends Controller
@@ -154,31 +155,6 @@ class PostController extends Controller
         return redirect()->route('index');
     }
 
-    public function showSearchResults(Request $request)
-    {
-        // 検索キーワード
-        $query = $request->input('query');
-
-        // 投稿ID（例: "1,5,12" という文字列）
-        $matched_ids = $request->input('matched_ids');
-
-        if ($matched_ids) {
-            // カンマ区切りの文字列 → 配列へ変換
-            $ids = explode(',', $matched_ids);
-
-            // 投稿をID順に並べて取得
-            $posts = Post::whereIn('id', $ids)->with('user')->get()
-                ->sortBy(function ($post) use ($ids) {
-                    return array_search($post->id, $ids);
-                })->values();
-        } else {
-            $posts = collect(); // 空のコレクション
-        }
-
-        // ビューへ渡す
-        return view('users/posts/search_results', compact('posts', 'query'));
-    }
-
     public function searchFromAI(Request $request)
     {
         $token = env('LAOZHANG_API_TOKEN');
@@ -190,10 +166,9 @@ class PostController extends Controller
 
         $apiUrl = 'https://api.laozhang.ai/v1/chat/completions';
 
-        // Get all posts (ID, category name, description)
+        // 投稿データ収集
         $allPosts = Post::with('categoryPost.category')->get();
 
-        // Prepare structured data to send to AI
         $postSummaries = $allPosts->map(function ($post) {
             $categories = $post->categoryPost->pluck('category.name')->toArray();
             return [
@@ -207,7 +182,6 @@ class PostController extends Controller
             return "ID: {$p['id']}\nCategory: {$p['categories']}\nDescription: {$p['description']}";
         })->implode("\n\n");
 
-        // Prompt (provide posts and keyword, extract relevant post IDs)
         $prompt = <<<EOT
 Below are user-submitted posts, each with an ID, category, and description.
 
@@ -222,26 +196,46 @@ EOT;
             'Authorization' => "Bearer {$token}",
             'Content-Type' => 'application/json'
         ])->post($apiUrl, [
-                    'model' => 'gpt-3.5-turbo',
-                    'messages' => [
-                        ['role' => 'system', 'content' => 'Only return a comma-separated list of IDs.'],
-                        ['role' => 'user', 'content' => $prompt]
-                    ],
-                    'max_tokens' => 30,
-                    'temperature' => 0.5,
-                ]);
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ['role' => 'system', 'content' => 'Only return a comma-separated list of IDs.'],
+                ['role' => 'user', 'content' => $prompt]
+            ],
+            'max_tokens' => 30,
+            'temperature' => 0.5,
+        ]);
 
         $result = $response->json();
         $content = trim($result['choices'][0]['message']['content'] ?? '');
 
-        // Validate response format
         if (!preg_match('/^\d+(,\d+)*$/', $content)) {
             return redirect()->back()->with('error', 'Invalid search result from AI.');
         }
 
-        return redirect()->route('post.searchResults', [
-            'query' => $query,
-            'matched_ids' => $content,
-        ]);
-    }   
+        // セッションに保存（URLには出さない）
+        Session::put('ai_query', $query);
+        Session::put('ai_matched_ids', $content);
+
+        return redirect()->route('post.searchResults');
+    }
+
+    public function showSearchResults(Request $request)
+    {
+        $query = Session::get('ai_query');
+        $matched_ids = Session::get('ai_matched_ids');
+
+        if ($matched_ids) {
+            $ids = explode(',', $matched_ids);
+
+            $posts = Post::whereIn('id', $ids)->with('user')->get()
+                ->sortBy(function ($post) use ($ids) {
+                    return array_search($post->id, $ids);
+                })->values();
+        } else {
+            $posts = collect();
+        }
+
+        return view('users.posts.search_results', compact('posts', 'query'));
+    }
+
 }

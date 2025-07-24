@@ -34,7 +34,8 @@
             🚀 AI Powered
         </div>
 
-        <form action="{{ route('post.searchFromAI') }}" method="GET" class="d-flex flex-column gap-3 mt-3">
+        <form action="{{ route('post.searchFromAI') }}" method="POST" class="d-flex flex-column gap-3 mt-3">
+            @csrf
             <h4 class="text-dark fw-bold mb-0" style="font-size: 1.4rem;">
                 🔍 Discover Smarter Results with AI
             </h4>
