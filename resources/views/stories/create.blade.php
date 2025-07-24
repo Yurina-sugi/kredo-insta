@@ -14,14 +14,14 @@
             <form action="{{ route('stories.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                {{-- 🔸画像プレビュー --}}
+                {{-- Preview display --}}
                 <div class="mb-3 text-center">
                     <img id="preview" src="#" alt="Preview" class="img-fluid rounded d-none"
                         style="max-height: 300px;">
                 </div>
 
-                {{-- 🔸アップロードUI --}}
-                <div class="mb-3 text-center" id="uploadArea">
+                {{-- Image upload --}}
+                <div class="mb-3 text-center">
                     <label for="image" class="form-label d-block">
                         <div id="imagePlaceholder" class="border rounded-3 p-4 bg-light" style="cursor: pointer;">
                             <i class="fas fa-image fa-2x text-muted"></i>
@@ -39,6 +39,7 @@
                 </div>
 
                 {{-- テキスト --}}
+                {{-- Add text --}}
                 <div class="mb-3">
                     <label for="text" class="form-label">Optional message</label>
                     <input type="text" name="text" id="text" class="form-control rounded-pill"

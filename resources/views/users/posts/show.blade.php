@@ -3,51 +3,8 @@
 @section('title', 'Show Post')
 
 @section('content')
-    <style>
-        .col-4 {
-            overflow-y: scroll;
-        }
 
-        .card-body {
-            position: absolute;
-            top: 65px;
-        }
-
-        .img-fixed {
-            width: 100%;
-            height: 450px;
-            object-fit: contain;
-            /* 画像比率を維持 */
-        }
-
-        .swiper {
-            width: 100%;
-            height: auto;
-            position: relative;
-        }
-
-        .swiper-wrapper {
-            height: 450px;
-            /* スライドの高さ固定 */
-        }
-
-        .swiper-pagination-fraction {
-            color: #000;
-            /* 黒文字 */
-            font-weight: bold;
-            font-size: 13px;
-            position: static;
-            /* 画像の下に自然に配置 */
-            text-align: center;
-        }
-
-        /* ナビゲーション矢印 */
-        .swiper-button-next,
-        .swiper-button-prev {
-            color: #000;
-        }
-    </style>
-    <div class="row border shadow">
+    <div class="row border shadow" data-post-id="{{ $post->id }}">
         {{-- <div class="col p-0 border-end">
             <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="w-100">
         </div> --}}
@@ -68,10 +25,10 @@
                         @endforeach
                     </div>
 
-                    <!-- ページ数（画像の下に表示） -->
+                    <!-- Page numbers (displayed below images) -->
                     <div class="swiper-pagination swiper-pagination-fraction"></div>
 
-                    <!-- 矢印（必要なら） -->
+                    <!-- Arrows (if needed) -->
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
@@ -82,22 +39,8 @@
             @endif
         </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                new Swiper('.mySwiper', {
-                    loop: true,
-                    pagination: {
-                        el: '.swiper-pagination',
-                        type: 'fraction',
-                    },
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                });
-            });
-        </script>
-        <div class="col-4 px-0 bg-white">
+
+        <div class="col-4 px-0 bg-white post-show-col-4">
             <div class="card border-0">
                 <div class="card-header bg-white py-3">
                     <div class="row align-items-center">
@@ -157,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body w-100">
+                <div class="card-body w-100 post-show-card-body">
                     {{-- heart button + no. of likes + categories --}}
                     <div class="row align-items-center">
                         <div class="col-auto">
@@ -173,7 +116,8 @@
                             @else
                                 <form action="{{ route('like.store', $post->id) }}" method="post">
                                     @csrf
-                                    <button type="submit" class="like-btn btn btn-sm p-0" onclick="showFloatingHearts(this)">
+                                    <button type="submit" class="like-btn btn btn-sm p-0"
+                                        onclick="showFloatingHearts(this)">
                                         <i class="fa-heart fa-2x fa-regular heart-icon"></i>
                                     </button>
                                     <div class="floating-hearts-container" style="position: relative;"></div>
@@ -206,32 +150,20 @@
                     &nbsp;
                     <p class="d-inline fw-light">{{ $post->description }}</p>
                     <p class="text-uppercase text-muted xsmall">{{ date('M d, Y', strtotime($post->created_at)) }}</p>
-                    
+
                     {{-- Location information and Google Maps --}}
-                    @if($post->location_name)
+                    @if ($post->location_name)
                         <p>
-                            <a class="text-decoration-none text-muted " href="https://www.google.com/maps?q={{ urlencode($post->location_name) }}" target="_blank" rel="noopener">
+                            <a class="text-decoration-none text-muted "
+                                href="https://www.google.com/maps?q={{ urlencode($post->location_name) }}" target="_blank"
+                                rel="noopener">
                                 {{ $post->location_name }}
                             </a>
                         </p>
                     @endif
-                    @if($post->latitude && $post->longitude)
-                        <div id="post-map" style="height: 300px; width: 100%;"></div>
-                        <script>
-                        function initPostMap() {
-                            const latLng = { lat: {{ $post->latitude }}, lng: {{ $post->longitude }} };
-                            const map = new google.maps.Map(document.getElementById('post-map'), {
-                                center: latLng,
-                                zoom: 15,
-                            });
-                            new google.maps.Marker({
-                                position: latLng,
-                                map: map,
-                            });
-                        }
-                        window.initPostMap = initPostMap;
-                        </script>
-                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxIyTHVtRWu8CQG3mE_aO3RNTcGH6cN7c&callback=initPostMap" async defer></script>
+                    @if ($post->latitude && $post->longitude)
+                        <div id="post-map" data-lat="{{ $post->latitude }}" data-lng="{{ $post->longitude }}"
+                            style="height: 300px; width: 100%;"></div>
                     @endif
 
                     {{-- Include comments here --}}

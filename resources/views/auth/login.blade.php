@@ -3,9 +3,7 @@
 @section('title', 'Login')
 
 @section('content')
-<style>
-    
-</style>
+
 
     <div class="container py-5">
         <h1 class="text-center mb-4 title">Insta</h1>

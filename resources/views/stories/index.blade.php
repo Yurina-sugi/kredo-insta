@@ -25,7 +25,7 @@
             @enderror
         </form>
 
-        {{-- ストーリーバー風の横スクロール --}}
+        {{-- Story bar style horizontal scroll --}}
         <div class="d-flex overflow-auto mb-4" style="gap: 16px;">
             {{-- 自分のストーリー --}}
             <div class="text-center position-relative" style="min-width: 80px;">
@@ -74,6 +74,22 @@
                 </div>
             @endforeach
         </div>
+
+        {{-- Modal display (per user) --}}
+        @foreach ($stories as $user_id => $userStories)
+            <div class="modal fade" id="user{{ $user_id }}" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body p-0">
+                            @foreach ($userStories as $story)
+                                <img src="{{ asset('storage/' . $story->image_path) }}" class="w-100"
+                                    style="object-fit: contain;">
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 
     @include('stories.modals.story')

@@ -54,6 +54,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::patch('/post/{id}/update', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post/{id}/destroy', [PostController::class, 'destroy'])->name('post.destroy');
+    Route::post('/post/ai-search', [PostController::class, 'searchFromAI'])->name('post.searchFromAI');
+    Route::get('/post/search-results', [PostController::class, 'showSearchResults'])->name('post.searchResults');
 
     #COMMENTS
     Route::post('/comment/{post_id}/store', [CommentController::class, 'store'])->name('comment.store');
