@@ -413,9 +413,7 @@
 
     <nav class="navbar navbar-expand-md navbar-light shadow-sm navbar-custom navbar-light-theme">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                <img src="{{ asset('kredo-insta-icon.png') }}" alt="Kredo Insta" class="me-2"
-                    style="width: 32px; height: 32px; border-radius: 8px;">
+            <a class="navbar-brand" href="{{ url('/') }}">
                 <h1 class="h5 mb-0">{{ config('app.name') }}</h1>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
