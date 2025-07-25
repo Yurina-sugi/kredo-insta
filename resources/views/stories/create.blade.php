@@ -15,6 +15,7 @@
                 @csrf
 
                 {{-- 🔸画像プレビュー --}}
+                {{-- Preview display --}}
                 <div class="mb-3 text-center">
                     <img id="preview" src="#" alt="Preview" class="img-fluid rounded d-none"
                         style="max-height: 300px;">
@@ -31,14 +32,7 @@
                     </label>
                 </div>
 
-                {{-- 🔸画像変更ボタン（初期は非表示） --}}
-                <div class="mb-3 text-center d-none" id="changeButtonArea">
-                    <button type="button" id="changeImageBtn" class="btn btn-outline-secondary rounded-pill">
-                        Change Image
-                    </button>
-                </div>
 
-                {{-- テキスト --}}
                 <div class="mb-3">
                     <label for="text" class="form-label">Optional message</label>
                     <input type="text" name="text" id="text" class="form-control rounded-pill"

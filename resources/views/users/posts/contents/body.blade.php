@@ -1,39 +1,4 @@
 {{-- Clickable image --}}
-<style>
-    .img-fixed {
-        width: 100%;
-        height: 450px;
-        object-fit: contain;
-        /* 画像比率を維持 */
-    }
-
-    .swiper {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-
-    .swiper-wrapper {
-        height: 450px;
-        /* スライドの高さ固定 */
-    }
-
-    .swiper-pagination-fraction {
-        color: #000;
-        /* 黒文字 */
-        font-weight: bold;
-        font-size: 13px;
-        position: static;
-        /* 画像の下に自然に配置 */
-        text-align: center;
-    }
-
-    /* ナビゲーション矢印 */
-    .swiper-button-next,
-    .swiper-button-prev {
-        color: #000;
-    }
-</style>
 
 <div class="container p-0">
     @php
@@ -52,10 +17,10 @@
                 @endforeach
             </div>
 
-            <!-- ページ数（画像の下に表示） -->
+            <!-- Page numbers (displayed below images) -->
             <div class="swiper-pagination swiper-pagination-fraction"></div>
 
-            <!-- 矢印（必要なら） -->
+            <!-- Arrows (if needed) -->
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
@@ -66,21 +31,7 @@
     @endif
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new Swiper('.mySwiper', {
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                type: 'fraction',
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    });
-</script>
+
 
 
 
@@ -106,7 +57,7 @@
                     <div class="floating-hearts-container" style="position: relative;"></div>
                 </form>
             @endif
-            
+
         </div>
         <div class="col-auto px-0">
             <span>{{ $post->likes->count() }}</span>
@@ -135,9 +86,11 @@
     &nbsp;
     <p class="d-inline fw-light">{{ $post->description }}</p>
     <p class="text-uppercase text-muted xsmall">{{ date('M d, Y', strtotime($post->created_at)) }}</p>
-    @if($post->location_name)
+    @if ($post->location_name)
         <p>
-            <a class="text-decoration-none text-muted " href="https://www.google.com/maps?q={{ urlencode($post->location_name) }}" target="_blank" rel="noopener">
+            <a class="text-decoration-none text-muted "
+                href="https://www.google.com/maps?q={{ urlencode($post->location_name) }}" target="_blank"
+                rel="noopener">
                 {{ $post->location_name }}
             </a>
         </p>

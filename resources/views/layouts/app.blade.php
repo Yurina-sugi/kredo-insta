@@ -32,6 +32,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     {{-- Google Maps API --}}
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxIyTHVtRWu8CQG3mE_aO3RNTcGH6cN7c&libraries=places" async
         defer></script>
 
@@ -396,6 +397,14 @@
 
 <body>
 
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="text-center">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
+
     <nav class="navbar navbar-expand-md navbar-light shadow-sm navbar-custom navbar-light-theme">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -470,7 +479,7 @@
                             </div>
                         </li>
                     @endguest
-                    {{-- 言語選択リンクのリストに変更 --}}
+                    {{-- Changed to language selection link list --}}
                     <li class="nav-item d-flex align-items-center lang-switcher-links">
                         <a href="{{ route('lang.switch', 'en') }}"
                             class="lang-switcher-link {{ app()->getLocale() == 'en' ? 'active-lang' : '' }}">EN</a>

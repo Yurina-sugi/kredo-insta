@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Storage;
 
 class StoryController extends Controller
 {
-    // ストーリー一覧表示
+    // Display story list
     public function index()
     {
-        // 最新の24時間以内のストーリーだけ取得
+        // Get only stories from the last 24 hours
         $stories = Story::where('created_at', '>=', now()->subDay())
             ->with('user')
             ->get()
@@ -21,7 +21,7 @@ class StoryController extends Controller
         return view('stories.index', compact('stories'));
     }
 
-    // ストーリー投稿処理
+    // Story posting process
     public function store(Request $request)
     {
         $request->validate([

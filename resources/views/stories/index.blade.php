@@ -25,7 +25,7 @@
             @enderror
         </form>
 
-        {{-- ストーリーバー風の横スクロール --}}
+        {{-- Story bar style horizontal scroll --}}
         <div class="d-flex overflow-auto mb-4" style="gap: 16px;">
             {{-- 自分のストーリー --}}
             <div class="text-center position-relative" style="min-width: 80px;">
