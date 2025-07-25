@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Story;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Arr;
@@ -20,12 +21,19 @@ class ProfileController extends Controller
 
     public function show($id)
     {
-        $user = User::with(['comments', 'posts.categoryPost.category'])->findOrFail($id);
+        $user = $this->user->findOrFail($id);
+        $stories = Story::with('user')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->get()
+            ->groupBy('user_id');
 
         $token = env('LAOZHANG_API_TOKEN');
         if (empty($token)) {
             return view('users.profile.show')->with('user', $user);
         }
+       
+    
 
 
         $categories = $user->posts->flatMap(function ($post) {
@@ -101,7 +109,8 @@ EOT;
             'categories' => $categories,
             'comments' => $comments,
             'recommendedTourLink' => $recommendedTourLink,
-            'personalitySummary' => $personalitySummary
+            'personalitySummary' => $personalitySummary,
+            'stories' => $stories
         ]);
 
     }

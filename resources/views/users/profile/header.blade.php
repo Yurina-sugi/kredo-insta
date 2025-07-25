@@ -1,12 +1,21 @@
 <div class="row">
-    <div class="col-4">
+    <div class="col-4 text-center">
         @if ($user->avatar)
-            <img src="{{ $user->avatar }}" alt="{{ $user->name }}"
-                class="img-thumbnail rounded-circle d-block mx-auto avatar-lg">
+            @if (isset($stories[$user->id]))
+                <a href="#" data-bs-toggle="modal" data-bs-target="#storyModal{{ $user->id }}">
+                    <div class="story-ring">
+                        <img src="{{ $user->avatar }}" alt="{{ $user->name }}"
+                            class="img-thumbnail rounded-circle avatar-lg">
+                    </div>
+                </a>
+            @else
+                <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="img-thumbnail rounded-circle avatar-lg">
+            @endif
         @else
             <i class="fa-solid fa-circle-user text-secondary d-block text-center icon-lg"></i>
         @endif
     </div>
+
     <div class="col-8">
         <div class="row mb-3">
             <div class="col-auto">
@@ -40,7 +49,8 @@
             </div>
             <div class="col-auto">
                 <a href="{{ route('profile.followers', $user->id) }}" class="text-decoration-none text-dark">
-                    <strong>{{ $user->followers->count() }}</strong> {{ $user->followers->count() == 1 ? 'follower' : 'followers' }}
+                    <strong>{{ $user->followers->count() }}</strong>
+                    {{ $user->followers->count() == 1 ? 'follower' : 'followers' }}
                 </a>
             </div>
             <div class="col-auto">
@@ -52,3 +62,5 @@
         <p class="fw-bold">{{ $user->introduction }}</p>
     </div>
 </div>
+
+@include('stories.modals.story')

@@ -8,9 +8,7 @@
  * navy:  #0A1E54
  */
 
-/* ==========================================================================
-   Loading Animation
-   ========================================================================== */
+
 .loading-overlay {
     position: fixed;
     top: 0;
@@ -80,7 +78,7 @@ body.dark-mode .loading-text {
 }
 
 /* ==========================================================================
-   Existing styles (unchanged)
+   既存のスタイル（変更なし）
    ========================================================================== */
 /**
 navbar icons
@@ -90,11 +88,29 @@ Suggestions
 following and followers
 **/
 
-body.dark-mode {
-    background: #181818;
-    color: #eee;
+body.light-mode {
+    background: #B39A84;
+    color: #0A1E54;
 }
 
+body.dark-mode {
+    background: #181818; /* ダークモードの背景色 */
+    color: #f5f5f5;      /* ダークモードのテキスト色 */
+}
+
+
+body.dark-mode p,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode span,
+body.dark-mode li,
+body.dark-mode a {
+    color: #F9F5EE !important; /* 強制的に白に近い色に */
+}
 .navbar,
 .card {
     transition: background 0.3s, color 0.3s;
@@ -168,82 +184,65 @@ body.dark-mode .card {
 .liked-users span {
     margin-right: 5px;
     font-size: 0.9em;
-    color: #555;
-    /* Adjust this color to theme color if necessary */
+    color: #555; /* 必要であればこの色もテーマカラーに調整 */
 }
 
 /* ==========================================================================
-   Added and updated common styles
+   カード（ログイン/登録/パスワード確認画面など）
    ========================================================================== */
 body {
-    background-color: #B39A84;
-    /* Unify overall background color to new white */
-    font-family: sans-serif;
-    /* Unify overall font */
-    color: #0A1E54;
-    /* Set default text color to navy */
+    background-color: #B39A84; /* 全体の背景色を新しい白に統一 */
+    font-family: sans-serif; /* 全体のフォントを統一 */
+    color: #0A1E54; /* デフォルトのテキスト色をネイビーに */
 }
 
-/* Language selection link styles */
+/* 言語選択リンクのスタイル */
 .lang-switcher-links {
-    /* Inherit nav-item default styles while centering with flexbox */
+    /* nav-item のデフォルトスタイルを継承しつつ、flexboxで中央揃え */
     display: flex !important;
     align-items: center;
-    gap: 0.25rem;
-    /* Gap between links */
-    padding: 0.5rem 0.5rem;
-    /* Match nav-link padding */
+    gap: 0.25rem; /* リンク間の隙間 */
+    padding: 0.5rem 0.5rem; /* nav-linkのパディングに合わせる */
 }
 
 .lang-switcher-link {
-    color: #B39A84 !important;
-    /* Beige */
+    color: #B39A84 !important; /* ベージュ */
     text-decoration: none;
     font-weight: bold;
-    padding: 0.25rem 0.25rem;
-    /* Padding for each link */
+    padding: 0.25rem 0.25rem; /* 各リンクのパディング */
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
     font-family: 'Times New Roman', 'Yu Mincho';
 }
 
 .lang-switcher-link:hover {
-    background-color: #CFC7C8;
-    /* Gray */
-    color: #0A1E54 !important;
-    /* Navy */
+    background-color: #CFC7C8; /* グレー */
+    color: #0A1E54 !important; /* ネイビー */
 }
 
 .lang-switcher-link.active-lang {
-    background-color: transparent;
-    /* Make background transparent */
-    color: #B39A84 !important;
-    /* Maintain text color as beige */
-    font-weight: bold;
-    /* Maintain default bold weight */
+    background-color: transparent; /* 背景を透明に */
+    color: #B39A84 !important; /* テキスト色をベージュに維持 */
+    font-weight: bold; /* デフォルトの太字を維持 */
     text-decoration: underline;
 }
 
 .lang-separator {
-    color: #B39A84;
-    /* Set separator color to beige */
+    color: #B39A84; /* セパレータの色をベージュに */
     font-weight: bold;
-    margin: 0 0.1rem;
-    /* Left and right margins for separator */
+    margin: 0 0.1rem; /* セパレータの左右の余白 */
     font-family: serif;
 }
 
-.lang-select:focus {
-    background-color: #B39A84 !important;
-    border-color: #F9F5EE !important;
-    /* White border on focus */
-    color: #F9F5EE !important;
-    box-shadow: 0 0 0 0.25rem rgba(10, 30, 84, 0.25) !important;
-    /* Subtle shadow */
-}
+    .lang-select:focus {
+        background-color: #B39A84 !important; 
+        border-color: #F9F5EE !important; /* フォーカス時に白いボーダー */
+        color: #F9F5EE !important;
+        box-shadow: 0 0 0 0.25rem rgba(10, 30, 84, 0.25) !important; /* 控えめなシャドウ */
+    }
 
 
-/* Card styles (login/register/password confirmation screens, etc.) */
+/* カードのスタイル（ログイン/登録/パスワード確認画面など） */
 .card {
     background-color: #F9F5EE;
     /* Unify card background color to new white */
@@ -255,21 +254,28 @@ body {
     /* Maintain rounded corners */
 }
 
+    background-color: #F9F5EE ;
+    border: none;              /* 枠を削除 */
+    box-shadow: none;          /* 影を削除 */
+    border-radius: 10px;       /* 角丸を維持 */
+    transition: background 0.3s, color 0.3s, border-color 0.3s; /* テーマ切り替え時のアニメーション */
+}
+
+body.dark-mode .card {
+    background: #232323 !important; /* ダークモード時のカード背景 */
+    color: #f5f5f5 !important;      /* ダークモード時のカードテキスト色 */
+    border-color: #333 !important;  /* ダークモード時のカードボーダー色 */
+}
 .card-login-register {
-    background-color: transparent !important;
-    /* Force background to be completely transparent */
-    border: none !important;
-    /* Force border removal */
-    box-shadow: none !important;
+    background-color: transparent !important; /* 背景を完全に透明に強制 */
+    border: none !important; /* 枠を削除を強制 */
+    box-shadow: none !important; 
 }
 
 .btn-primary {
-    background-color: #0A1E54 !important;
-    /* Set background color to navy */
-    border-color: #0A1E54 !important;
-    /* Set border color to navy */
-    color: #F9F5EE !important;
-    /* Set text color to white */
+    background-color: #0A1E54 !important; /* 背景色をネイビーに */
+    border-color: #0A1E54 !important; /* ボーダー色をネイビーに */
+    color: #F9F5EE !important; /* テキスト色を白に */
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s, border-color 0.3s;
@@ -282,9 +288,12 @@ body {
     /* Remove header bottom border */
     padding-bottom: 0;
     /* Adjust bottom padding */
+    background-color: transparent !important; /* ヘッダーの背景を透明に */
+    border-bottom: none !important;           /* ヘッダーの下線を削除 */
+    padding-bottom: 0 ;                       /* 下パディングを調整 */
 }
 
-/* Form label styles */
+/* フォームラベルのスタイル */
 .form-label {
     color: #B39A84;
     /* Set label color to beige */
@@ -323,26 +332,23 @@ body {
     /* Keep text color navy on focus */
 }
 
+/* ==========================================================================
+   ボタン
+   ========================================================================== */
 /* Primary button styles */
 .btn-primary {
-    background-color: #0A1E54;
-    /* Set background color to navy */
-    border-color: #0A1E54;
-    /* Set border color to navy */
-    color: #F9F5EE;
-    /* Set text color to white */
-    border-radius: 5px;
-    /* Maintain rounded corners */
+    background-color: #0A1E54; /* 背景色をネイビーに */
+    border-color: #0A1E54; /* ボーダー色をネイビーに */
+    color: #F9F5EE; /* テキスト色を白に */
+    border-radius: 5px; /* 角丸を維持 */
     font-weight: bold;
     transition: background-color 0.3s, border-color 0.3s;
 }
 
 .btn-primary:hover {
-    background-color: #0A1E54;
-    /* Maintain same navy on hover (darken if needed) */
+    background-color: #0A1E54; /* ホバー時も同じネイビーを維持（必要であれば濃くする） */
     border-color: #0A1E54;
-    opacity: 0.9;
-    /* Add slight transparency on hover */
+    opacity: 0.9; /* ホバーで少し透明度を出す */
 }
 
 /* Link button styles (e.g., Forgot Your Password?) */
@@ -353,7 +359,6 @@ body {
     text-decoration: none !important;
     /* Remove underline */
     font-family: 'Times New Roman', Times, serif;
-
 }
 
 .btn-link:hover {
@@ -363,13 +368,11 @@ body {
     /* Show underline on hover */
 }
 
-
 /* ==========================================================================
-   Authentication screen tab navigation styles
+   認証画面のタブナビゲーションスタイル
    ========================================================================== */
 .nav-tabs-custom {
-    border-bottom: 1px solid #CFC7C8;
-    /* Set underline to gray */
+    border-bottom: 1px solid #CFC7C8; /* 下線をグレーに */
     margin-bottom: 20px;
 }
 
@@ -379,37 +382,28 @@ body {
 
 .nav-tabs-custom .nav-link {
     border: none;
-    border-bottom: 2px solid transparent;
-    /* Make default underline transparent */
-    background-color: #F9F5EE;
-    /* Unify background color to new white */
-    color: #0A1E54;
-    /* Set text color to navy */
-    border-radius: 5px 5px 0 0;
-    /* Round top corners */
+    border-bottom: 2px solid transparent; /* デフォルトの下線を透明に */
+    background-color: #F9F5EE; /* 背景色を新しい白に統一 */
+    color: #0A1E54; /* 文字色をネイビーに */
+    border-radius: 5px 5px 0 0; /* 上部を丸く */
     padding: 8px 20px;
     font-weight: bold;
     transition: background-color 0.3s, color 0.3s, border-bottom-color 0.3s;
 }
 
 .nav-tabs-custom .nav-link.active {
-    background-color: #F9F5EE;
-    /* Unify background color to new white even when active */
-    color: #B39A84;
-    /* Set active text color to beige */
-    border-bottom-color: #B39A84;
-    /* Set active underline to beige */
+    background-color: #F9F5EE; /* アクティブ時も背景色を新しい白に統一 */
+    color: #B39A84; /* アクティブ時の文字色をベージュに */
+    border-bottom-color: #B39A84; /* アクティブ時の下線をベージュに */
 }
 
 .nav-tabs-custom .nav-link:hover:not(.active) {
-    background-color: #CFC7C8;
-    /* Set to gray on hover */
-    color: #0A1E54;
-    /* Set hover text color to navy */
+    background-color: #CFC7C8; /* ホバー時はグレーに */
+    color: #0A1E54; /* ホバー時の文字色をネイビーに */
 }
 
 /* ==========================================================================
-   Navigation bar styles
+   ナビゲーションバーのスタイル
    ========================================================================== */
 .navbar-custom {
     border-bottom: none;
@@ -427,24 +421,20 @@ body {
 .navbar-light-theme .navbar-brand,
 .navbar-light-theme .nav-link,
 .navbar-light-theme .navbar-toggler-icon {
-    color: #B39A84 !important;
-    /* Beige */
+    color: #B39A84 !important; /* ベージュ */
     font-family: sans-serif;
 }
 
 .navbar-light-theme .navbar-brand h1 {
-    color: #B39A84 !important;
-    /* Beige */
+    color: #B39A84 !important; /* ベージュ */
     font-family: 'Yu Mincho', 'Hiragino Mincho ProN', 'Times New Roman', Georgia, serif !important;
 }
 
 .navbar-light-theme .navbar-toggler {
-    border-color: #B39A84;
-    /* Beige */
+    border-color: #B39A84; /* ベージュ */
 }
-
 .navbar-light-theme .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28179, 154, 132, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2810, 30, 84, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
 /* Search bar styles within navigation bar */
@@ -505,16 +495,69 @@ body {
 }
 
 /* ==========================================================================
-   Existing styles (adjusted) - Match icon-sm, avatar-sm, etc. colors to theme
+   認証画面のタブナビゲーションスタイル
    ========================================================================== */
-/* .icon-sm redefinition (override existing definition) */
+.nav-tabs-custom {
+    border-bottom: 1px solid #CFC7C8; /* 下線をグレーに */
+    margin-bottom: 20px;
+}
+
+.nav-tabs-custom .nav-item {
+    margin-right: 0;
+}
+
+.nav-tabs-custom .nav-link {
+    border: none;
+    border-bottom: 2px solid transparent; /* デフォルトの下線を透明に */
+    background-color: #F9F5EE; /* 背景色を白に統一 */
+    color: #0A1E54; /* 文字色をネイビーに */
+    border-radius: 5px 5px 0 0; /* 上部を丸く */
+    padding: 8px 20px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, border-bottom-color 0.3s;
+}
+
+.nav-tabs-custom .nav-link.active {
+    background-color: #F9F5EE; /* アクティブ時も背景色を白に統一 */
+    color: #B39A84; /* アクティブ時の文字色をベージュに */
+    border-bottom-color: #B39A84; /* アクティブ時の下線をベージュに */
+}
+
+.nav-tabs-custom .nav-link:hover:not(.active) {
+    background-color: #CFC7C8; /* ホバー時はグレーに */
+    color: #0A1E54; /* ホバー時の文字色をネイビーに */
+}
+
+/* ==========================================================================
+   アイコン・画像・アバターサイズ
+   ========================================================================== */
+/* .icon-sm の再定義（既存の定義を上書き） */
 .icon-sm {
     font-size: 2rem;
     color: #B39A84 !important;
     /* Unify navigation bar icon color to beige */
 }
 
-/* .avatar-sm redefinition (override existing definition) */
+.icon-md {
+    font-size: 3.5rem;
+}
+
+.icon-lg {
+    font-size: 9rem;
+}
+
+.image-lg {
+    width: 9rem;
+    height: 9rem;
+    object-fit: cover;
+}
+
+.grid-img {
+    width: 100%;
+    height: 300px; /* height is not dynamic. optimized for widescreen */
+    object-fit: cover;
+}
+
 .avatar-sm {
     width: 2rem;
     height: 2rem;
@@ -523,28 +566,37 @@ body {
     /* Unify avatar border color to beige */
 }
 
-/* Dropdown menu (common with unified theme) */
+
+.avatar-md {
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: cover;
+}
+
+.avatar-lg {
+    width: 9rem;
+    height: 9rem;
+    object-fit: cover;
+}
+
+/* ドロップダウンメニュー（統一テーマで共通） */
 .dropdown-menu {
-    background-color: #B39A84;
-    /* White */
-    border: 1px solid #CFC7C8;
-    /* Gray */
+    background-color: #B39A84; /* 白 */
+    border: 1px solid #CFC7C8; /* グレー */
     border-radius: 5px;
 }
 
-.dropdown-item {
-    color: #0A1E54;
-    /* Navy */
-    font-family: sans-serif;
+/* ==========================================================================
+   いいねボタンとアニメーション
+   ========================================================================== */
+/* like button */
+.fa-heart {
+    font-size: 1.5rem;
 }
-
 .dropdown-item:hover {
-    background-color: #CFC7C8;
-    /* Gray */
-    color: #0A1E54;
-    /* Navy */
+    background-color: #CFC7C8; /* グレー */
+    color: #0A1E54; /* ネイビー */
 }
-
 
 .heart-icon {
     color: #aaa;
@@ -561,29 +613,17 @@ body {
 }
 
 @keyframes heart-bounce {
-    0% {
-        transform: scale(1);
-    }
+    0%   { transform: scale(1); }
+    20%  { transform: scale(1.3); }
+    40%  { transform: scale(0.95); }
+    60%  { transform: scale(1.1); }
+    80%  { transform: scale(0.98); }
+    100% { transform: scale(1); }
+}
 
-    20% {
-        transform: scale(1.3);
-    }
-
-    40% {
-        transform: scale(0.95);
-    }
-
-    60% {
-        transform: scale(1.1);
-    }
-
-    80% {
-        transform: scale(0.98);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+.floating-hearts-container {
+    z-index: 9999;
+    position: absolute;
 }
 
 .floating-heart {
@@ -613,12 +653,11 @@ body {
     }
 }
 
+
 body.dark-mode {
     background: #181818;
-    color: #f5f5f5;
-    /* Close to white color */
+    color: #f5f5f5; /* 白に近い色 */
 }
-
 body.dark-mode p,
 body.dark-mode h1,
 body.dark-mode h2,
@@ -637,7 +676,6 @@ body.dark-mode .navbar {
     color: #f5f5f5 !important;
     border-bottom: 1px solid #333;
 }
-
 body.dark-mode .navbar a,
 body.dark-mode .navbar-brand,
 body.dark-mode .navbar-nav .nav-link {
@@ -654,12 +692,10 @@ body.light-mode {
     background: #fff;
     color: #222;
 }
-
 body.light-mode .navbar {
     background: #f8f9fa !important;
     color: #222 !important;
 }
-
 body.light-mode .card {
     background: #fff !important;
     color: #222 !important;
@@ -668,8 +704,7 @@ body.light-mode .card {
 
 body.dark-mode .username,
 body.dark-mode .email {
-    color: #fff !important;
-    /* Or #f5f5f5 etc. white series */
+    color: #fff !important; /* もしくは #f5f5f5 など白系 */
 }
 
 body.dark-mode .text-muted,
@@ -694,837 +729,16 @@ body.dark-mode .card-header {
     color: #f5f5f5 !important;
     border-bottom: 1px solid #333 !important;
 }
-
 body.dark-mode .bg-white {
     background: #232323 !important;
     color: #f5f5f5 !important;
     border-color: #333 !important;
 }
-
 body.dark-mode .bg-white a,
 body.dark-mode .card-header a {
     color: #aad7ff !important;
 }
-
 body.dark-mode .bg-white .text-muted,
 body.dark-mode .card-header .text-muted {
-    color: #bbb !important;
-}
-
-/* ==========================================================================
-   Comprehensive dark mode style modifications
-   ========================================================================== */
-
-/* Dark mode dropdown styles */
-body.dark-mode .dropdown-menu {
-    background-color: #333 !important;
-    border-color: #555 !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .dropdown-item {
-    color: #f5f5f5 !important;
-    background-color: transparent !important;
-}
-
-body.dark-mode .dropdown-item:hover {
-    background-color: #555 !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .dropdown-item:focus {
-    background-color: #555 !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .dropdown-divider {
-    border-color: #555 !important;
-}
-
-/* Dark mode tab styles */
-body.dark-mode .nav-tabs-custom {
-    border-bottom-color: #555;
-}
-
-body.dark-mode .nav-tabs-custom .nav-link {
-    background-color: #333;
-    color: #f5f5f5;
-    border-bottom-color: transparent;
-}
-
-body.dark-mode .nav-tabs-custom .nav-link.active {
-    background-color: #333;
-    color: #fff;
-    border-bottom-color: #aad7ff;
-    font-weight: bold;
-}
-
-body.dark-mode .nav-tabs-custom .nav-link:hover:not(.active) {
-    background-color: #555;
-    color: #fff;
-}
-
-/* Dark mode form styles */
-body.dark-mode .form-label {
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .form-control {
-    background-color: #333 !important;
-    border-color: #555 !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .form-control::placeholder {
-    color: #bbb !important;
-}
-
-body.dark-mode .form-control:focus {
-    background-color: #333 !important;
-    border-color: #aad7ff !important;
-    color: #f5f5f5 !important;
-    box-shadow: 0 0 0 0.2rem rgba(170, 215, 255, 0.25) !important;
-}
-
-/* Dark mode button styles */
-body.dark-mode .btn-primary {
-    background-color: #aad7ff !important;
-    border-color: #aad7ff !important;
-    color: #222 !important;
-}
-
-body.dark-mode .btn-primary:hover {
-    background-color: #8bc6ff !important;
-    border-color: #8bc6ff !important;
-    color: #222 !important;
-}
-
-body.dark-mode .btn-outline-secondary {
-    color: #f5f5f5 !important;
-    border-color: #555 !important;
-}
-
-body.dark-mode .btn-outline-secondary:hover {
-    background-color: #555 !important;
-    color: #f5f5f5 !important;
-}
-
-/* Dark mode link styles */
-body.dark-mode .text-decoration-none {
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .text-decoration-none:hover {
-    color: #aad7ff !important;
-}
-
-body.dark-mode .text-dark {
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .text-dark:hover {
-    color: #aad7ff !important;
-}
-
-body.dark-mode .forgot-password-link {
-    color: #aad7ff !important;
-}
-
-body.dark-mode .forgot-password-link:hover {
-    color: #8bc6ff !important;
-}
-
-/* Dark mode icons and avatars */
-body.dark-mode .icon-sm {
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .avatar-sm {
-    border-color: #555 !important;
-}
-
-/* Dark mode heart icon */
-body.dark-mode .heart-icon {
-    color: #666 !important;
-}
-
-body.dark-mode .heart-icon.liked {
-    color: #e0245e !important;
-}
-
-/* Dark mode language selection */
-body.dark-mode .lang-switcher-link {
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .lang-switcher-link:hover {
-    background-color: #555 !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .lang-switcher-link.active-lang {
-    color: #aad7ff !important;
-}
-
-body.dark-mode .lang-separator {
-    color: #f5f5f5 !important;
-}
-
-/* Dark mode search bar */
-body.dark-mode .navbar-light-theme .search-input {
-    background-color: #333 !important;
-    border-bottom-color: #555 !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .navbar-light-theme .search-input::placeholder {
-    color: #bbb !important;
-}
-
-body.dark-mode .navbar-light-theme .search-input:focus {
-    border-bottom-color: #aad7ff !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .navbar-light-theme .search-icon {
-    color: #f5f5f5 !important;
-}
-
-/* Dark mode navigation bar */
-body.dark-mode .navbar-light-theme {
-    background-color: rgba(34, 34, 34, 0.95) !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-}
-
-body.dark-mode .navbar-light-theme.scrolled {
-    background-color: rgba(34, 34, 34, 0.98) !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-}
-
-body.dark-mode .navbar-light-theme .navbar-brand,
-body.dark-mode .navbar-light-theme .nav-link,
-body.dark-mode .navbar-light-theme .navbar-toggler-icon {
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .navbar-light-theme .navbar-brand h1 {
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .navbar-light-theme .navbar-toggler {
-    border-color: #555 !important;
-}
-
-/* Dark mode cards */
-body.dark-mode .card {
-    background-color: #232323 !important;
-    border-color: #333 !important;
-}
-
-body.dark-mode .card-login-register {
-    background-color: transparent !important;
-}
-
-/* Dark mode text */
-body.dark-mode .liked-users span {
-    color: #bbb !important;
-}
-
-/* Dark mode alerts */
-body.dark-mode .alert {
-    background-color: #333 !important;
-    border-color: #555 !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .alert-success {
-    background-color: #1e4d2b !important;
-    border-color: #2d5a3a !important;
-    color: #d4edda !important;
-}
-
-body.dark-mode .alert-danger {
-    background-color: #4d1e1e !important;
-    border-color: #5a2d2d !important;
-    color: #f8d7da !important;
-}
-
-/* Dark mode validation */
-body.dark-mode .invalid-feedback {
-    color: #f8d7da !important;
-}
-
-body.dark-mode .is-invalid {
-    border-color: #dc3545 !important;
-}
-
-/* Dark mode modals */
-body.dark-mode .modal-content {
-    background-color: #232323 !important;
-    border-color: #333 !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .modal-header {
-    border-bottom-color: #333 !important;
-}
-
-body.dark-mode .modal-footer {
-    border-top-color: #333 !important;
-}
-
-/* Dark mode tables */
-body.dark-mode .table {
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .table th,
-body.dark-mode .table td {
-    border-color: #333 !important;
-}
-
-body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #2a2a2a !important;
-}
-
-/* ==========================================================================
-   Profile Show Page Styles
-   ========================================================================== */
-.multi-photo-icon {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 4px 6px;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-.profile-grid-img {
-    width: 100%;
-    height: 230px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.ai-summary-box {
-    margin-bottom: 30px;
-    padding: 20px;
-    background: linear-gradient(to right, #4b6cb7, #182848);
-    color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.ai-summary-box h5 {
-    font-weight: bold;
-    margin-bottom: 12px;
-    color: #ffd700;
-}
-
-.ai-summary-box p {
-    margin-bottom: 0;
-    font-size: 1rem;
-}
-
-.ai-tour-box {
-    padding: 20px;
-    background: #f4f9ff;
-    border-left: 5px solid #007bff;
-    border-radius: 10px;
-    margin-bottom: 35px;
-    transition: box-shadow 0.3s ease;
-}
-
-.ai-tour-box:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-.ai-tour-box a {
-    font-weight: bold;
-    color: #007bff;
-    text-decoration: underline;
-}
-
-/* ==========================================================================
-   Post Show Page Styles
-   ========================================================================== */
-
-.post-show-col-4 {
-    overflow-y: scroll;
-}
-
-.post-show-card-body {
-    position: absolute;
-    top: 65px;
-}
-
-.img-fixed {
-    width: 100%;
-    height: 450px;
-    object-fit: contain;
-    /* Maintain image aspect ratio */
-}
-
-.swiper {
-    width: 100%;
-    height: auto;
-    position: relative;
-}
-
-.swiper-wrapper {
-    height: 450px;
-    /* Fixed slide height */
-}
-
-.swiper-pagination-fraction {
-    color: #000;
-    /* Black text */
-    font-weight: bold;
-    font-size: 13px;
-    position: static;
-    /* Natural placement below image */
-    text-align: center;
-}
-
-/* Navigation arrows */
-.swiper-button-next,
-.swiper-button-prev {
-    color: #333 !important;
-}
-
-/* ==========================================================================
-   Admin Posts Index Styles
-   ========================================================================== */
-.admin-multi-photo-icon {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    /* Default top-right */
-    transform: translateX(-6px);
-    /* Shift left */
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    padding: 2px 4px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-}
-
-/* ==========================================================================
-   Email Template Styles
-   ========================================================================== */
-.email-header {
-    text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-.email-header h1 {
-    font-size: 24px;
-    color: #333;
-    margin: 0;
-}
-
-.email-body p {
-    font-size: 16px;
-    color: #666;
-    line-height: 1.5;
-    margin: 0 0 5px;
-}
-
-.email-body {
-    padding: 20px;
-}
-
-.email-body .name {
-    font-weight: bold;
-}
-
-.email-footer {
-    text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid #ddd;
-}
-
-.email-footer p {
-    font-size: 14px;
-    color: #999;
-    margin: 0;
-}
-
-.email-button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 20px 0;
-    background-color: #0d6efd;
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
-.email-body .not-me {
-    margin-top: 25px;
-    font-style: italic;
-    font-size: 14px;
-}
-
-/* ==========================================================================
-   Layout App Styles (from app.blade.php)
-   ========================================================================== */
-.navbar-custom {
-    border-bottom: none;
-}
-
-.navbar-light-theme {
-    background-color: #F9F5EE !important;
-    /* White */
-    border-bottom: none;
-    box-shadow: none;
-    border-radius: 0;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 1030 !important;
-    width: 100% !important;
-    transition: all 0.3s ease !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-}
-
-/* Scroll animation for navbar */
-.navbar-light-theme.scrolled {
-    background-color: rgba(249, 245, 238, 0.95) !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-}
-
-/* Add padding to body to account for fixed navbar */
-body {
-    padding-top: 80px !important;
-}
-
-.navbar-light-theme .navbar-brand,
-.navbar-light-theme .nav-link,
-.navbar-light-theme .navbar-toggler-icon {
-    color: #B39A84 !important;
-    /* Beige */
-    font-family: sans-serif;
-}
-
-.navbar-light-theme .navbar-brand h1 {
-    color: #B39A84 !important;
-    /* Beige */
-}
-
-.navbar-light-theme .navbar-toggler {
-    border-color: #B39A84;
-    /* Beige */
-}
-
-.navbar-light-theme .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28179, 154, 132, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-}
-
-/* Search bar styles */
-.navbar-light-theme .search-bar-container {
-    position: relative;
-    display: flex;
-    /* Align icon and input field */
-    align-items: center;
-    width: 300px;
-    /* Maintain form width */
-}
-
-.navbar-light-theme .search-icon {
-    position: absolute;
-    /* Absolute positioning within container */
-    left: 5px;
-    /* Icon position from left */
-    color: #B39A84;
-    /* Beige color (magnifying glass icon) */
-    font-size: 1rem;
-    z-index: 1;
-    /* Icon appears above input field */
-}
-
-.navbar-light-theme .search-input {
-    border: none;
-    /* Remove default border */
-    border-bottom: 1px solid #B39A84;
-    /* Beige underline */
-    background-color: transparent;
-    /* Transparent background */
-    padding-left: 30px;
-    /* Space for icon */
-    padding-right: 5px;
-    /* Small right padding */
-    color: #0A1E54;
-    /* Navy text color */
-    border-radius: 0;
-    /* Remove rounded corners */
-    box-shadow: none;
-    /* Remove shadow */
-    width: 100%;
-    /* Use full container width */
-}
-
-.navbar-light-theme .search-input::placeholder {
-    color: rgba(10, 30, 84, 0.7);
-    /* Semi-transparent navy placeholder */
-}
-
-.navbar-light-theme .search-input:focus {
-    background-color: transparent;
-    /* Maintain transparency on focus */
-    border-color: #0A1E54;
-    /* Navy underline on focus */
-    box-shadow: none;
-    color: #0A1E54;
-}
-
-/* Existing form control styles are overridden by more specific .search-input */
-.navbar-light-theme .form-control {
-    /* This style is overridden by .search-input, so it only affects other form controls if needed */
-    border-color: #B39A84;
-    /* Beige */
-    background-color: transparent;
-    /* Semi-transparent beige */
-    color: #0A1E54;
-}
-
-.navbar-light-theme .form-control::placeholder {
-    color: rgba(10, 30, 84, 0.7);
-    /* Semi-transparent navy */
-}
-
-.navbar-light-theme .form-control:focus {
-    background-color: transparent;
-    border-color: #B39A84;
-    box-shadow: none;
-    color: #0A1E54;
-}
-
-.navbar-light-theme .icon-sm {
-    color: #B39A84 !important;
-    /* Beige */
-}
-
-.navbar-light-theme .avatar-sm {
-    border: 1px solid #B39A84;
-    /* Beige */
-}
-
-/* ==========================================================================
-   AI-related boxes and dropdown button styles
-   ========================================================================== */
-
-/* Dark mode support for AI Tour Box */
-body.dark-mode .ai-tour-box {
-    background-color: #1a2a3a !important;
-    border-left-color: #aad7ff !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .ai-tour-box p {
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .ai-tour-box a {
-    color: #aad7ff !important;
-}
-
-body.dark-mode .ai-tour-box a:hover {
-    color: #8bc6ff !important;
-}
-
-/* Dark mode support for AI Summary Box */
-body.dark-mode .ai-summary-box {
-    background: linear-gradient(to right, #1a2a3a, #0f1a2a) !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .ai-summary-box h5 {
-    color: #ffd700 !important;
-}
-
-body.dark-mode .ai-summary-box p {
-    color: #f5f5f5 !important;
-}
-
-/* Dropdown button styles */
-.btn-sm.shadow-none {
-    background-color: transparent !important;
-    border: none !important;
-    color: #666 !important;
-    padding: 0.25rem 0.5rem !important;
-    transition: color 0.3s ease !important;
-}
-
-.btn-sm.shadow-none:hover {
-    color: #333 !important;
-    background-color: rgba(0, 0, 0, 0.05) !important;
-}
-
-.btn-sm.shadow-none:focus {
-    box-shadow: none !important;
-    outline: none !important;
-}
-
-/* Dark mode dropdown button */
-body.dark-mode .btn-sm.shadow-none {
-    color: #bbb !important;
-}
-
-body.dark-mode .btn-sm.shadow-none:hover {
-    color: #f5f5f5 !important;
-    background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-/* Button styles within dropdown menu */
-.dropdown-item.border-0.bg-transparent {
-    background-color: transparent !important;
-    border: none !important;
-    padding: 0.5rem 1rem !important;
-    transition: background-color 0.3s ease !important;
-}
-
-.dropdown-item.border-0.bg-transparent:hover {
-    background-color: rgba(0, 0, 0, 0.05) !important;
-}
-
-body.dark-mode .dropdown-item.border-0.bg-transparent {
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode .dropdown-item.border-0.bg-transparent:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-body.dark-mode .dropdown-item.border-0.bg-transparent.text-secondary {
-    color: #bbb !important;
-}
-
-body.dark-mode .dropdown-item.border-0.bg-transparent.text-primary {
-    color: #aad7ff !important;
-}
-
-body.dark-mode .dropdown-item.border-0.bg-transparent.text-danger {
-    color: #ff6b6b !important;
-}
-
-/* ==========================================================================
-   Location Input Form style adjustments
-   ========================================================================== */
-
-/* Basic styles for Location Input */
-#location_search {
-    border-color: #B39A84;
-    background-color: transparent;
-    color: #0A1E54;
-    border-radius: 5px;
-    box-shadow: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-#location_search::placeholder {
-    color: rgba(10, 30, 84, 0.7);
-}
-
-#location_search:focus {
-    background-color: transparent;
-    border-color: #0A1E54;
-    box-shadow: 0 0 0 0.2rem rgba(10, 30, 84, 0.25);
-    color: #0A1E54;
-}
-
-/* Dark mode support for Location Input */
-body.dark-mode #location_search {
-    background-color: #333 !important;
-    border-color: #555 !important;
-    color: #f5f5f5 !important;
-}
-
-body.dark-mode #location_search::placeholder {
-    color: #bbb !important;
-}
-
-body.dark-mode #location_search:focus {
-    background-color: #333 !important;
-    border-color: #aad7ff !important;
-    color: #f5f5f5 !important;
-    box-shadow: 0 0 0 0.2rem rgba(170, 215, 255, 0.25) !important;
-}
-
-/* Location Label styles */
-label[for="location_search"] {
-    color: #B39A84;
-    font-weight: bold;
-    font-family: 'Times New Roman', Times, serif;
-}
-
-body.dark-mode label[for="location_search"] {
-    color: #f5f5f5 !important;
-}
-
-/* Location-related error messages */
-.text-danger.small {
-    color: #dc3545 !important;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-}
-
-body.dark-mode .text-danger.small {
-    color: #ff6b6b !important;
-}
-
-/* Location-related alerts */
-#geolocation-alert {
-    background-color: #d1ecf1;
-    border-color: #bee5eb;
-    color: #0c5460;
-}
-
-body.dark-mode #geolocation-alert {
-    background-color: #1a2a3a !important;
-    border-color: #2d5a6a !important;
-    color: #aad7ff !important;
-}
-
-/* Map container styles */
-#map {
-    border-radius: 5px;
-    border: 1px solid #B39A84;
-}
-
-body.dark-mode #map {
-    border-color: #555 !important;
-}
-
-/* Hidden Inputs styles (for debugging) */
-input[type="hidden"]#latitude,
-input[type="hidden"]#longitude,
-input[type="hidden"]#location_name {
-    /* Usually hidden, so no special styles needed */
-}
-
-/* Location Form group styles */
-.mb-4:has(#location_search) {
-    /* Add special styles for Location form group if needed */
-}
-
-/* Location-related form text */
-.form-text {
-    color: #6c757d;
-    font-size: 0.875rem;
-}
-
-body.dark-mode .form-text {
     color: #bbb !important;
 }

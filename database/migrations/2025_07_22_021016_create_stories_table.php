@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('image_path');
+            $table->string('text')->nullable();
             $table->timestamps();
         });
     }

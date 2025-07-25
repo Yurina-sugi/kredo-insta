@@ -52,6 +52,7 @@ class User extends Authenticatable
 
     #To get all the posts of a user
     public function posts()
+   
     {
         return $this->hasMany(Post::class)->latest();
     }
@@ -75,5 +76,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function stories()
+    {
+        return $this->hasMany(\App\Models\Story::class);
     }
 }

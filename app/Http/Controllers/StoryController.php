@@ -34,9 +34,33 @@ class StoryController extends Controller
         Story::create([
             'user_id' => Auth::id(),
             'image_path' => $path,
-            'text' => $request->text,
+            'text' => $request->input('text'),
         ]);
 
         return redirect()->back()->with('success', 'Story posted!');
+    }
+
+    // ストーリー投稿フォーム表示
+    public function create()
+    {
+        return view('stories.create');
+    }
+
+    // ✅ ストーリー削除処理
+    public function destroy(Story $story)
+    {
+        // 自分のストーリーじゃない場合は403
+        if ($story->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // 画像ファイルも削除（あれば）
+        if (Storage::exists($story->image_path)) {
+            Storage::delete($story->image_path);
+        }
+
+        // DBから削除
+        $story->delete();
+        return back();
     }
 }
