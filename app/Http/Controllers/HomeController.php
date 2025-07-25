@@ -42,7 +42,7 @@ class HomeController extends Controller
             ->groupBy('user_id');
 
         // 🟣 自分のストーリーだけ取得（過去24時間以内）
-        $myStories = Auth::user()->id
+        $myStories = auth()->user()
             ->stories()
             ->where('created_at', '>=', now()->subHours(24))
             ->latest()
