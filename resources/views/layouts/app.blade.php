@@ -404,12 +404,12 @@
 <body>
 
     <!-- Loading Overlay -->
-    <div id="loading-overlay" class="loading-overlay">
+    {{-- <div id="loading-overlay" class="loading-overlay">
         <div class="text-center">
             <div class="loading-spinner"></div>
             <div class="loading-text">Loading...</div>
         </div>
-    </div>
+    </div> --}}
 
     <nav class="navbar navbar-expand-md navbar-light shadow-sm navbar-custom navbar-light-theme">
         <div class="container">
